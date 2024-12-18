@@ -4,6 +4,6 @@
     - dynamodb
     - lambda
     - s3
-    - amplify(not sure)
+    - amplify(미정)
 - tailwindcss
     - shadcn/ui
