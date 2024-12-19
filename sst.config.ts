@@ -10,13 +10,14 @@ export default $config({
     };
   },
   async run() {
-    const table = new sst.aws.Dynamo("MyTable", {
+    const table = new sst.aws.Dynamo("Todo", {
       fields: {
-        userId: "string",
-        noteId: "string",
+        id: "string",
       },
-      primaryIndex: { hashKey: "userId", rangeKey: "noteId" },
+      primaryIndex: { hashKey: "id" },
     });
-    new sst.aws.Nextjs("MyWeb");
+    new sst.aws.Nextjs("MyWeb", {
+      link: [table],
+    });
   },
 });

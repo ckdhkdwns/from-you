@@ -2,13 +2,14 @@
 
 import { createContext, useState, useContext } from "react";
 import { Todo, TodoContextType } from "../_types/todo";
+import { saveTodo } from "@/infra/dynamo/tables/todo";
 
 export const TodoContext = createContext<TodoContextType | null>(null);
 
 export function TodoProvider({ children }: { children: React.ReactNode }) {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const addTodo = (text: string) => {
+  const addTodo = async (text: string) => {
     setTodos((prev) => [
       ...prev,
       {
@@ -17,6 +18,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
         completed: false,
       },
     ]);
+    await saveTodo(text);
   };
 
   const toggleTodo = (id: string) => {
