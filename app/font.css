@@ -1,0 +1,3468 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 70%;
+}
+
+@font-face {
+    font-family: 'Freesentation-9Black';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'GowunDodum-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'PartialSansKR-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/PartialSansKR-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BagelFatOne-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_JAMO@1.0/BagelFatOne-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+     font-family: 'DungGeunMo';
+     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Danjo-bold-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Danjo-bold-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimDunggeunmisoTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimDunggeunmisoTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NanumSquareNeoLight';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-aLt.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-aLt.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-aLt.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-aLt.ttf) format("truetype");
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NanumSquareNeo';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.ttf) format("truetype");
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NanumSquareNeoBold';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-cBd.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-cBd.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-cBd.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-cBd.ttf) format("truetype");
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NanumSquareNeoExtraBold';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-dEb.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-dEb.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-dEb.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-dEb.ttf) format("truetype");
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NanumSquareNeoHeavy';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-eHv.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-eHv.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-eHv.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-eHv.ttf) format("truetype");
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NanumSquareNeoVariable';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.ttf) format("truetype");
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MaruBuri';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.ttf) format("truetype");
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MaruBuriSemiBold';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.ttf) format("truetype");
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MaruBuriBold';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.ttf) format("truetype");
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MaruBuriLight';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.ttf) format("truetype");
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MaruBuriExtraLight';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.ttf) format("truetype");
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NanumHumanTTFBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2501-1@1.1/NanumHumanTTFBold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 70%;
+}
+
+@font-face {
+    font-family: 'ClimateCrisisKR-1979';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/ClimateCrisisKR-1979.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 70%;
+}
+
+
+
+
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 400;
+ src: url('//fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+ src: url('//fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+    size-adjust: 70%;
+}
+
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 700;
+ src: url('//fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot');
+ src: url('//fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix') format('embedded-opentype'), url('//fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff') format('woff'), url('//fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf') format('truetype');
+    size-adjust: 80%;
+}
+
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 300;
+ src: url('//fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
+ src: url('//fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
+    size-adjust: 80%;
+}
+
+.nanumbarungothic * {
+ font-family: 'NanumBarunGothic', sans-serif;
+}
+
+@font-face {
+    font-family: 'RIDIBatang';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'TmonMonsori';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24ClassicType-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Cafe24ClassicType-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimAllimjangTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimAllimjangTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'DOSSaemmul';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSSaemmul.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'D2Coding';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NoonnuBasicGothicRegular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noon-2410@1.0/NoonnuBasicGothicRegular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMkkubulimTTF-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/BMkkubulimTTF-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Ohsquare';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMDOHYEON';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSBombaram3_Regular';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.1/HSBombaram3_Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Shiningstar';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Shiningstar.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'DOSGothic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMEULJIRO';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimWoojuR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'kdg_Medium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/kdg_Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSSanTokki20-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimByeolbichhaneulTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimByeolbichhaneulTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NotoSerifKR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NotoSerifKR.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'EliceDigitalBaeum-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum-Bd.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MinSans-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NeoDunggeunmo';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimNadeuriTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimNadeuriTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSBombaram';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSBombaram.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'SpoqaHanSansNeo-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Hahmlet-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimMulgyeolB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMulgyeolB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Nyangi-W-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/Cafe24Nyangi-W-v1.0.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NanumBarunpen';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Supermagic-Bold-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/Cafe24Supermagic-Bold-v1.0.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'GothicA1-Light';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HS-Regular';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HS-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Yeongdo-Rg';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.2/Yeongdo-Rg.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Danjunghae';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Danjunghae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+font-family: 'BMHANNAPro';
+src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
+font-weight: normal;
+font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Lovingu';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Lovingu.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'WavvePADO-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/WavvePADO-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimPuzzleTTF-Black';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimPuzzleTTF-Black.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Dongle-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108_2@1.0/Dongle-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Meongi-W-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Meongi-W-v1.0.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'HakgyoansimChilpanjiugaeTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimChilpanjiugaeTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+  font-family: 'Interop';
+  src: url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Regular.woff2')
+      format('woff2'),
+    url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Regular.woff')
+      format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Oneprettynight';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Gothic_Goding';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Gothic_Goding.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Diphylleia-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_JAMO@1.0/Diphylleia-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSSaemaul-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/HSSaemaul-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimJiugaeR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimJiugaeR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'goorm-sans-bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/goorm-sans-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimGeurimilgiTTF-R';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimGeurimilgiTTF-R.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'HakgyoansimBadasseugiTTF-L';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimBadasseugiTTF-L.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSYuji-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/HSYuji-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'KCC-Ahnchangho';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_1@1.0/KCC-Ahnchangho.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimPuzzleTTF-Outline';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimPuzzleTTF-Outline.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Dangdanghae';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.2/Cafe24Dangdanghae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSBombaram21-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/HSBombaram21-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Dongdong';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Dongdong.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Dovemayo-Medium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/Dovemayo-Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'KCC-Hanbit';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'YanoljaYacheR';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YanoljaYacheR.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Basic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimBunpilR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimBunpilR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'DOSIyagiMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSIyagiMedium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMYEONSUNG';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMYEONSUNG.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Meongi-B-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Meongi-B-v1.0.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'JGaegujaengyi-Medium-KO';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/JGaegujaengyi-Medium-KO.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTBookendBatangR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-2@1.0/TTBookendBatangR.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSGyoulnoonkot';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSGyoulnoonkot.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'IAMAPLAYER';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/IAMAPLAYER.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Happiness-Sans-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Handletter';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Handletter.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'Cafe24Syongsyong';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Syongsyong.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'EliceDigitalBaeum_Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EliceDigitalBaeum_Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKR-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-kr@1.0/MonoplexKR-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSSummer';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSSummer.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimBareonbatangB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimBareonbatangB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'GasoekOne-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_JAMO@1.0/GasoekOne-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Beeunhye';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Beeunhye.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMEuljiro10yearslater';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/BMEuljiro10yearslater.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimMonggeulmonggeulR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMonggeulmonggeulR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'DOSMyungjo';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSMyungjo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimGaeulsopungB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimGaeulsopungB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimRikodeoR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimRikodeoR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimBareondotumB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimBareondotumB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Bareun_hipi';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Bareun_hipi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKRWide-BoldItalic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-wide@1.0/MonoplexKRWide-BoldItalic.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'JSongMyung-Regular-KO';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/JSongMyung-Regular-KO.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/intelone-mono-font-family-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimSamulhamR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimSamulhamR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Ohsquareair';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/Cafe24Ohsquareair.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimChulseokbuTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimChulseokbuTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'GrandifloraOne-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_JAMO@1.0/GrandifloraOne-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NeoDunggeunmoPro-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMKIRANGHAERANG';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMKIRANGHAERANG.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimKkokkomaR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimKkokkomaR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Decobox';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Decobox.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Decoshadow';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Decoshadow.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimMoheomgaB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMoheomgaB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Orbit-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/Orbit-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'DOSPilgiMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSPilgiMedium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Decoschool';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Decoschool.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKR-Italic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-kr@1.0/MonoplexKR-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+
+@font-face {
+    font-family: 'HSDuggobi';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2406@1.0/HSDuggobi.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Garam';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Garam.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'Wild';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_11@1.0/Wild.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKRNerd-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-nerd@1.0/MonoplexKRNerd-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSJiptokki-Round';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/HSJiptokki-Round.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Ssukssuk';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Ssukssuk.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'SlowSlow';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/SlowSlow.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimByeoljariTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimByeoljariTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimSantteutdotumL';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimSantteutdotumL.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKRWideNerd-BoldItalic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-widenerd@1.0/MonoplexKRWideNerd-BoldItalic.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'SLEIGothicTTF';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SLEIGothicTTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'JHaebaragi-Medium-KO';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/JHaebaragi-Medium-KO.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimBombanghakR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimBombanghakR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Moyamoya-Face-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/Cafe24Moyamoya-Face-v1.0.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Behappy';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Behappy.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKRNerd-BoldItalic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-nerd@1.0/MonoplexKRNerd-BoldItalic.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimMabeopsaR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMabeopsaR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Simplehae';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Shiningstar';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Shiningstar.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'DOSGothic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMEULJIRO';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimWoojuR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'kdg_Medium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/kdg_Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSSanTokki20-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimByeolbichhaneulTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimByeolbichhaneulTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NotoSerifKR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NotoSerifKR.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'EliceDigitalBaeum-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum-Bd.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MinSans-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NeoDunggeunmo';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimNadeuriTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimNadeuriTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSBombaram';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSBombaram.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'SpoqaHanSansNeo-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Hahmlet-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimMulgyeolB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMulgyeolB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Nyangi-W-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/Cafe24Nyangi-W-v1.0.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 70%;
+}
+
+@font-face {
+    font-family: 'NanumBarunpen';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Supermagic-Bold-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/Cafe24Supermagic-Bold-v1.0.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'GothicA1-Light';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HS-Regular';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HS-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Yeongdo-Rg';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.2/Yeongdo-Rg.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Danjunghae';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Danjunghae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+font-family: 'BMHANNAPro';
+src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
+font-weight: normal;
+font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Lovingu';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Lovingu.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'WavvePADO-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/WavvePADO-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimPuzzleTTF-Black';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimPuzzleTTF-Black.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Dongle-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108_2@1.0/Dongle-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Meongi-W-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Meongi-W-v1.0.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'HakgyoansimChilpanjiugaeTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimChilpanjiugaeTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+  font-family: 'Interop';
+  src: url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Regular.woff2')
+      format('woff2'),
+    url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Regular.woff')
+      format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Oneprettynight';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Gothic_Goding';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Gothic_Goding.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Diphylleia-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_JAMO@1.0/Diphylleia-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSSaemaul-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/HSSaemaul-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimJiugaeR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimJiugaeR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'goorm-sans-bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/goorm-sans-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimGeurimilgiTTF-R';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimGeurimilgiTTF-R.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 70%;
+}
+
+
+@font-face {
+    font-family: 'HakgyoansimBadasseugiTTF-L';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimBadasseugiTTF-L.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 70%;
+}
+
+@font-face {
+    font-family: 'HSYuji-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/HSYuji-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'KCC-Ahnchangho';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_1@1.0/KCC-Ahnchangho.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Dangdanghae';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.2/Cafe24Dangdanghae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimPuzzleTTF-Outline';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimPuzzleTTF-Outline.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSBombaram21-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/HSBombaram21-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Dongdong';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Dongdong.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Dovemayo-Medium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/Dovemayo-Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'KCC-Hanbit';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'YanoljaYacheR';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YanoljaYacheR.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Basic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimBunpilR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimBunpilR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 70%;
+}
+
+@font-face {
+    font-family: 'DOSIyagiMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSIyagiMedium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMYEONSUNG';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMYEONSUNG.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Meongi-B-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Meongi-B-v1.0.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'JGaegujaengyi-Medium-KO';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/JGaegujaengyi-Medium-KO.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTBookendBatangR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-2@1.0/TTBookendBatangR.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSGyoulnoonkot';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSGyoulnoonkot.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'IAMAPLAYER';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/IAMAPLAYER.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Happiness-Sans-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Handletter';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Handletter.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'Cafe24Syongsyong';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Syongsyong.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'EliceDigitalBaeum_Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EliceDigitalBaeum_Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKR-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-kr@1.0/MonoplexKR-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSSummer';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSSummer.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimBareonbatangB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimBareonbatangB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'GasoekOne-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_JAMO@1.0/GasoekOne-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Beeunhye';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Beeunhye.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMEuljiro10yearslater';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/BMEuljiro10yearslater.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimMonggeulmonggeulR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMonggeulmonggeulR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'DOSMyungjo';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSMyungjo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimGaeulsopungB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimGaeulsopungB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimRikodeoR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimRikodeoR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimBareondotumB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimBareondotumB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Bareun_hipi';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Bareun_hipi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKRWide-BoldItalic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-wide@1.0/MonoplexKRWide-BoldItalic.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'JSongMyung-Regular-KO';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/JSongMyung-Regular-KO.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/intelone-mono-font-family-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimSamulhamR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimSamulhamR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Ohsquareair';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/Cafe24Ohsquareair.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimChulseokbuTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimChulseokbuTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'GrandifloraOne-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_JAMO@1.0/GrandifloraOne-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'NeoDunggeunmoPro-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMKIRANGHAERANG';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMKIRANGHAERANG.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimKkokkomaR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimKkokkomaR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Decobox';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Decobox.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Decoshadow';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Decoshadow.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimMoheomgaB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMoheomgaB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Orbit-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/Orbit-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'DOSPilgiMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSPilgiMedium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Decoschool';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Decoschool.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKR-Italic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-kr@1.0/MonoplexKR-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+
+@font-face {
+    font-family: 'HSDuggobi';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2406@1.0/HSDuggobi.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Garam';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Garam.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'Wild';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_11@1.0/Wild.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKRNerd-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-nerd@1.0/MonoplexKRNerd-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSJiptokki-Round';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/HSJiptokki-Round.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Ssukssuk';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Ssukssuk.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'SlowSlow';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/SlowSlow.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimByeoljariTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimByeoljariTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimSantteutdotumL';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimSantteutdotumL.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKRWideNerd-BoldItalic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-widenerd@1.0/MonoplexKRWideNerd-BoldItalic.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'JHaebaragi-Medium-KO';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/JHaebaragi-Medium-KO.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'SLEIGothicTTF';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SLEIGothicTTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimBombanghakR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimBombanghakR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Moyamoya-Face-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/Cafe24Moyamoya-Face-v1.0.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Behappy';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Behappy.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKRNerd-BoldItalic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-nerd@1.0/MonoplexKRNerd-BoldItalic.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimMabeopsaR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMabeopsaR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Simplehae';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimGureumR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimGureumR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimNamuL';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimNamuL.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Happiness-Sans-Title';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Title.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HBIOS-SYS';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/HBIOS-SYS.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Moyamoya-Regular-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/Cafe24Moyamoya-Regular-v1.0.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'intelone-mono-font-family-italic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/intelone-mono-font-family-italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Hangeuljaemin4-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Hangeuljaemin4-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'DAEHWA_NANUM_B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_1@1.0/DAEHWA_NANUM_B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'dalmoori';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2102-01@1.0/dalmoori.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Sam3KRFont';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Sam3KRFont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimButpenB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimButpenB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKRWideNerd-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-widenerd@1.0/MonoplexKRWideNerd-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'DepartureMono-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MiraeroNormal';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/MiraeroNormal.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSYeoleum20-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSYeoleum20-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSGooltokki';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/HSGooltokki.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSGyeoulNoonkott20';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HSGyeoulNoonkott20.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimKkwabaegiR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimKkwabaegiR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimDoldamB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimDoldamB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimYeohaengR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimYeohaengR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'ClimateCrisisKRVF';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/ClimateCrisisKRVF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MonoplexKRWide-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-wide@1.0/MonoplexKRWide-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Dovemayo_wild';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/Dovemayo_wild.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Nyangi-B-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/Cafe24Nyangi-B-v1.0.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimSonagiR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimSonagiR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimUndongjangL';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimUndongjangL.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimTtwimteulR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimTtwimteulR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimKossuyeomR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimKossuyeomR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Jaemin';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jaemin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimSantteutbatangL';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimSantteutbatangL.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'MoiraiOne-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_JAMO@1.0/MoiraiOne-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Decoline';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Decoline.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Middleschool_student';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_08@1.0/Middleschool_student.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimTuhoR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimTuhoR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSJiptokki-Black';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/HSJiptokki-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'goorm-sans-code';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/goorm-sans-code.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'AssacomFreeGothicTTF-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/AssacomFreeGothicTTF-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMHANNAAir';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TiquiTaca-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/TiquiTaca-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Galmetgol';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Galmetgol.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimGodeunjemokB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimGodeunjemokB.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Sungsil';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/Sungsil.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Somi';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/Somi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimDotbogiR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimDotbogiR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimMalgeunnalB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimMalgeunnalB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    size-adjust: 70%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimJeomsimsiganB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimJeomsimsiganB.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTSahmyookUniversityR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/TTSahmyookUniversityR.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimEunhasuR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimEunhasuR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 70%;
+}
+
+@font-face {
+    font-family: 'Yeonji';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_11@1.0/Yunji.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'SeguSegu-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.2/SeguSegu-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+
+@font-face {
+    font-family: 'HSGaeulsenggak';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSGaeulsenggak.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Unggungqui';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_11@1.0/Unggungqui.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Goseogu-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.2/Goseogu-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Hana_handwriting';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Hana_handwriting.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Yuni_ddingddang';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_11@1.0/Yuni_ddingddang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Grandpa_sharing';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Grandpa_sharing.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'CHOGOONChickenScratchV2-Medium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2406-1@1.0/CHOGOONChickenScratchV2-Medium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: '60sSTRIPE';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/60sSTRIPE.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'TTHakgyoansimUsanR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimUsanR.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Pretty_Left_handed';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_09@1.0/Pretty_Left_handed.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Treegarden';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/Treegarden.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Decomilk';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Decomilk.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Baby_love';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Baby_love.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Rose';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_09@1.0/Rose.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'FOUREYES';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/FOUREYES.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'CHOGOONCHICKENSCRATCHV5';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/CHOGOONCHICKENSCRATCHV5.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Anssang';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Anssang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'CHOGOONCHICKENSCRATCHV6';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/CHOGOONCHICKENSCRATCHV6.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Geumeunbohwa';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Geumeunbohwa.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Ggeuteumuri';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Ggeuteumuri.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HakgyoansimGgooreogiR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimGgooreogiR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Jayoo';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_06@1.0/Jayoo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Gootneaeum';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Gootneaeum.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'GibbemBalgeum';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/GibbemBalgeum.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Mingyung';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_08@1.0/Mingyung.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Mingijuk';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105@1.1/Mingijuk.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'CHOGOONCHICKENSCRATCHV3';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-2@1.0/CHOGOONCHICKENSCRATCHV3.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'White_angel';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_11@1.0/White_angel.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'BMEuljirooraeorae';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/BMEuljirooraeorae.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Restart';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_09@1.0/Restart.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'mom_to_daughter';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_08@1.0/mom_to_daughter.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'DosKor';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/DosKor.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Fairytale_ddobak';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Fairytale_ddobak.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Daheng';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_02@1.0/Daheng.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'HSGaeulSenggak20';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/HSGaeulSenggak20.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Daughter_handwriting';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Daughter_handwriting.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cafe24Decozoo';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Decozoo.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Kanginhan';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_07@1.0/Kanginhan.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Future_tree';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Future_tree.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Global_Hangul';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Global_Hangul.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Korea_hero';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_07@1.0/Korea_hero.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Shining_star';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/Shining_star.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Shy_college_student';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/Shy_college_student.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Kimyooyee';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_07@1.0/Kimyooyee.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'WinKor';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/WinKor.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Yedang';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_11@1.0/Yedang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Mini_handwriting';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_08@1.0/Mini_handwriting.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Sanghea_chanmi';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_09@1.0/Sanghea_chanmi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'White_kkorisuri';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_11@1.0/White_kkorisuri.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Amsterdam';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Amsterdam.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Saying_tobe_strong';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_09@1.0/Saying_tobe_strong.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Se-hwa';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/Se-hwa.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Kyuri_diary';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_07@1.0/Kyuri_diary.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Mugunghwa';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_08@1.0/Mugunghwa.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Okbi';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_08@1.0/Okbi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Ddakdandan';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Ddakdandan.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Yammy';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_11@1.0/Yammy.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Firefighter_prayer';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Firefighter_prayer.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Dot_font';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Dot_font.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Father_handwriting';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Father_handwriting.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Syning_19';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/Syning_19.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Hardworking';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_06@1.0/Hardworking.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Become_one';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Become_one.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Choding_hope';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_02@1.0/Choding_hope.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Mongdol';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/naverfont_08@1.0/Mongdol.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Father_loveletter';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Father_loveletter.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Kangbujang';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_06@1.0/Kangbujang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Love_mom';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_07@1.0/Love_mom.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Ddobakddobak';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Ddobakddobak.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Mago';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_07@1.0/Mago.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Warm_farewell';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_11@1.0/Warm_farewell.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Meaningful_hanguel';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_07@1.0/Meaningful_hanguel.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Flower_tree';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Flower_tree.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Ainmom';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Ainmom.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Kimjuim';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_07@1.0/Kimjuim.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Orbit_of_moon';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_09@1.0/Orbit_of_moon.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Polar_Star';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_09@1.0/Polar_Star.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Fighting_hyonam';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Fighting_hyonam.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Hanyoon';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Hanyoon.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Love_son';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_07@1.0/Love_son.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Gomsin';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Gomsin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Hyejun';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_06@1.0/Hyejun.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Se-a';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/Se-a.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Bujangnim_nunchi';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_02@1.0/Bujangnim_nunchi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Mujinjang';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_08@1.0/Mujinjang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'My_wife_writing';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_08@1.0/My_wife_writing.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Deagwang_mirror';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Deagwang_mirror.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Newly_married';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_08@1.0/Newly_married.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Koreageulggol';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_07@1.0/Koreageulggol.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Round_destiny';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_09@1.0/Round_destiny.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Chulpil_writing';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_02@1.0/Chulpil_writing.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Bud_tree';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_02@1.0/Bud_tree.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'I_survive';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_06@1.0/I_survive.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Bumsom';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_02@1.0/Bumsom.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Grandma_wring';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Grandma_wring.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Hyukee';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_06@1.0/Hyukee.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Dajin';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Dajin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Kalguksu';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_06@1.0/Kalguksu.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Haram';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Haram.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Summer_letter';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/Summer_letter.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Dache_love';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_02@1.0/Dache_love.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Bbang_gunimom';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Bbang_gunimom.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Jungeun';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_06@1.0/Jungeun.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Parkgyunga';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_09@1.0/Parkgyunga.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Doing_well';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Doing_well.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Hope_nuri';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_06@1.0/Hope_nuri.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Cute_siu';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_02@1.0/Cut_siu.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Hardworking_donghee';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_06@1.0/Hardworking_donghee.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Bisang';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_02@1.0/Bisang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Coco';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_02@1.0/Coco.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Happy_dobi';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Happy_dobi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Bareun_mental';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Bareun_mental.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Pride_jiu';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_09@1.0/Pride_jiu.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}
+
+@font-face {
+    font-family: 'Beakeumrye';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Beakeumrye.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    size-adjust: 80%;
+}

@@ -6,11 +6,15 @@ import "sst"
 export {}
 declare module "sst" {
   export interface Resource {
-    "MyWeb": {
+    "FromYou": {
       "type": "sst.aws.Nextjs"
       "url": string
     }
-    "Todo": {
+    "FromYouBucket": {
+      "name": string
+      "type": "sst.aws.Bucket"
+    }
+    "FromYouTable": {
       "name": string
       "type": "sst.aws.Dynamo"
     }

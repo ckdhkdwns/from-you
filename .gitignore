@@ -45,3 +45,13 @@ next-env.d.ts
 
 # open-next
 .open-next
+
+
+/public
+/assets
+/.vscode
+/.open-next
+
+
+package-lock.json
+README.md

@@ -1,6 +1,6 @@
 module.exports = function (plop) {
   plop.setGenerator("feature", {
-    description: "SaaS Boilerplate feature structure",
+    description: "From You feature structure",
     prompts: [
       {
         type: "input",
