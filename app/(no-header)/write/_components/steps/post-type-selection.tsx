@@ -18,7 +18,7 @@ export default function PostTypeSelection() {
     };
 
     return (
-        <div className="space-y-6 flex flex-col items-center mt-12 md:mt-24 w-full my-auto h-full">
+        <div className="space-y-6 flex flex-col items-center w-full my-auto h-full">
             <RadioGroup
                 value={selectedPostType}
                 onValueChange={handlePostTypeChange}

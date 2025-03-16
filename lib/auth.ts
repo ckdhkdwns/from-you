@@ -67,12 +67,15 @@ export const authOptions: NextAuthOptions = {
                 }
 
                 try {
-                    const { data: user } = await verifyCredentials(
+                    const { data: user, error } = await verifyCredentials(
                         credentials.email,
                         credentials.password,
                     );
 
-                    console.log(user);
+                    if (error) {
+                        throw new Error(error.message);
+                    }
+
                     return {
                         id: user.email,
                         name: user.name,

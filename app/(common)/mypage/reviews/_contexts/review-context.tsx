@@ -69,6 +69,7 @@ export function ReviewProvider({
         if (!success) return;
 
         // 리뷰 목록에 추가
+        setPreparedLetters(prev => prev.filter(letter => removeTableKeyPrefix(letter.SK) !== letterId));
         setReviews(prev => [...prev, review]);
         const earnPointText = earnPoint > 0 ? ` ${earnPoint}P 적립되었습니다.` : '';
         toast.success(`리뷰가 등록되었습니다.${earnPointText}`);

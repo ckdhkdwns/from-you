@@ -6,9 +6,7 @@ interface TransferInfoSectionProps {
 }
 
 export default function TransferInfoSection({ letter }: TransferInfoSectionProps) {
-    if (letter.paymentMethod !== 'transfer' || !letter.transferInfo) {
-        return null;
-    }
+
 
     const { transferInfo } = letter;
 

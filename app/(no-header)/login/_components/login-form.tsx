@@ -64,8 +64,9 @@ export default function LoginForm() {
 
             if (result?.error) {
                 setError('이메일 또는 비밀번호가 일치하지 않습니다.');
+                return;
             }
-            // 리다이렉트는 useEffect에서 처리
+
             toast.success('로그인에 성공했습니다.');
             router.push('/');
         } catch (error) {

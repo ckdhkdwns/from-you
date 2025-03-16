@@ -73,6 +73,17 @@ export default async function page({ params }: { params: Promise<{ type: string;
             value: paymentMethodConfig[letter.paymentMethod].label,
         },
         {
+            label: '입금자명',
+            value: letter.transferInfo?.depositorName,
+            hidden: letter.paymentMethod !== 'transfer',
+        },
+        {
+            label: '현금영수증',
+            value: `${letter?.transferInfo?.cashReceiptType === 'business' ? '법인' : '개인'} ${letter.transferInfo?.cashReceiptNumber}`,
+            hidden: letter?.transferInfo?.cashReceiptType === 'none',
+        },
+
+        {
             label: '등기번호',
             value: (
                 <div className="flex items-center gap-2 w-full">
@@ -132,13 +143,13 @@ export default async function page({ params }: { params: Promise<{ type: string;
     ];
 
     return (
-        <div className="mb-8">
+        <div className="mb-8 flex flex-col w-full">
             <div className="text-xl font-semibold mb-8">발송 상세조회</div>
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-8 w-full">
                 <InfoTable info={orderInfo} title="주문 정보" />
                 <InfoTable info={senderInfo} title="주문자 정보" />
                 <InfoTable info={receiverInfo} title="수신자 정보" />
-                <div>
+                <div className="w-full flex flex-col">
                     <div className="flex justify-between items-center">
                         <div className="mb-3 text-lg font-semibold">작성된 편지</div>
                         <div>총 {letter.text.length}장</div>
@@ -153,13 +164,18 @@ export default async function page({ params }: { params: Promise<{ type: string;
                     </div>
                 </div>
                 {letter.photos.length > 0 && (
-                    <div>
+                    <div className="w-full">
                         <div className="flex justify-between items-center">
                             <div className="mb-3 text-lg font-semibold">첨부된 사진</div>
                             <div>총 {letter.photos.length}장</div>
                         </div>
                         <div className="border-t border-primary-black py-6 px-3">
-                            <PreviewPhoto photos={letter.photos} />
+                            <PreviewPhoto
+                                photos={letter.photos}
+                                aspectRatio={
+                                    templateConfig.photoSize.width / templateConfig.photoSize.height
+                                }
+                            />
                         </div>
                     </div>
                 )}

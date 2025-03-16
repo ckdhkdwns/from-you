@@ -146,6 +146,7 @@ export function LetterDetailDialog() {
         return false;
     };
 
+    console.log('currentLetter', currentLetter);
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogContent className="max-w-6xl overflow-y-auto !bg-white">
@@ -168,15 +169,16 @@ export function LetterDetailDialog() {
                                 />
                             </div>
 
+                            {currentLetter.paymentMethod === 'transfer' && (
+                                <TransferInfoSection letter={currentLetter} />
+                            )}
+
                             <div className="bg-gray-50 p-4 rounded-lg">
                                 <h3 className="text-md font-semibold mb-3">발신자 정보</h3>
                                 <SenderInfoSection letter={currentLetter} />
                             </div>
 
                             {/* 계좌이체 정보 섹션 */}
-                            {currentLetter.paymentMethod === 'transfer' && (
-                                <TransferInfoSection letter={currentLetter} />
-                            )}
 
                             <div className="bg-gray-50 p-4 rounded-lg">
                                 <h3 className="text-md font-semibold mb-3">수신자 정보</h3>

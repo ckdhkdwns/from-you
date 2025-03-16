@@ -82,7 +82,7 @@ export default function Receipt({
                 <div className="flex justify-between items-center self-stretch relative w-full">
                     <p className="text-base font-medium text-left text-[#4f4f4f]">총 결제금액</p>
                     <p className="text-lg font-semibold text-left text-gray-700">
-                        {totalPrice?.toLocaleString()}원
+                        {priceInfo.totalPrice?.toLocaleString()}원
                     </p>
                 </div>
                 <div className="flex justify-start items-start self-stretch gap-4 mt-1">

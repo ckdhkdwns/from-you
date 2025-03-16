@@ -2,6 +2,7 @@ import React from 'react';
 import { mmToPx } from '@/lib/mmToPx';
 import { TemplateConfigPublic } from '@/models/types/template-config';
 import { Font } from '@/models/types/letter';
+import Image from 'next/image';
 
 interface ReadonlyPaperProps {
     font: Font;
@@ -49,6 +50,14 @@ const PrintablePaper = ({
                 margin: '0 auto',
             }}
         >
+            <Image
+                src={'/blank-letter.png'}
+                alt="letter-paper"
+                width={mmToPx(standardWidth)}
+                height={mmToPx(standardWidth)}
+                className="w-full h-full object-cover absolute top-0 left-0 z-10"
+                draggable={false}
+            />
             {/* 편지지 내용 영역 */}
             <textarea
                 className="w-full h-full p-0 resize-none outline-none bg-transparent"

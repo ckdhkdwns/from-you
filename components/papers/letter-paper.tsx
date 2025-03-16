@@ -65,6 +65,10 @@ const LetterPaper = forwardRef<HTMLTextAreaElement, LetterPaperProps>(
                     // backgroundImage: `url(${paperImage})`,
                     // backgroundSize: "cover",
                     // backgroundPosition: "center",
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    margin: '0 auto',
                 }}
             >
                 {paperImage && (
@@ -77,6 +81,16 @@ const LetterPaper = forwardRef<HTMLTextAreaElement, LetterPaperProps>(
                         draggable={false}
                     />
                 )}
+
+                <Image
+                    src={'/blank-letter.png'}
+                    alt="letter-paper"
+                    width={mmToPx(standardWidth)}
+                    height={mmToPx(standardWidth)}
+                    className="w-full h-full object-cover absolute top-0 left-0 z-10"
+                    draggable={false}
+                />
+
                 {/* 편지지 내용 영역 */}
                 <textarea
                     ref={ref}
