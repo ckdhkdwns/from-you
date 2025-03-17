@@ -3,6 +3,7 @@ import LoginForm from './_components/login-form';
 import Image from 'next/image';
 import BluredEval from '../_components/blured-eval';
 import RedirectedToast from '../_components/redirected-toast';
+import Link from 'next/link';
 
 async function Login() {
     return (
@@ -13,7 +14,9 @@ async function Login() {
             <div className="absolute -top-[25%] left-0 w-full h-full overflow-visible z-0">
                 <BluredEval />
             </div>
-            <Image src="/logo.png" alt="logo" width={180} height={80} />
+            <Link href="/" className="z-10">
+                <Image src="/logo.png" alt="logo" width={180} height={80} />
+            </Link>
             <h1 className="text-2xl font-semibold text-black w-full text-center hidden md:block">
                 소중한 마음을 전하기 위해 로그인하세요!
             </h1>
