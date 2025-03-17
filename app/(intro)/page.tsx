@@ -6,6 +6,8 @@ import EventSection from './_components/event-section';
 import NoticeSection from './_components/notice-section';
 import { getNotices } from '@/models/actions/notice-actions';
 import SecondEventSection from './_components/second-event-section';
+import { Suspense } from 'react';
+import UnauthorizedToast from './_components/unauthorized-toast';
 
 export default async function Home() {
     const { data: templates } = await getAllTemplates();
@@ -15,6 +17,10 @@ export default async function Home() {
 
     return (
         <div className="items-center justify-center flex flex-col pb-24 w-full mt-12">
+            <Suspense fallback={<></>}>
+                <UnauthorizedToast />
+            </Suspense>
+            
             <div className="w-full flex flex-col gap-8 mt-4 md:mt-12 mx-auto">
                 <div className="flex flex-col w-full md:gap-6 items-center">
                     <PopularTemplateCarousel popularTemplates={popularTemplates} />

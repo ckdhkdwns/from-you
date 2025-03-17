@@ -74,6 +74,7 @@ export async function checkUserRole(): Promise<ActionResponse<UserRole>> {
     });
 }
 
+
 /**
  * 이메일과 비밀번호로 사용자 인증
  */
@@ -98,6 +99,7 @@ export async function verifyCredentials(
         return toUserPublic(user);
     });
 }
+
 
 /**
  * 소셜 로그인 처리

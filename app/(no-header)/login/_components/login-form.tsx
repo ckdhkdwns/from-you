@@ -1,10 +1,11 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { toast } from 'sonner';
 import { Separator } from '@/components/ui/separator';
+import { signInEmail } from '@/lib/auth';
 
 const SOCIAL_BUTTONS = [
     {
@@ -39,9 +40,11 @@ const SOCIAL_BUTTONS = [
 export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get('callbackUrl') || '/';
+    const [error, setError] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -49,32 +52,35 @@ export default function LoginForm() {
 
         try {
             if (!email || !password) {
-                setError('이메일과 비밀번호를 입력해주세요.');
                 setIsLoading(false);
+                setError('이메일과 비밀번호를 입력해주세요.');
                 return;
             }
 
-            const result = await signIn('credentials', {
-                email,
-                password,
-                redirect: false,
-            });
-
-            console.log('로그인 결과:', result);
-
-            if (result?.error) {
-                setError('이메일 또는 비밀번호가 일치하지 않습니다.');
+            const error = await signInEmail(email, password);
+            if (error) {
+                setError(error);
                 return;
             }
-
-            toast.success('로그인에 성공했습니다.');
             router.push('/');
         } catch (error) {
             console.error('로그인 오류:', error);
-            setError('로그인 중 오류가 발생했습니다.');
         } finally {
             setIsLoading(false);
         }
+    };
+
+    // 소셜 로그인 핸들러
+    const handleSocialLogin = (provider: string) => {
+        setIsLoading(true);
+        signIn(provider, {
+            callbackUrl, // URL 파라미터에서 가져온 callbackUrl 사용
+            redirect: true,
+        }).catch(error => {
+            console.error(`${provider} 로그인 오류:`, error);
+            setIsLoading(false);
+            toast.error(`${provider} 로그인 중 오류가 발생했습니다.`);
+        });
     };
 
     return (
@@ -156,11 +162,7 @@ export default function LoginForm() {
                             <button
                                 key={button.provider}
                                 type="button"
-                                onClick={() =>
-                                    signIn(button.provider, {
-                                        callbackUrl: '/',
-                                    })
-                                }
+                                onClick={() => handleSocialLogin(button.provider)}
                                 className="w-full flex justify-center items-center h-[54px] rounded-xl"
                                 style={{ backgroundColor: button.color }}
                                 disabled={isLoading}

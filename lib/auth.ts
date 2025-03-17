@@ -8,6 +8,8 @@ import AppleProvider from 'next-auth/providers/apple';
 import { verifyCredentials, handleSocialLogin } from '@/models/actions/user-actions';
 import { getServerSession } from 'next-auth';
 import { Provider } from '@/models/types/user';
+import { signIn } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 declare module 'next-auth' {
     interface Session {
@@ -42,6 +44,18 @@ export const getUserIdBySession = async () => {
     return session.user.id;
 };
 
+
+export const signInEmail = async (email: string, password: string) => {
+    const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+    });
+
+    if (result?.error) {
+        return '이메일 또는 비밀번호가 일치하지 않습니다.';
+    }
+};
 export const authOptions: NextAuthOptions = {
     cookies: {
         pkceCodeVerifier: {
