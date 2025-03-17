@@ -11,6 +11,7 @@ import {
     toReviewPublic,
     ReviewInput,
     createReviewEntityFromInput,
+    ReviewKeys,
 } from '../types/review';
 import { v4 as uuidv4 } from 'uuid';
 import { logPointAction } from './point-action';
@@ -103,8 +104,8 @@ export async function createReviewAction(
         const newReview: ReviewEntity = {
             ...(reviewEntity as ReviewEntity),
             template: templateInfo,
-            PK: UserKeys.pk(userId), // UserKeys로 변경
-            SK: `REVIEW#${reviewId}`, // 사용자 하위에 리뷰 저장
+            PK: ReviewKeys.pk(userId), // UserKeys로 변경
+            SK: ReviewKeys.sk(reviewId), // 사용자 하위에 리뷰 저장
             GSI2PK: TemplateKeys.pk(templateId), // 템플릿 ID로 변경
         };
 
@@ -112,7 +113,7 @@ export async function createReviewAction(
             .transaction()
             .updateItem<Partial<UserEntity>>(
                 UserKeys.pk(userId),
-                `USER#${userId}`, // 사용자 프로필 SK 패턴 사용
+                UserKeys.sk(userId), // 사용자 프로필 SK 패턴 사용
                 {
                     point: earnPointAmount,
                 },
@@ -166,7 +167,7 @@ export async function deleteReviewAction(
     reviewId: string,
 ): Promise<ActionResponse<void>> {
     return withActionResponse(async () => {
-        await repository.delete(UserKeys.pk(userId), `REVIEW#${reviewId}`);
+        await repository.delete(UserKeys.pk(userId), ReviewKeys.sk(reviewId));
     });
 }
 
@@ -184,7 +185,7 @@ export async function deleteMultipleReviewsAction(
             reviews.map(async review => {
                 return await repository.delete(
                     UserKeys.pk(review.userId),
-                    `REVIEW#${review.reviewId}`,
+                    ReviewKeys.sk(review.reviewId),
                 );
             }),
         );
@@ -214,7 +215,7 @@ export async function toggleMultipleBestReviewsAction(
             // 리뷰 업데이트
             transaction.updateItem<Partial<ReviewEntity>>(
                 UserKeys.pk(review.userId),
-                `REVIEW#${review.reviewId}`,
+                ReviewKeys.sk(review.reviewId),
                 {
                     isBest: isBest,
                 },

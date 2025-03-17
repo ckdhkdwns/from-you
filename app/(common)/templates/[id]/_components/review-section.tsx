@@ -21,8 +21,8 @@ export default function ReviewSection({ thumbnail, reviews }: ReviewSectionProps
                 )}
             </div>
             <div className="flex flex-col gap-6">
-                {reviews.slice(0, MAX_REVIEW_COUNT).map(review => (
-                    <ReviewItem key={review.PK} review={review} thumbnail={thumbnail} />
+                {reviews.slice(0, MAX_REVIEW_COUNT).map((review, index) => (
+                    <ReviewItem key={index} review={review} thumbnail={thumbnail} />
                 ))}
             </div>
 

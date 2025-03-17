@@ -107,8 +107,7 @@ export default function PostTypeSelection() {
                                                 </svg>
                                                 <div className="space-y-2">
                                                     <p className="text-xs font-medium text-left text-[#333]">
-                                                        발송 후 영업일 기준 {item.delivery} 이내
-                                                        도착
+                                                        영업일 기준 {item.delivery}
                                                     </p>
                                                     <p className="text-xs font-medium text-left text-[#333]">
                                                         제주 및 도서 지역은 약 2일 추가 소요

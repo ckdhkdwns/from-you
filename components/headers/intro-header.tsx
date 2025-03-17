@@ -90,7 +90,7 @@ export default function IntroHeader() {
                     </p>
                 </div>
                 <div className="flex justify-between items-center w-full p-[32px]">
-                    <DropdownMenu modal={false}>
+                    <DropdownMenu modal={false} open={true}>
                         <DropdownMenuTrigger asChild>
                             <Image
                                 src="/icons/menu.svg"

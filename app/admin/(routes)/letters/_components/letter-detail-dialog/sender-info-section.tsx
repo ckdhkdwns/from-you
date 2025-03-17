@@ -15,8 +15,12 @@ export function SenderInfoSection({ letter }: SenderInfoSectionProps) {
             <InfoItem label="우편번호" value={letter.senderAddress?.zonecode} />
             <InfoItem
                 label="주소"
-                value={`${letter.senderAddress?.address1} ${letter.senderAddress?.address2}`}
+                value={`${letter.senderAddress?.address1}`}
             />
+            <InfoItem label="상세주소" value={letter.senderAddress?.address2} />
+            {letter.senderAddress?.prisonerNumber && (
+                <InfoItem label="수용자 번호" value={letter.senderAddress.prisonerNumber} />
+            )}
             {letter.senderAddress?.contact && (
                 <InfoItem label="연락처" value={letter.senderAddress.contact} />
             )}

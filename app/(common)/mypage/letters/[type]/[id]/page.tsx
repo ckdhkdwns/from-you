@@ -114,6 +114,7 @@ export default async function page({ params }: { params: Promise<{ type: string;
         { label: '주문자', value: letter.senderAddress.name },
         { label: '우편번호', value: letter.senderAddress.zonecode },
         { label: '주소', value: letter.senderAddress.address1 },
+        { label: '상세주소', value: letter.senderAddress.address2 },
         {
             label: '연락처',
             value: letter.senderAddress.contact,
@@ -130,6 +131,12 @@ export default async function page({ params }: { params: Promise<{ type: string;
         { label: '수령인', value: letter.recipientAddress.name },
         { label: '우편번호', value: letter.recipientAddress.zonecode },
         { label: '주소', value: letter.recipientAddress.address1 },
+        { label: '상세주소', value: letter.recipientAddress.address2 },
+        {
+            label: '수용자 번호',
+            value: letter.recipientAddress?.prisonerNumber,
+            hidden: !letter.recipientAddress.prisonerNumber,
+        },
         {
             label: '연락처',
             value: letter.recipientAddress.contact,

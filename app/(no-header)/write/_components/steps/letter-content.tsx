@@ -209,17 +209,22 @@ export default function LetterContent() {
                     }
                 } else if (pages.length < 10) {
                     // 새 페이지 추가
-                    setPages(prev => [...prev, removedChars]);
+                    setTimeout(() => {
+                        setPages(prev => [...prev, removedChars]);
+                    }, 0);
 
                     // 새 페이지로 포커스 이동
                     setTimeout(() => {
                         const nextTextarea = textareaRefs.current[index + 1];
                         if (nextTextarea && isFocus) {
+
+                            
                             nextTextarea.focus();
                             nextTextarea.setSelectionRange(0, 0);
+                            
                             nextTextarea.value = removedChars;
                         }
-                    }, 10);
+                    }, 0);
                 }
             }
         }

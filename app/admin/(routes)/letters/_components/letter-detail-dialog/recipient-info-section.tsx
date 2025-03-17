@@ -13,10 +13,11 @@ export function RecipientInfoSection({ letter }: RecipientInfoSectionProps) {
         <SectionContainer title="수신자 정보">
             <InfoItem label="이름" value={letter.recipientAddress?.name} />
             <InfoItem label="우편번호" value={letter.recipientAddress?.zonecode} />
-            <InfoItem
-                label="주소"
-                value={`${letter.recipientAddress?.address1} ${letter.recipientAddress?.address2}`}
-            />
+            <InfoItem label="주소" value={`${letter.recipientAddress?.address1}`} />
+            <InfoItem label="상세주소" value={letter.recipientAddress?.address2} />
+            {letter.recipientAddress?.prisonerNumber && (
+                <InfoItem label="수용자 번호" value={letter.recipientAddress.prisonerNumber} />
+            )}
             {letter.recipientAddress?.contact && (
                 <InfoItem label="연락처" value={letter.recipientAddress.contact} />
             )}

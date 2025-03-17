@@ -6,8 +6,8 @@ import { PopupDisplay } from '@/components/popup/popup-display';
 
 export default function layout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="bg-primary-pink">
-            <div className="flex flex-col min-h-screen bg-primary-ivory container mx-auto relative px-2 shadow-md !p-0">
+        <div className="">
+            <div className="flex flex-col min-h-screen bg-primary-ivory container mx-auto relative px-2 !p-0">
                 <NewHeader />
 
                 <div className="p-2">

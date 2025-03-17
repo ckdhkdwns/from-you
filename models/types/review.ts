@@ -5,12 +5,12 @@ import { DynamoEntity, EntityKeyPattern, getISOTimestamp } from './dynamo';
  * 리뷰 엔티티 키 생성 패턴
  */
 export const ReviewKeys: EntityKeyPattern = {
-    pk: (reviewId: string) => `REVIEW#${reviewId}`,
+    pk: (userId: string) => `USER#${userId}`,
     sk: (reviewId: string) => `REVIEW#${reviewId}`,
-    gsi1pk: (letterId: string) => `LETTER#${letterId}`,
-    gsi1sk: (userId: string) => `USER#${userId}`,
-    gsi2pk: (userId: string) => `USER#${userId}`,
-    gsi2sk: (timestamp: string) => `REVIEW#${timestamp}`,
+    gsi1pk: () => `REVIEW`,
+    gsi1sk: (createdAt: string) => createdAt,
+    gsi2pk: (templateId: string) => `TEMPLATE#${templateId}`,
+    gsi2sk: (createdAt: string) => `${createdAt}`,
 };
 
 /**
