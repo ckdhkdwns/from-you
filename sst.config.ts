@@ -54,6 +54,7 @@ export default $config({
                 name: 'fromyou.co.kr',
                 dns: false,
                 cert: process.env.NEXT_PUBLIC_ACM_CERTIFICATE_ARN || '',
+                aliases: ['xn--jp2by2y0ok.com']
             },
         });
     },
