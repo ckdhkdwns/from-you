@@ -26,67 +26,43 @@ export const statusTabs = [
     { label: '배송 완료', value: 'shipping-complete' },
 ];
 
-export const MyLettersContext = createContext({
+interface LettersState {
+    draftLetters: LetterPublic[];
+    sentLetters: LetterPublic[];
+    receivedLetters: ReceivedLetterPublic[];
+}
+
+interface MyLettersContextType {
+    letters: (LetterPublic | ReceivedLetterPublic)[];
+    filter1: (typeof letterTypeTabs)[number];
+    setFilter1: (filter: (typeof letterTypeTabs)[number]) => void;
+    filter2: (typeof statusTabs)[number];
+    setFilter2: (filter: (typeof statusTabs)[number]) => void;
+    hideStatusTabs: boolean;
+    isLoading: boolean;
+    handleDeleteLetter: (userId: string, letterId: string) => Promise<void>;
+    letterCount: {
+        sent: number;
+        received: number;
+        draft: number;
+    } | null;
+}
+
+export const MyLettersContext = createContext<MyLettersContextType>({
     letters: [],
     filter1: letterTypeTabs[0],
-    setFilter1: (_filter: (typeof letterTypeTabs)[number]) => {},
+    setFilter1: () => {},
     filter2: statusTabs[0],
-    setFilter2: (_filter: (typeof statusTabs)[number]) => {},
+    setFilter2: () => {},
     hideStatusTabs: false,
     isLoading: false,
-    handleDeleteLetter: (_userId: string, _letterId: string) => {},
+    handleDeleteLetter: async () => {},
     letterCount: null,
 });
 
-const getStandardDate = (letter: LetterPublic) => {
-    if (letter.isDraft) {
-        return letter.updatedAt;
-    }
-    if (letter.paymentMethod === 'transfer') {
-        return letter.transferRequestedAt;
-    }
-    if (letter.paymentMethod === 'point') {
-        return letter.paymentCompletedAt;
-    }
-    return letter.paymentCompletedAt || letter.updatedAt;
-};
-
-const classifyLetters = ({
-    letters,
-    receivedLetters,
-}: {
-    letters: LetterPublic[];
-    receivedLetters: ReceivedLetterPublic[];
-}) => {
-    const sortedLetters = letters.sort((a, b) => {
-        const dateA = getStandardDate(a);
-        const dateB = getStandardDate(b);
-        return new Date(dateB).getTime() - new Date(dateA).getTime();
-    });
-    const classifiedLetters = sortedLetters.reduce(
-        (acc, letter) => {
-            if (letter.isDraft) {
-                acc.draft.push(letter);
-            } else {
-                acc.sent.push(letter);
-            }
-            return acc;
-        },
-        {
-            sent: [],
-            received: [],
-            draft: [],
-        },
-    );
-    return { ...classifiedLetters, received: receivedLetters };
-};
-
 interface MyLettersProviderProps {
     children: React.ReactNode;
-    initialLetters?: {
-        letters: LetterPublic[];
-        receivedLetters: ReceivedLetterPublic[];
-    };
+    initialLetters?: LettersState;
     error?: string;
 }
 
@@ -94,22 +70,24 @@ export const MyLettersProvider = ({
     error,
     children,
     initialLetters = {
-        letters: [],
+        draftLetters: [],
+        sentLetters: [],
         receivedLetters: [],
     },
 }: MyLettersProviderProps) => {
     const { type } = useParams();
     const router = useRouter();
-    const [letters, setLetters] = useState(() => classifyLetters(initialLetters));
+    const [letters, setLetters] = useState<LettersState>(initialLetters);
     const [filter1, setFilter1] = useState<(typeof letterTypeTabs)[number]>(letterTypeTabs[0]);
     const [filter2, setFilter2] = useState<(typeof statusTabs)[number]>(statusTabs[0]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (error && error === 'already-paid') {
             toast.error('이미 결제된 편지입니다.');
             router.replace('/mypage/letters/sent');
         }
-    }, [error]);
+    }, [error, router]);
 
     useEffect(() => {
         setFilter1(letterTypeTabs.find(tab => tab.value === type) || letterTypeTabs[0]);
@@ -119,8 +97,13 @@ export const MyLettersProvider = ({
         }
     }, [type]);
 
-    const filteredLetters = letters[filter1.value as keyof typeof letters].filter(letter => {
+    const filteredLetters = letters[filter1.value as keyof LettersState].filter(letter => {
         if (filter2.value === 'all') return true;
+        
+        // ReceivedLetterPublic 타입 체크
+        if ('senderName' in letter) return true;
+        
+        // LetterPublic 타입인 경우에만 상태 필터링
         return (
             getStatusText({
                 paymentStatus: letter.paymentStatus,
@@ -130,16 +113,23 @@ export const MyLettersProvider = ({
     });
 
     const handleDeleteLetter = async (userId: string, letterId: string) => {
-        const response = await deleteLetterAction(userId, letterId);
-        if (response.success) {
-            const newLetters = filteredLetters.filter(letter => letter.id !== letterId);
-            setLetters(
-                classifyLetters({
-                    letters: newLetters,
-                    receivedLetters: letters.received,
-                }),
-            );
-            toast.info('편지가 삭제되었습니다.');
+        setIsLoading(true);
+        try {
+            const response = await deleteLetterAction(userId, letterId);
+
+            if (response.success) {
+                setLetters(prev => ({
+                    ...prev,
+                    [filter1.value]: prev[filter1.value as keyof LettersState].filter(
+                        letter => letter.PK !== `USER#${letterId}`
+                    ),
+                }));
+                toast.info('편지가 삭제되었습니다.');
+            }
+        } catch (error) {
+            toast.error('편지 삭제 중 오류가 발생했습니다.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -154,12 +144,12 @@ export const MyLettersProvider = ({
                 filter2,
                 setFilter2,
                 hideStatusTabs,
-                isLoading: false,
+                isLoading,
                 handleDeleteLetter,
                 letterCount: {
-                    sent: letters.sent.length,
-                    received: letters.received.length,
-                    draft: letters.draft.length,
+                    sent: letters.sentLetters.length,
+                    received: letters.receivedLetters.length,
+                    draft: letters.draftLetters.length,
                 },
             }}
         >
@@ -169,26 +159,9 @@ export const MyLettersProvider = ({
 };
 
 export const useMyLetters = () => {
-    const {
-        letters,
-        filter1,
-        filter2,
-        setFilter1,
-        setFilter2,
-        hideStatusTabs,
-        handleDeleteLetter,
-        isLoading,
-        letterCount,
-    } = useContext(MyLettersContext);
-    return {
-        letters,
-        filter1,
-        filter2,
-        setFilter1,
-        setFilter2,
-        hideStatusTabs,
-        isLoading,
-        handleDeleteLetter,
-        letterCount,
-    };
+    const context = useContext(MyLettersContext);
+    if (!context) {
+        throw new Error('useMyLetters must be used within a MyLettersProvider');
+    }
+    return context;
 };

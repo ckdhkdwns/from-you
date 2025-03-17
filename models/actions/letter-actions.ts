@@ -92,11 +92,15 @@ export async function getMyLettersAction(): Promise<
         const userId = await getUserIdBySession();
 
         // 편지 목록 조회
-        const letters = await repository.query<LetterEntity>(UserKeys.pk(userId), 'LETTER#', true);
+        const letters = await repository.query<LetterEntity>(
+            LetterKeys.pk(userId),
+            'LETTER#',
+            true,
+        );
 
         // 받은 편지 목록 조회
         const receivedLetters = await repository.query<ReceivedLetterEntity>(
-            UserKeys.pk(userId),
+            LetterKeys.pk(userId),
             'RECEIVED_LETTER#',
             true,
         );
@@ -166,9 +170,10 @@ export async function deleteLetterAction(
     userId: string,
     letterId: string,
 ): Promise<ActionResponse<boolean>> {
+    console.log('deleteLetterAction', userId, letterId);
     return withActionResponse(async () => {
         try {
-            await repository.delete(UserKeys.pk(userId), LetterKeys.sk(letterId));
+            await repository.delete(LetterKeys.pk(userId), LetterKeys.sk(letterId));
             return true;
         } catch (error) {
             console.error('Error deleting letter:', error);

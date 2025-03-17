@@ -95,6 +95,15 @@ export function ResponsiveDialog({
                     </DialogHeader>
 
                     <div className={cn('w-full', className)}>{children}</div>
+                    {showFooter && (
+                        <div className="pt-2">
+                            {footerContent || (
+                                <button className="w-full rounded-md bg-gray-100 py-2 font-medium">
+                                    닫기
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </DialogContent>
             </Dialog>
         );
