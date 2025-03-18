@@ -9,42 +9,16 @@ import PaymentInfo from '../payment/payment-info';
 import TermAgreements from '../payment/term-agreements';
 import { Button } from '@/components/ui/button';
 import { useLetter } from '../../_contexts/letter-provider';
-import { parsePhotos } from '../../_libs/parse-photos';
-import { TossPaymentsWidgets, WidgetPaymentMethodWidget } from '@tosspayments/tosspayments-sdk';
 import { useUserData } from '@/contexts/session';
-import { LetterInput, TransferInfo } from '@/models/types/letter';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
-import { validateLetterData } from '../../_libs/validate';
-import { STEP_KEYS } from '../../_types/steps';
-import {
-    initiateAccountTransferPaymentAction,
-    initiateTossPaymentAction,
-    processPointOnlyPaymentAction,
-} from '@/models/actions/payment-actions';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
-import { paymentMethodMapping, POINT_RATE } from '@/constants';
+import { usePayment } from '../../_hooks/use-payment';
+import { createLetterData } from '../../_libs/create-letter-data';
 
 export default function Payment() {
+    // 사용자 데이터와 약관 동의 상태 관리
     const { userData } = useUserData();
     const [allAgreed, setAllAgreed] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
 
-    const [paymentWidget, setPaymentWidget] = useState<TossPaymentsWidgets | null>(null);
-    const [paymentMethodsWidget, setPaymentMethodsWidget] =
-        useState<WidgetPaymentMethodWidget | null>(null);
-
-    const [isPaymentReady, setIsPaymentReady] = useState(false);
-    const [isProgressing, setIsProgressing] = useState(false);
-
-    const [transferInfo, setTransferInfo] = useState<TransferInfo>({
-        depositorName: '',
-        cashReceiptType: 'none',
-        cashReceiptNumber: '',
-    });
-
-    const router = useRouter();
-
+    // 편지 관련 데이터 및 기능
     const {
         postTypes: selectedPostType,
         senderAddress,
@@ -72,194 +46,66 @@ export default function Payment() {
         tossPaymentMethod,
     } = useLetter();
 
-    const createLetterData = async (): Promise<LetterInput> => {
-        const photos = await parsePhotos(photo);
-
-        // 템플릿 객체 형태 수정 (LetterInput 타입에 맞춤)
-        const templateData = {
-            PK: template?.PK || '',
-            SK: template?.SK || '',
-            name: template?.name || '',
-            thumbnail: template?.thumbnail || '',
-            paperImage: template?.paperImage || '',
-        };
-
-        return {
-            id: removeTableKeyPrefix(letterId),
-
-            template: templateData,
-            text: text,
-            font: font,
-            photos: photos,
-            recipientAddress: recipientAddress,
-            senderAddress: senderAddress,
-            postType: selectedPostType,
-            // 가격 정보 구조
-            priceInfo: {
-                paperPrice,
-                photoPrice,
-                postTypePrice,
-                initialPrice,
-                totalPrice,
-            },
-            pointInfo: {
-                isUsingPoint,
-                usePointAmount,
-                earnPointAmount,
-            },
-        };
+    // 편지 데이터 생성 함수
+    const handleCreateLetterData = async () => {
+        return createLetterData({
+            letterId,
+            template,
+            text,
+            font,
+            photo,
+            recipientAddress,
+            senderAddress,
+            selectedPostType,
+            paperPrice,
+            photoPrice,
+            postTypePrice,
+            initialPrice,
+            totalPrice,
+            isUsingPoint,
+            usePointAmount,
+            earnPointAmount,
+        });
     };
 
-    // 결제 요청 처리
-    const handlePayment = async () => {
-        if (!allAgreed) {
-            toast.warning('이용약관에 동의해주세요.');
-            setIsProgressing(false);
-            setIsLoading(false);
-            return;
-        }
-
-        const { isValid, errorMessage } = validateLetterData(
-            {
-                currentStep: STEP_KEYS.PAYMENT,
-                text,
-                recipientAddress,
-                senderAddress,
-                postTypes: selectedPostType,
-            },
-            true,
-        );
-
-        if (!isValid) {
-            toast.warning(errorMessage);
-            setIsProgressing(false);
-            setIsLoading(false);
-            return;
-        }
-
-        setIsProgressing(true);
-
-        if (isUsingPoint && totalPrice === 0) {
-            try {
-                const letterData = await createLetterData();
-                const result = await processPointOnlyPaymentAction(letterData);
-
-                if (!result.success) {
-                    throw new Error('결제 요청에 실패했습니다.');
-                }
-
-                const resultLetterId = removeTableKeyPrefix(result.data.letter?.SK);
-
-                router.push(`/payment/success?letterId=${resultLetterId}&method=point`);
-            } catch (error) {
-                console.error('결제 요청 실패:', error);
-            } finally {
-                setIsLoading(false);
-                setIsProgressing(false);
-            }
-            return;
-        }
-
-        if (paymentMethod === 'toss') {
-            if (!paymentWidget || !isPaymentReady) return;
-
-            setIsLoading(true);
-            try {
-                const letterData = await createLetterData();
-
-                const { data: result } = await initiateTossPaymentAction(
-                    letterData as LetterInput,
-                    tossPaymentMethod,
-                );
-
-                const orderId = result.orderId;
-                const letterId = removeTableKeyPrefix(result?.SK);
-
-                // 결제 요청
-                await paymentWidget.requestPayment({
-                    orderId: orderId,
-                    orderName: template?.name || '',
-                    customerName: userData?.name || '',
-                    successUrl: `${window.location.origin}/payment/success?method=toss&letterId=${letterId}`,
-                    failUrl: `${window.location.origin}/payment/fail?method=toss&letterId=${letterId}`,
-                });
-                setIsLoading(false);
-            } catch (error) {
-                console.log('결제 요청 실패:', error);
-                if (error.code === 'USER_CANCEL') {
-                    toast.warning('취소되었습니다.');
-                }
-                setIsLoading(false);
-            } finally {
-                setIsLoading(false);
-                setIsProgressing(false);
-            }
-        } else if (paymentMethod === 'transfer') {
-            if (!transferInfo.depositorName) {
-                toast.warning('입금자명을 입력해주세요.');
-                return;
-            }
-
-            setIsLoading(true);
-
-            try {
-                const letterData = await createLetterData();
-
-                const result = await initiateAccountTransferPaymentAction({
-                    ...letterData,
-                    transferInfo: transferInfo,
-                });
-
-                if (!result.success) {
-                    throw new Error('계좌이체 정보 저장에 실패했습니다.');
-                }
-
-                // 헬퍼 함수를 사용하여 ID 추출
-                const resultLetterId = removeTableKeyPrefix(result.data.letter?.SK);
-
-                router.push(
-                    `/payment/success?method=transfer&price=${totalPrice}&letterId=${resultLetterId}`,
-                );
-            } catch (error) {
-                console.error('계좌이체 처리 중 오류 발생:', error);
-            } finally {
-                setIsLoading(false);
-                setIsProgressing(false);
-            }
-        }
-    };
-
-    // 현재 선택된 결제 수단의 포인트 적립률 계산
-    const getPointRateInfo = () => {
-        if (paymentMethod === 'toss' && tossPaymentMethod) {
-            return POINT_RATE[tossPaymentMethod] || POINT_RATE.default;
-        } else {
-            return POINT_RATE[paymentMethod.toLowerCase()] || POINT_RATE.default;
-        }
-    };
-
-    // 결제 수단 이름 표시
-    const getPaymentMethodName = () => {
-        if (paymentMethod === 'toss' && tossPaymentMethod) {
-            // 토스페이먼츠 결제 수단 이름
-            return paymentMethodMapping[tossPaymentMethod] || tossPaymentMethod;
-        } else {
-            // 일반 결제 수단 이름
-            return paymentMethodMapping[paymentMethod] || paymentMethod;
-        }
-    };
-
-    const pointRateInfo = getPointRateInfo();
-    const pointRatePercent =
-        pointRateInfo.type === 'percent' ? (pointRateInfo.rate * 100).toFixed(1) : '0';
-    const paymentMethodName = getPaymentMethodName();
+    // 결제 관련 훅 사용
+    const {
+        isLoading,
+        isProgressing,
+        transferInfo,
+        setTransferInfo,
+        paymentWidget,
+        setPaymentWidget,
+        paymentMethodsWidget,
+        setPaymentMethodsWidget,
+        isPaymentReady,
+        setIsPaymentReady,
+        handlePayment,
+        pointRatePercent,
+        paymentMethodName,
+    } = usePayment({
+        userData,
+        letterData: {
+            text,
+            recipientAddress,
+            senderAddress,
+            selectedPostType,
+        },
+        createLetterData: handleCreateLetterData,
+        paymentMethod,
+        tossPaymentMethod,
+        isUsingPoint,
+        totalPrice,
+        template,
+    });
 
     return (
         <div
             className="p-6 md:p-12 flex flex-col md:grid gap-8 md:gap-24 !pb-12"
             style={{ gridTemplateColumns: '3fr 2fr' }}
         >
-            <div className={'flex flex-col gap-12 pb-12'}>
+            {/* 왼쪽 컬럼: 주문 정보, 포인트 정보, 결제 위젯 */}
+            <div className="flex flex-col gap-12 pb-12">
                 <OrderInfo />
                 <PointInfo
                     isUsingPoint={isUsingPoint}
@@ -284,6 +130,7 @@ export default function Payment() {
                 )}
             </div>
 
+            {/* 오른쪽 컬럼: 결제 정보, 약관 동의, 결제 버튼 */}
             <div className="flex flex-col gap-4">
                 <div className="sticky top-12">
                     <PaymentInfo />
@@ -292,11 +139,12 @@ export default function Payment() {
                         variant="pink"
                         className="w-full h-12 text-base"
                         disabled={isLoading || isProgressing}
-                        onClick={handlePayment}
+                        onClick={() => handlePayment(allAgreed)}
                     >
                         {isLoading || isProgressing ? '결제 중...' : '결제하기'}
                     </Button>
 
+                    {/* 포인트 적립 정보 표시 */}
                     {!isUsingPoint && (
                         <div className="flex flex-col mt-2 p-2">
                             <div className="flex justify-between text-sm">
