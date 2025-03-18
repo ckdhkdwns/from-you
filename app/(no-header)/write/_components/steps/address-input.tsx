@@ -115,7 +115,7 @@ export default function AddressInput() {
         if (addressType === 'recipient') {
             setRecipientAddress({
                 ...recipientAddress,
-                name: facility.name,
+                name: '',
                 zonecode: facility.zonecode,
                 address1: facility.address1,
                 address2: facility.address2,
@@ -134,7 +134,7 @@ export default function AddressInput() {
         } else {
             setSenderAddress({
                 ...senderAddress,
-                name: facility.name,
+                name: '',
                 zonecode: facility.zonecode,
                 address1: facility.address1,
                 address2: facility.address2,
@@ -157,7 +157,7 @@ export default function AddressInput() {
         if (addressType === 'recipient') {
             setRecipientAddress({
                 ...recipientAddress,
-                name: military.name,
+                name: '',
                 zonecode: military.zonecode,
                 address1: military.address1,
                 address2: military.address2,
@@ -175,7 +175,7 @@ export default function AddressInput() {
         } else {
             setSenderAddress({
                 ...senderAddress,
-                name: military.name,
+                name: '',
                 zonecode: military.zonecode,
                 address1: military.address1,
                 address2: military.address2,
