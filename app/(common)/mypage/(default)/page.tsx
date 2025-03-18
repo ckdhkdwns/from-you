@@ -4,11 +4,20 @@ import { MyLettersProvider } from '../_contexts/my-letters-provider';
 import MyPageClient from './_components/my-page-client';
 
 export default async function MyPage() {
-    const response = await getMyLettersAction();
-    const initialLetters = response.data;
+    const { data: letters } = await getMyLettersAction();
 
+    const draftLetters = letters.letters.filter(letter => letter.isDraft);
+    const sentLetters = letters.letters.filter(letter => !letter.isDraft);
+
+    console.log(draftLetters, sentLetters, letters.receivedLetters);
     return (
-        <MyLettersProvider initialLetters={initialLetters}>
+        <MyLettersProvider
+            initialLetters={{
+                draft: draftLetters,
+                sent: sentLetters,
+                received: letters.receivedLetters,
+            }}
+        >
             <MyPageClient />
         </MyLettersProvider>
     );

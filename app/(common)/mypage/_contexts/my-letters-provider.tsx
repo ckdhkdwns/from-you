@@ -27,9 +27,9 @@ export const statusTabs = [
 ];
 
 interface LettersState {
-    draftLetters: LetterPublic[];
-    sentLetters: LetterPublic[];
-    receivedLetters: ReceivedLetterPublic[];
+    draft: LetterPublic[];
+    sent: LetterPublic[];
+    received: ReceivedLetterPublic[];
 }
 
 interface MyLettersContextType {
@@ -70,9 +70,9 @@ export const MyLettersProvider = ({
     error,
     children,
     initialLetters = {
-        draftLetters: [],
-        sentLetters: [],
-        receivedLetters: [],
+        draft: [],
+        sent: [],
+        received: [],
     },
 }: MyLettersProviderProps) => {
     const { type } = useParams();
@@ -97,7 +97,7 @@ export const MyLettersProvider = ({
         }
     }, [type]);
 
-    const filteredLetters = letters[filter1.value as keyof LettersState].filter(letter => {
+    const filteredLetters = letters[filter1.value as keyof LettersState]?.filter(letter => {
         if (filter2.value === 'all') return true;
         
         // ReceivedLetterPublic 타입 체크
@@ -147,9 +147,9 @@ export const MyLettersProvider = ({
                 isLoading,
                 handleDeleteLetter,
                 letterCount: {
-                    sent: letters.sentLetters.length,
-                    received: letters.receivedLetters.length,
-                    draft: letters.draftLetters.length,
+                    sent: letters.sent.length,
+                    received: letters.received.length,
+                    draft: letters.draft.length,
                 },
             }}
         >
