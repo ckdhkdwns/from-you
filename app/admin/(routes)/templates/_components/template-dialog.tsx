@@ -32,6 +32,9 @@ const formSchema = z.object({
         photo: z.coerce.number().min(0),
     }),
     initialPrice: z.coerce.number().min(0),
+    maxQuantity: z.object({
+        paper: z.coerce.number().min(0),
+    }),
     additionalUnitPrice: z.object({
         paper: z.coerce.number().min(0),
         photo: z.coerce.number().min(0),
@@ -68,48 +71,35 @@ export function TemplateDialog({
     const onOpenChange = controlledOnOpenChange || setOpen;
     const isOpen = controlledOpen !== undefined ? controlledOpen : open;
 
+    const defaultValues = {
+        name: '',
+        description: '',
+        category: '',
+        initialQuantity: { paper: 0, photo: 0 },
+        initialPrice: 0,
+        maxQuantity: { paper: 0 },
+        additionalUnitPrice: { paper: 0, photo: 0 },
+        discountedPrice: 0,
+        isPopular: false,
+        paperImage: '',
+        thumbnail: '',
+    };
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            name: template?.name ?? '',
-            description: template?.description ?? '',
-            category: template?.category ?? '',
-            initialQuantity: template?.initialQuantity ?? {
-                paper: 0,
-                photo: 0,
-            },
-            initialPrice: template?.initialPrice ?? 0,
-            additionalUnitPrice: template?.additionalUnitPrice ?? {
-                paper: 0,
-                photo: 0,
-            },
-            discountedPrice: template?.discountedPrice ?? 0,
-            isPopular: template?.isPopular ?? false,
-            paperImage: template?.paperImage ?? '',
-            thumbnail: template?.thumbnail ?? '',
-        },
+        defaultValues: template
+            ? {
+                  ...defaultValues,
+                  ...template,
+              }
+            : defaultValues,
     });
 
     useEffect(() => {
-        console.log('Template changed:', template);
         if (template) {
             form.reset({
-                name: template.name ?? '',
-                description: template.description ?? '',
-                category: template.category ?? '',
-                initialQuantity: template.initialQuantity ?? {
-                    paper: 0,
-                    photo: 0,
-                },
-                initialPrice: template.initialPrice ?? 0,
-                additionalUnitPrice: template.additionalUnitPrice ?? {
-                    paper: 0,
-                    photo: 0,
-                },
-                discountedPrice: template.discountedPrice ?? 0,
-                isPopular: template.isPopular ?? false,
-                paperImage: template.paperImage ?? '',
-                thumbnail: template.thumbnail ?? '',
+                ...defaultValues,
+                ...template,
             });
         }
     }, [template, form]);
@@ -118,46 +108,33 @@ export function TemplateDialog({
         try {
             setIsLoading(true);
 
-            // 선택된 파일이 있다면 업로드
-            if (selectedFiles.paperImage) {
-                const paperImageResult = await uploadImage('templates', selectedFiles.paperImage);
-                if (paperImageResult.success && paperImageResult.url) {
-                    values.paperImage = paperImageResult.url;
-                } else {
-                    toast.error('편지지 이미지 업로드에 실패했습니다.');
-                    return;
+            // 이미지 업로드 처리
+            for (const field of ['paperImage', 'thumbnail'] as const) {
+                if (selectedFiles[field]) {
+                    const result = await uploadImage('templates', selectedFiles[field]!);
+                    if (result.success && result.url) {
+                        values[field] = result.url;
+                    } else {
+                        toast.error(
+                            field === 'paperImage'
+                                ? '편지지 이미지 업로드에 실패했습니다.'
+                                : '썸네일 업로드에 실패했습니다.',
+                        );
+                        return;
+                    }
                 }
             }
 
-            if (selectedFiles.thumbnail) {
-                const thumbnailResult = await uploadImage('templates', selectedFiles.thumbnail);
-                if (thumbnailResult.success && thumbnailResult.url) {
-                    values.thumbnail = thumbnailResult.url;
-                } else {
-                    toast.error('썸네일 업로드에 실패했습니다.');
-                    return;
-                }
-            }
-
-            let result;
-            if (isEdit && template) {
-                result = await updateTemplate({
-                    ...values,
-                    id: template.PK,
-                } as TemplateInput);
-            } else {
-                // createTemplate은 함수 내부에서 PK, SK 등을 생성합니다.
-                const templateData: Partial<TemplateEntity> = {
-                    ...values,
-                    EntityType: 'TEMPLATE',
-                } as Partial<TemplateEntity>;
-                result = await createTemplate(templateData as TemplateEntity);
-            }
+            // 템플릿 생성 또는 수정
+            const result =
+                isEdit && template
+                    ? await updateTemplate({ ...values, id: template.PK } as TemplateInput)
+                    : await createTemplate({ ...values, EntityType: 'TEMPLATE' } as TemplateEntity);
 
             if (result.success) {
                 toast.success(isEdit ? '템플릿이 수정되었습니다.' : '템플릿이 생성되었습니다.');
 
-                // 외부 콜백 호출
+                // 콜백 처리
                 if (isEdit && template && result.data) {
                     onTemplateUpdate?.(template.PK, result.data);
                 } else if (result.data) {
@@ -168,7 +145,7 @@ export function TemplateDialog({
                 setSelectedFiles({});
                 onOpenChange(false);
             } else {
-                toast.error(result.error);
+                toast.error(result.error.message);
             }
         } catch (error) {
             console.error('Template operation error:', error);
@@ -183,22 +160,58 @@ export function TemplateDialog({
     }
 
     const handleFileSelect = (file: File, field: 'paperImage' | 'thumbnail') => {
-        setSelectedFiles(prev => ({
-            ...prev,
-            [field]: file,
-        }));
-
+        setSelectedFiles(prev => ({ ...prev, [field]: file }));
         const reader = new FileReader();
-        reader.onload = e => {
-            const result = e.target?.result as string;
-            form.setValue(field, result);
-        };
+        reader.onload = e => form.setValue(field, e.target?.result as string);
         reader.readAsDataURL(file);
     };
 
+    // 숫자 입력 필드 공통 핸들러
+    const handleNumberInput = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        onChange: (value: number | '') => void,
+    ) => {
+        const value = e.target.value === '' ? '' : Number(e.target.value);
+        onChange(value);
+    };
+
+    // 이미지 필드 렌더링 함수
+    const renderImageField = (name: 'paperImage' | 'thumbnail', label: string) => (
+        <FormField
+            control={form.control}
+            name={name}
+            render={({ field: { value } }) => (
+                <FormItem className="space-y-4">
+                    <FormLabel>{label}</FormLabel>
+                    <FormControl>
+                        <div className="space-y-4">
+                            <Input
+                                type="file"
+                                accept="image/*"
+                                onChange={e => {
+                                    const file = e.target.files?.[0];
+                                    if (file) handleFileSelect(file, name);
+                                }}
+                            />
+                            {value && (
+                                <div className="mt-2">
+                                    <img
+                                        src={value}
+                                        alt="Preview"
+                                        className={`max-w-full h-auto border rounded-md ${name === 'thumbnail' ? 'aspect-square object-cover' : ''}`}
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+            )}
+        />
+    );
+
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
-            {/* {trigger || (!isEdit && defaultTrigger)} */}
             <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto !bg-white">
                 <DialogHeader>
                     <DialogTitle>{isEdit ? '편지지 수정' : '새 편지지 추가'}</DialogTitle>
@@ -222,7 +235,6 @@ export function TemplateDialog({
                                         </FormItem>
                                     )}
                                 />
-
                                 <FormField
                                     control={form.control}
                                     name="category"
@@ -237,7 +249,6 @@ export function TemplateDialog({
                                     )}
                                 />
                             </div>
-
                             <FormField
                                 control={form.control}
                                 name="description"
@@ -256,11 +267,11 @@ export function TemplateDialog({
                                 )}
                             />
                         </div>
-                        {/* <Separator /> */}
-                        {/* 수량 및 가격 섹션 */}
+
+                        {/* 편지지 설정 섹션 */}
                         <div className="space-y-4">
-                            <div className="text-lg font-semibold">수량 및 가격 설정</div>
-                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div className="text-lg font-semibold">편지지 설정</div>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <FormField
                                     control={form.control}
                                     name="initialQuantity.paper"
@@ -272,11 +283,7 @@ export function TemplateDialog({
                                                     type="number"
                                                     {...field}
                                                     onChange={e =>
-                                                        field.onChange(
-                                                            e.target.value === ''
-                                                                ? ''
-                                                                : Number(e.target.value),
-                                                        )
+                                                        handleNumberInput(e, field.onChange)
                                                     }
                                                 />
                                             </FormControl>
@@ -284,7 +291,25 @@ export function TemplateDialog({
                                         </FormItem>
                                     )}
                                 />
-
+                                <FormField
+                                    control={form.control}
+                                    name="maxQuantity.paper"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>최대 편지지 수량</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    type="number"
+                                                    {...field}
+                                                    onChange={e =>
+                                                        handleNumberInput(e, field.onChange)
+                                                    }
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                                 <FormField
                                     control={form.control}
                                     name="additionalUnitPrice.paper"
@@ -296,11 +321,7 @@ export function TemplateDialog({
                                                     type="number"
                                                     {...field}
                                                     onChange={e =>
-                                                        field.onChange(
-                                                            e.target.value === ''
-                                                                ? ''
-                                                                : Number(e.target.value),
-                                                        )
+                                                        handleNumberInput(e, field.onChange)
                                                     }
                                                 />
                                             </FormControl>
@@ -308,7 +329,13 @@ export function TemplateDialog({
                                         </FormItem>
                                     )}
                                 />
+                            </div>
+                        </div>
 
+                        {/* 사진 설정 섹션 */}
+                        <div className="space-y-4">
+                            <div className="text-lg font-semibold">사진 설정</div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
                                     name="initialQuantity.photo"
@@ -320,11 +347,7 @@ export function TemplateDialog({
                                                     type="number"
                                                     {...field}
                                                     onChange={e =>
-                                                        field.onChange(
-                                                            e.target.value === ''
-                                                                ? ''
-                                                                : Number(e.target.value),
-                                                        )
+                                                        handleNumberInput(e, field.onChange)
                                                     }
                                                 />
                                             </FormControl>
@@ -343,11 +366,7 @@ export function TemplateDialog({
                                                     type="number"
                                                     {...field}
                                                     onChange={e =>
-                                                        field.onChange(
-                                                            e.target.value === ''
-                                                                ? ''
-                                                                : Number(e.target.value),
-                                                        )
+                                                        handleNumberInput(e, field.onChange)
                                                     }
                                                 />
                                             </FormControl>
@@ -356,7 +375,11 @@ export function TemplateDialog({
                                     )}
                                 />
                             </div>
+                        </div>
 
+                        {/* 가격 설정 섹션 */}
+                        <div className="space-y-4">
+                            <div className="text-lg font-semibold">가격 설정</div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
@@ -373,10 +396,9 @@ export function TemplateDialog({
                                                             e.target.value === ''
                                                                 ? ''
                                                                 : Number(e.target.value);
-
                                                         field.onChange(value);
 
-                                                        // 할인 가격이 기본 가격보다 높으면 할인 가격을 기본 가격으로 설정
+                                                        // 할인 가격 자동 조정
                                                         const currentDiscountedPrice =
                                                             form.getValues('discountedPrice');
                                                         if (
@@ -428,8 +450,6 @@ export function TemplateDialog({
                                                                     e.target.value === ''
                                                                         ? ''
                                                                         : Number(e.target.value);
-
-                                                                // 할인 가격이 기본 가격보다 높지 않도록 제한
                                                                 if (
                                                                     typeof value !== 'number' ||
                                                                     typeof initialPrice !==
@@ -455,81 +475,18 @@ export function TemplateDialog({
                                 />
                             </div>
                         </div>
-                        {/* <Separator /> */}
-                        {/* 이미지 섹션 */}
+
                         <div className="space-y-4">
-                            <div className="text-lg font-semibold">이미지 설정</div>
+                            <div className="text-lg font-semibold">추가 설정</div>
+
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <FormField
-                                    control={form.control}
-                                    name="thumbnail"
-                                    render={({ field: { value } }) => (
-                                        <FormItem className="space-y-4">
-                                            <FormLabel>썸네일 이미지</FormLabel>
-                                            <FormControl>
-                                                <div className="space-y-4">
-                                                    <Input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        onChange={e => {
-                                                            const file = e.target.files?.[0];
-                                                            if (file)
-                                                                handleFileSelect(file, 'thumbnail');
-                                                        }}
-                                                    />
-                                                    {value && (
-                                                        <div className="mt-2">
-                                                            <img
-                                                                src={value}
-                                                                alt="Preview"
-                                                                className="max-w-full h-auto aspect-square object-cover border rounded-md"
-                                                            />
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="paperImage"
-                                    render={({ field: { value } }) => (
-                                        <FormItem className="space-y-4">
-                                            <FormLabel>편지지 이미지</FormLabel>
-                                            <FormControl>
-                                                <div className="space-y-4">
-                                                    <Input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        onChange={e => {
-                                                            const file = e.target.files?.[0];
-                                                            if (file)
-                                                                handleFileSelect(
-                                                                    file,
-                                                                    'paperImage',
-                                                                );
-                                                        }}
-                                                    />
-                                                    {value && (
-                                                        <div className="mt-2">
-                                                            <img
-                                                                src={value}
-                                                                alt="Preview"
-                                                                className="max-w-full h-auto border rounded-md"
-                                                            />
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                                {renderImageField('thumbnail', '썸네일 이미지')}
+                                {renderImageField('paperImage', '편지지 이미지')}
                             </div>
                         </div>
                         <Separator />
+
+                        {/* 추가 설정 섹션 */}
                         <div className="space-y-4">
                             <div className="text-lg font-semibold">추가 설정</div>
                             <FormField

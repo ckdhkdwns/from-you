@@ -32,6 +32,10 @@ export interface TemplateInput {
         photo: number;
     };
 
+    maxQuantity: {
+        paper: number;
+    };
+
     isPopular: boolean;
 
     paperImage: string;
@@ -57,6 +61,10 @@ export interface TemplateEntity extends DynamoEntity {
     additionalUnitPrice: {
         paper: number;
         photo: number;
+    };
+
+    maxQuantity: {
+        paper: number;
     };
 
     isPopular: boolean;
@@ -104,6 +112,7 @@ export const createTemplateEntityFromInput = (
         initialPrice: input.initialPrice,
         discountedPrice: input.discountedPrice,
         additionalUnitPrice: input.additionalUnitPrice,
+        maxQuantity: input.maxQuantity,
         isPopular: input.isPopular,
         paperImage: input.paperImage,
         thumbnail: input.thumbnail,
@@ -133,6 +142,7 @@ export const updateTemplateEntityFromInput = (input: TemplateInput): Partial<Tem
         initialPrice: input.initialPrice,
         discountedPrice: input.discountedPrice,
         additionalUnitPrice: input.additionalUnitPrice,
+        maxQuantity: input.maxQuantity,
         isPopular: input.isPopular,
         paperImage: input.paperImage,
         thumbnail: input.thumbnail,

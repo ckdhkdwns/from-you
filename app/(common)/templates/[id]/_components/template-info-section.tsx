@@ -3,6 +3,13 @@ import { removeTableKeyPrefix } from '@/lib/remove-prefix';
 import { TemplatePublic } from '@/models/types/template';
 import Link from 'next/link';
 import React from 'react';
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from '@/components/ui/accordion';
+import { CircleHelp } from 'lucide-react';
 
 export default function TemplateInfoSection({ template }: { template: TemplatePublic }) {
     const discount =
@@ -14,25 +21,49 @@ export default function TemplateInfoSection({ template }: { template: TemplatePu
             : 0;
 
     // 템플릿 정보 데이터 배열로 구성
-    const templateDetails = [
+    const priceDetails = [
         {
             label: '기본 구성',
-            value: `편지지 ${template.initialQuantity.paper}장 ${
-                template.initialQuantity.photo ? `& 사진 ${template.initialQuantity.photo}장` : ''
+            value: `봉투 1장, 편지지 ${template.initialQuantity.paper}장${
+                template.initialQuantity.photo ? `, 사진 ${template.initialQuantity.photo}장` : ''
             }`,
         },
         {
             label: '추가 편지지',
-            value: '100장',
+            value: `최대 ${(template.maxQuantity?.paper || 0) - template.initialQuantity.paper}장`,
         },
         {
-            label: '사진 가격',
-            value: '최대 100장',
+            label: '추가 사진',
+            value: `최대 30장 (장당 ${template.additionalUnitPrice?.photo.toLocaleString()}원)`,
+        },
+    ];
+
+    const announcementDetails = [
+        '우편요금은 별도입니다',
+        '4시 이전 주문시 당일 우체국에 접수됩니다',
+    ];
+
+    const sizeDetails = [
+        {
+            label: '봉투 크기',
+            value: '18cmX12cm (100g) 크라프트지, 자켓형 봉투',
+        },
+        {
+            label: '편지지 크기',
+            value: '14.6cmX21cm(120g) 모조지, 양면',
+        },
+        {
+            label: '사진 크기',
+            value: '4x6(inch)',
+        },
+        {
+            label: '편지 라인수',
+            value: '1장당 최대 18줄',
         },
     ];
 
     return (
-        <div className="gap-2 flex flex-col">
+        <div className="gap-2 flex flex-col h-full">
             <div className="space-y-2">
                 <div className="flex items-center justify-between">
                     <div className="text-sm text-gray-500">#{template.category}</div>
@@ -70,27 +101,59 @@ export default function TemplateInfoSection({ template }: { template: TemplatePu
                 </div>
             )}
 
-            <div className="space-y-3 py-4 pb-6">
-                {templateDetails.map((detail, index) => (
+            <div className="space-y-3 py-4 pb-4">
+                {priceDetails.map((detail, index) => (
                     <div key={index} className="flex">
-                        <div className="text-gray-400 font-normal min-w-[100px] text-sm">
+                        <div className=" font-medium min-w-[100px] text-sm">
                             {detail.label}
                         </div>
-                        <div className="font-medium text-sm">{detail.value}</div>
+                        <div className="text-gray-450 font-medium text-sm whitespace-pre-line">
+                            {detail.value}
+                        </div>
                     </div>
                 ))}
             </div>
+            <div className="space-y-2 pb-4">
+                {announcementDetails.map((detail, index) => (
+                    <div key={index} className="flex">
+                        <li className="text-secondary-newpink font-medium text-sm"> {detail}</li>
+                    </div>
+                ))}
+            </div>
+
             <Link
                 href={`/write?tid=${removeTableKeyPrefix(template.PK)}`}
                 className="sticky bottom-6 md:relative md:bottom-0"
             >
                 <Button
                     variant="pink"
-                    className="w-full h-12 bg-secondary-newpink text-base font-semibold"
+                    className="w-full h-12 bg-secondary-newpink text-base font-semibold "
                 >
                     작성하기
                 </Button>
             </Link>
+            
+            <Accordion type="single" collapsible className="py-2">
+                <AccordionItem value="size-info" className="border-b-0">
+                    <AccordionTrigger className="py-2 font-medium text-sm justify-start gap-4 text-gray-500">
+                        편지지 규격 확인하기
+                    </AccordionTrigger>
+                    <AccordionContent>
+                        <div className="space-y-3">
+                            {sizeDetails.map((detail, index) => (
+                                <div key={index} className="flex">
+                                    <div className="font-medium min-w-[100px] text-sm">
+                                        {detail.label}
+                                    </div>
+                                    <div className="text-gray-450 font-medium text-sm whitespace-pre-line">
+                                        {detail.value}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </AccordionContent>
+                </AccordionItem>
+            </Accordion>
         </div>
     );
 }

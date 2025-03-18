@@ -20,7 +20,10 @@ export default function ImageSection({
                     src={selectedImage}
                     alt={'selectedImage'}
                     fill
-                    className="object-cover "
+                    className={cn(
+                        'object-cover',
+                        selectedImage === paperImage ? 'object-contain' : '',
+                    )}
                 />
             </div>
             <div className="gap-2 hidden md:flex">
