@@ -10,7 +10,7 @@ import PostTypeSelection from './steps/post-type-selection';
 import Payment from './steps/payment';
 import { StepNavigation } from './step-navigation';
 import { StepControls } from './step-controls';
-import WriteHeader from '@/components/headers/write-header';
+import Header from '@/components/header';
 
 const STEP_COMPONENTS: Record<StepKey, React.FC> = {
     [STEP_KEYS.LETTER_CONTENT]: LetterContent,
@@ -36,7 +36,7 @@ const LetterUI = () => {
 
     return (
         <div className="flex flex-col h-[100dvh]">
-            <WriteHeader currentStep={currentStep} />
+            <Header writeStep={currentStep} />
             <StepNavigation />
             <StepContent />
             <div className="sticky bottom-0 left-0 right-0 bg-white">
