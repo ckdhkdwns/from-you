@@ -80,7 +80,8 @@ declare global {
       (function () {
         var w = window;
         if (w.ChannelIO) {
-          return w.console.error("ChannelIO script included twice.");
+          return;
+          // return w.console.error("ChannelIO script included twice.");
         }
         var ch: IChannelIO = function () {
           ch.c?.(arguments);
