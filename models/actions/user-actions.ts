@@ -151,6 +151,7 @@ export async function createEmailUser(
     password: string,
     name: string,
     role: UserRole = 'user', // 기본 역할 추가
+    phone?: string, // 전화번호 추가 (선택사항)
 ): Promise<ActionResponse<UserPublic>> {
     return withActionResponse(async () => {
         // 유효성 검사
@@ -190,6 +191,7 @@ export async function createEmailUser(
             password: hashedPassword,
             provider: 'email',
             role,
+            phone,
         };
 
         // 새 엔티티 생성 및 저장

@@ -30,6 +30,7 @@ export default function ProfileForm({ initialUserData }: ProfileFormProps) {
         name: initialUserData?.name || '',
         password: '',
         passwordConfirm: '',
+        phone: '',
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isWithdrawing, setIsWithdrawing] = useState(false);
@@ -42,6 +43,7 @@ export default function ProfileForm({ initialUserData }: ProfileFormProps) {
             name: initialUserData?.name || '',
             password: '',
             passwordConfirm: '',
+            phone: initialUserData?.phone || '',
         });
     }, [initialUserData]);
 
@@ -208,6 +210,13 @@ export default function ProfileForm({ initialUserData }: ProfileFormProps) {
             value: formData.passwordConfirm,
             placeholder: '',
             hide: initialUserData?.provider !== 'email',
+        },
+        {
+            label: '휴대폰 번호',
+            name: 'phone',
+            type: 'text',
+            value: formData.phone,
+            placeholder: '',
         },
         {
             label: '이름',

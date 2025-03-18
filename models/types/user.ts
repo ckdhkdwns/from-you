@@ -32,6 +32,7 @@ export interface UserInput {
     point?: number;
     blocked?: boolean;
     role?: UserRole;
+    phone?: string;
 
     // 기존 사용자 수정 시 사용될 ID (새 사용자는 불필요)
     id?: string;
@@ -49,6 +50,7 @@ export interface UserEntity extends DynamoEntity {
     createdAt: string;
     blocked?: boolean;
     role?: UserRole;
+    phone?: string;
     EntityType: 'USER';
 }
 
@@ -94,6 +96,7 @@ export const createUserEntityFromInput = (
         provider: input.provider,
         blocked: input.blocked,
         role: input.role ?? 'user',
+        phone: input.phone,
         createdAt: timestamp,
         GSI1PK: UserKeys.gsi1pk!(null),
         GSI1SK: UserKeys.gsi1sk!(timestamp),

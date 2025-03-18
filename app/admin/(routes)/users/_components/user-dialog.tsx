@@ -127,29 +127,34 @@ export function UserDialog({ user, open, onOpenChange }: UserDialogProps) {
                                         <div className="text-base">{parseDate(user.createdAt)}</div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div className="flex items-end mt-4 w-[calc(50%-0.7rem)] ml-auto">
-                                <div className="flex-1 mr-2">
-                                    <Label htmlFor="point" className="text-gray-450 mb-1 block">
-                                        포인트
-                                    </Label>
-                                    <Input
-                                        id="point"
-                                        type="number"
-                                        value={pointValue}
-                                        onChange={handlePointChange}
-                                        className="text-base"
-                                    />
+                                <div className="flex flex-col">
+                                    <Label className="text-gray-450 mb-1">전화번호</Label>
+                                    <div className="text-base">
+                                        {user?.phone || '등록되지 않음'}
+                                    </div>
                                 </div>
-                                <Button
-                                    variant="outline"
-                                    onClick={() => handlePointUpdate(user, Number(pointValue))}
-                                    disabled={isLoading || Number(pointValue) === user.point}
-                                    className="h-10"
-                                >
-                                    {isLoading ? '업데이트 중...' : '적용'}
-                                </Button>
+                                <div className="flex items-end">
+                                    <div className="flex-1 mr-2">
+                                        <Label htmlFor="point" className="text-gray-450 mb-1 block">
+                                            포인트
+                                        </Label>
+                                        <Input
+                                            id="point"
+                                            type="number"
+                                            value={pointValue}
+                                            onChange={handlePointChange}
+                                            className="text-base"
+                                        />
+                                    </div>
+                                    <Button
+                                        variant="outline"
+                                        onClick={() => handlePointUpdate(user, Number(pointValue))}
+                                        disabled={isLoading || Number(pointValue) === user.point}
+                                        className="h-10"
+                                    >
+                                        {isLoading ? '업데이트 중...' : '적용'}
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </div>

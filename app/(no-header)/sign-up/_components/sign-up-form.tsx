@@ -9,6 +9,7 @@ export default function SignUpForm() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
@@ -20,7 +21,7 @@ export default function SignUpForm() {
         try {
             // 로컬 유효성 검사
             if (!email || !password || !confirmPassword || !name) {
-                setError('모든 필드를 입력해주세요.');
+                setError('모든 필수 필드를 입력해주세요.');
                 setIsLoading(false);
                 return;
             }
@@ -32,7 +33,7 @@ export default function SignUpForm() {
             }
 
             // 서버 액션 호출
-            const result = await createEmailUser(email, password, name);
+            const result = await createEmailUser(email, password, name, undefined, phone);
 
             if (!result.success) {
                 setError(result.error?.message || '회원가입 중 오류가 발생했습니다.');
@@ -96,7 +97,9 @@ export default function SignUpForm() {
                                     />
                                 </div>
                             </div>
-
+                            <div className="text-sm -mt-2  pl-4 text-left font-medium text-gray-400">
+                                (영문/숫자/특수문자 3가지 조합, 10~20자)
+                            </div>
                             <div className="p-4 rounded-[10px] bg-white border border-[#e0e0e0]">
                                 <div className="flex items-center">
                                     <input
@@ -110,8 +113,17 @@ export default function SignUpForm() {
                                 </div>
                             </div>
 
-                            <div className="text-sm text-left font-medium text-gray-400">
-                                (영문/숫자/특수문자 3가지 조합, 10~20자)
+                            <div className="p-4 rounded-[10px] bg-white border border-[#e0e0e0]">
+                                <div className="flex items-center">
+                                    <input
+                                        type="tel"
+                                        placeholder="전화번호 (선택사항)"
+                                        value={phone}
+                                        onChange={e => setPhone(e.target.value)}
+                                        className="w-full text-base bg-transparent border-none outline-none"
+                                        disabled={isLoading}
+                                    />
+                                </div>
                             </div>
                         </div>
 
