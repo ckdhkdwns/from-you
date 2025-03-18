@@ -62,7 +62,7 @@ export default function Footer() {
                                 <p className="text-xs">{COMPANY_INFO.phone}</p>
                                 <p className="text-xs">{COMPANY_INFO.bankAccount}</p>
                                 <p className="text-xs">
-                                    {COMPANY_INFO.businessHours} {COMPANY_INFO.lunchHours}{' '}
+                                    {COMPANY_INFO.businessHours} {" "}
                                     {COMPANY_INFO.holidays}
                                 </p>
                             </div>
