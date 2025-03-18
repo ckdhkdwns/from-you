@@ -16,7 +16,7 @@ export default async function Home() {
     const popularTemplates = templates.filter(template => template.isPopular);
 
     return (
-        <div className="items-center justify-center flex flex-col pb-24 w-full mt-12">
+        <div className="items-center justify-center flex flex-col pb-24 w-full md:mt-12">
             <Suspense fallback={<></>}>
                 <UnauthorizedToast />
             </Suspense>

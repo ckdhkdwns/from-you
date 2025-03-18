@@ -5,9 +5,9 @@ import { Card } from '@/components/ui/card';
 
 export default function EventSection() {
     return (
-        <div className="space-y-2">
-            <Card className="p-6 md:p-8 md:h-[220px] relative items-center flex bg-[#E7F0E0] rounded-md border-none shadow-none">
-                <div className="flex justify-between items-center gap-8">
+        <div className="space-y-2 relative">
+            <Card className="p-6 md:p-8 md:h-[220px] relative items-center flex bg-[#E7F0E0] rounded-md border-none shadow-none z-10">
+                <div className="flex justify-between items-center gap-8 z-50">
                     <Image
                         src="/temp/event-phone.png"
                         alt="이벤트 이미지"
@@ -45,6 +45,9 @@ export default function EventSection() {
                     </div>
                 </div>
             </Card>
+            <div className="absolute top-[-160px] lg:top-[-200px] left-[-250px] lg:left-[-320px] z-0 w-[400px] h-[400px] lg:w-[500px] lg:h-[500px]">
+                <Image src="/give.png" alt="이벤트 이미지" fill className="object-cover " />
+            </div>
         </div>
     );
 }
