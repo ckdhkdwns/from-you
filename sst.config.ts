@@ -69,6 +69,12 @@ export default $config({
                     return { stage: 'production' };
                 }
             },
+            async workflow({ $, event }) {
+                await $`npm i --save --legacy-peer-deps`;
+                event.action === "removed"
+                  ? await $`npm sst remove`
+                  : await $`npm sst deploy`;
+            },
         },
     },
 });

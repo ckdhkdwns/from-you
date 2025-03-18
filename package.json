@@ -80,7 +80,7 @@
     "server-only": "^0.0.1",
     "shadcn-dropzone": "^0.2.1",
     "sonner": "^2.0.1",
-    "sst": "3.3.71",
+    "sst": "^3.9.39",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "textarea-caret": "^3.1.0",
