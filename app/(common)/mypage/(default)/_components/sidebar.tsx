@@ -48,7 +48,7 @@ const menuSections: MenuSection[] = [
 export default function Sidebar() {
     return (
         <nav className="w-full md:min-w-48 md:w-48 mt-12 md:ml-2">
-            <div className="sticky top-[7.3rem]">
+            <div className="sticky">
                 <Link href="/mypage" className="hidden md:block">
                     <h1 className="text-xl font-semibold mb-6">My Account</h1>
                 </Link>

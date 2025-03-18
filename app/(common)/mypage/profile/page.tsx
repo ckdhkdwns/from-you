@@ -22,8 +22,6 @@ export default async function ProfilePage() {
         <div className="pt-12">
             <h1 className="text-lg font-semibold mt-0 mb-2">회원 정보 수정</h1>
             <Separator className="bg-primary-black h-[2px] mb-8" />
-
-            {/* 클라이언트 컴포넌트로 분리된 프로필 폼 */}
             <ProfileForm initialUserData={userData} />
         </div>
     );

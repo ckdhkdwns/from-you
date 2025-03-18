@@ -16,9 +16,9 @@ export default async function TemplatePage({ params }: { params: Promise<{ id: s
     }
 
     return (
-        <div className="container mx-auto py-0 md:py-8 px-0">
+        <div className="container mx-auto py-0 md:py-8 px-0 relative">
             <div
-                className="flex flex-col-reverse md:grid md:grid-cols-2 gap-8 md:gap-20 py-4 h-auto"
+                className="flex flex-col-reverse md:grid md:grid-cols-2 gap-8 md:gap-20 py-4"
                 style={{
                     gridTemplateColumns: '2fr 3fr',
                 }}

@@ -52,13 +52,13 @@ export default function PopularTemplateCarousel({
             </div>
             <Carousel
                 className={cn('w-full mx-auto', hasEnoughItems ? 'md:w-[calc(100%-12rem)]' : '')}
-                opts={{ loop: hasEnoughItems }}
+                opts={{ loop: hasEnoughItems, align: 'start' }}
             >
-                <CarouselContent>
+                <CarouselContent className='-ml-1.5 md:-ml-6'>
                     {popularTemplates.map((template, index) => (
                         <CarouselItem
                             key={index}
-                            className="max-md:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/4 2xl:basis-1/4"
+                            className="pl-6 basis-2/3 md:basis-1/3 lg:basis-1/4 xl:basis-1/4 2xl:basis-1/4"
                         >
                             <TemplateCard template={template} />
                         </CarouselItem>
