@@ -101,19 +101,27 @@ export default function TemplateInfoSection({ template }: { template: TemplatePu
                 </div>
             )}
 
-            <div className="space-y-3 py-4 pb-4">
+            <div className="space-y-3 py-4 pb-1">
                 {priceDetails.map((detail, index) => (
                     <div key={index} className="flex">
-                        <div className=" font-medium min-w-[100px] text-sm">
-                            {detail.label}
-                        </div>
+                        <div className=" font-medium min-w-[100px] text-sm">{detail.label}</div>
                         <div className="text-gray-450 font-medium text-sm whitespace-pre-line">
                             {detail.value}
                         </div>
                     </div>
                 ))}
             </div>
-            <div className="space-y-2 pb-4">
+            <div className="space-y-3">
+                {sizeDetails.map((detail, index) => (
+                    <div key={index} className="flex">
+                        <div className="font-medium min-w-[100px] text-sm">{detail.label}</div>
+                        <div className="text-gray-450 font-medium text-sm whitespace-pre-line">
+                            {detail.value}
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <div className="space-y-2 pb-4 mt-4">
                 {announcementDetails.map((detail, index) => (
                     <div key={index} className="flex">
                         <li className="text-secondary-newpink font-medium text-sm"> {detail}</li>
@@ -132,28 +140,8 @@ export default function TemplateInfoSection({ template }: { template: TemplatePu
                     작성하기
                 </Button>
             </Link>
-            
-            <Accordion type="single" collapsible className="py-2">
-                <AccordionItem value="size-info" className="border-b-0">
-                    <AccordionTrigger className="py-2 font-medium text-sm justify-start gap-4 text-gray-500">
-                        편지지 규격 확인하기
-                    </AccordionTrigger>
-                    <AccordionContent>
-                        <div className="space-y-3">
-                            {sizeDetails.map((detail, index) => (
-                                <div key={index} className="flex">
-                                    <div className="font-medium min-w-[100px] text-sm">
-                                        {detail.label}
-                                    </div>
-                                    <div className="text-gray-450 font-medium text-sm whitespace-pre-line">
-                                        {detail.value}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </AccordionContent>
-                </AccordionItem>
-            </Accordion>
+
+       
         </div>
     );
 }
