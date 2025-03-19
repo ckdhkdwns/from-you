@@ -42,7 +42,7 @@ export default $config({
         });
 
         const bucket = new sst.aws.Bucket('FromYouBucket', {
-            access: 'public',
+            access: 'public',  
         });
 
         const nextApp = new sst.aws.Nextjs('FromYou', {
