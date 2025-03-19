@@ -20,7 +20,7 @@ export default async function Home() {
             <Suspense fallback={<></>}>
                 <UnauthorizedToast />
             </Suspense>
-            
+
             <div className="w-full flex flex-col gap-8 mt-4 md:mt-12 mx-auto">
                 <div className="flex flex-col w-full md:gap-6 items-center">
                     <PopularTemplateCarousel popularTemplates={popularTemplates} />
@@ -39,9 +39,15 @@ export default async function Home() {
                 </div>
             </div>
 
-            <div className="my-16 md:my-24 w-full grid grid-cols-1 md:grid-cols-2 gap-8 px-6">
-                <EventSection />
-                <SecondEventSection />
+            <div className="my-16 md:my-24 w-full grid grid-cols-1 md:grid-cols-2 gap-6 px-6">
+                <div className="relative aspect-[22/9] overflow-hidden rounded-md">
+                    <Image src="/banners/sub-banner-1.png" alt="intro-1" fill className="object-cover" />
+                </div>
+                <div className="relative aspect-[22/9] overflow-hidden rounded-md">
+                    <Image src="/banners/sub-banner-2.png" alt="intro-2" fill className="object-cover" />
+                </div>
+                {/* <EventSection />
+                <SecondEventSection /> */}
             </div>
 
             <NoticeSection notices={notices} />

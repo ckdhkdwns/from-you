@@ -172,6 +172,12 @@ export async function createEmailUser(
             throw new Error('비밀번호는 영문, 숫자, 특수문자 3가지 조합으로 10~20자여야 합니다.');
         }
 
+        // 전화번호 형식 검사
+        const phoneRegex = /^\d{10,11}$/;
+        if (phone && !phoneRegex.test(phone)) {
+            throw new Error('유효한 전화번호를 입력해주세요.');
+        }
+
         // 기존 사용자 검사
         const PK = UserKeys.pk(email);
         const SK = UserKeys.sk(email);
@@ -192,6 +198,7 @@ export async function createEmailUser(
             provider: 'email',
             role,
             phone,
+            point: phone ? 2000 : 0,
         };
 
         // 새 엔티티 생성 및 저장
