@@ -8,7 +8,6 @@ import { Separator } from '@/components/ui/separator';
 import { EMOJI_CATEGORIES } from '@/constants';
 import { useLetter } from '../../_contexts/letter-provider';
 import EmojiIcon from './icons/emoji.svg';
-import Image from 'next/image';
 
 export default function PickEmojiButton() {
     const { text: pages, setText: setPages } = useLetter();

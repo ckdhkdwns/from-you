@@ -13,6 +13,7 @@ import PreviewLetterContent from '../_components/preview-letter-content';
 import PreviewPhoto from '../_components/preview-photo';
 import { paymentMethodConfig } from '@/constants';
 import { getTemplateConfigAction } from '@/models/actions/config-actions';
+import { removeTableKeyPrefix } from '@/lib/remove-prefix';
 
 export default async function page({ params }: { params: Promise<{ type: string; id: string }> }) {
     const { type, id } = await params;
@@ -60,7 +61,7 @@ export default async function page({ params }: { params: Promise<{ type: string;
             label: '주문일자',
             value: parseDate(displayDate),
         },
-        { label: '주문자', value: letter.PK?.replace('USER#', '') },
+        { label: '주문자', value: removeTableKeyPrefix(letter.PK) },
         {
             label: '주문상태',
             value: getStatusText({
@@ -111,7 +112,7 @@ export default async function page({ params }: { params: Promise<{ type: string;
     ];
 
     const senderInfo = [
-        { label: '주문자', value: letter.senderAddress.name },
+        { label: '보내는 사람', value: letter.senderAddress.name },
         { label: '우편번호', value: letter.senderAddress.zonecode },
         { label: '주소', value: letter.senderAddress.address1 },
         { label: '상세주소', value: letter.senderAddress.address2 },
@@ -128,7 +129,7 @@ export default async function page({ params }: { params: Promise<{ type: string;
     ];
 
     const receiverInfo = [
-        { label: '수령인', value: letter.recipientAddress.name },
+        { label: '받는 사람', value: letter.recipientAddress.name },
         { label: '우편번호', value: letter.recipientAddress.zonecode },
         { label: '주소', value: letter.recipientAddress.address1 },
         { label: '상세주소', value: letter.recipientAddress.address2 },
@@ -154,8 +155,8 @@ export default async function page({ params }: { params: Promise<{ type: string;
             <div className="text-xl font-semibold mb-8">발송 상세조회</div>
             <div className="flex flex-col gap-8 w-full">
                 <InfoTable info={orderInfo} title="주문 정보" />
-                <InfoTable info={senderInfo} title="주문자 정보" />
-                <InfoTable info={receiverInfo} title="수신자 정보" />
+                <InfoTable info={senderInfo} title="보내는 사람" />
+                <InfoTable info={receiverInfo} title="받는 사람" />
                 <div className="w-full flex flex-col">
                     <div className="flex justify-between items-center">
                         <div className="mb-3 text-lg font-semibold">작성된 편지</div>

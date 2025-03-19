@@ -1,7 +1,6 @@
 'use client';
 
 import { parseDate } from '@/lib/date';
-
 import { SectionContainer } from './section-container';
 import { InfoItem } from './info-item';
 import { LetterPublic, PaymentMethod, PaymentStatus, ShippingStatus } from '@/models/types/letter';
@@ -18,6 +17,7 @@ import { useState } from 'react';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { postTypeMapping } from '@/constants';
+import { removeTableKeyPrefix } from '@/lib/remove-prefix';
 
 interface BasicInfoSectionProps {
     letter: LetterPublic;
@@ -75,6 +75,7 @@ export function BasicInfoSection({
 
     return (
         <SectionContainer title="기본 정보">
+            <InfoItem label="사용자 ID" value={removeTableKeyPrefix(letter.PK)} />
             <InfoItem
                 label="결제금액"
                 value={`${letter.priceInfo.totalPrice.toLocaleString()}원`}
