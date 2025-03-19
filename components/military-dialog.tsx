@@ -104,58 +104,7 @@ export default function MilitaryDialog({ isOpen, onClose, onSelectMilitary }: Mi
 
             <ScrollArea className="h-[50dvh] md:h-[50vh]">
                 <div className="pb-4">
-                    {/* 데스크탑 화면에서만 보이는 테이블 */}
-                    <div className="hidden md:block">
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>부대명</TableHead>
-                                    <TableHead>군종</TableHead>
-                                    <TableHead>주소</TableHead>
-                                    <TableHead className="w-[100px] text-right">선택</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {filteredMilitaries.length > 0 ? (
-                                    filteredMilitaries.map((military, index) => (
-                                        <TableRow key={index}>
-                                            <TableCell className="font-medium">
-                                                {military.name}
-                                            </TableCell>
-                                            <TableCell>
-                                                {MILITARY_CATEGORY_MAP[military.category]}
-                                            </TableCell>
-                                            <TableCell className="max-w-[250px] truncate">
-                                                {military.address1}
-                                            </TableCell>
-                                            <TableCell className="text-right">
-                                                <Button
-                                                    variant="outline"
-                                                    size="sm"
-                                                    onClick={() =>
-                                                        handleSelectMilitary(
-                                                            military as AddressPublic,
-                                                        )
-                                                    }
-                                                >
-                                                    선택
-                                                </Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))
-                                ) : (
-                                    <TableRow>
-                                        <TableCell colSpan={4} className="h-24 text-center">
-                                            검색 결과가 없습니다.
-                                        </TableCell>
-                                    </TableRow>
-                                )}
-                            </TableBody>
-                        </Table>
-                    </div>
-
-                    {/* 모바일 화면에서 보이는 카드 형태 */}
-                    <div className="md:hidden">
+                    <div>
                         {filteredMilitaries.length > 0 ? (
                             filteredMilitaries.map((military, index) => (
                                 <div

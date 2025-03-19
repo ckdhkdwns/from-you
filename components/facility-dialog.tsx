@@ -99,59 +99,7 @@ export default function FacilityDialog({ isOpen, onClose, onSelectFacility }: Fa
 
             <ScrollArea className="h-[50dvh] md:h-[50vh]">
                 <div className="pb-4">
-                    {/* 데스크탑 화면에서만 보이는 테이블 */}
-                    <div className="hidden md:block">
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>시설명</TableHead>
-                                    <TableHead>지역</TableHead>
-                                    <TableHead>주소</TableHead>
-                                    <TableHead className="w-[100px] text-right">선택</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {filteredFacilities.length > 0 ? (
-                                    filteredFacilities.map((facility, index) => (
-                                        <TableRow key={index}>
-                                            <TableCell className="font-medium">
-                                                {facility.name}
-                                            </TableCell>
-                                            <TableCell>{facility.category}</TableCell>
-                                            <TableCell className="max-w-[250px] truncate">
-                                                {facility.address1}
-                                            </TableCell>
-                                            <TableCell className="text-right">
-                                                <Button
-                                                    variant="outline"
-                                                    size="sm"
-                                                    onClick={() =>
-                                                        handleSelectFacility(
-                                                            facility as AddressPublic,
-                                                        )
-                                                    }
-                                                >
-                                                    선택
-                                                </Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))
-                                ) : (
-                                    <TableRow>
-                                        <TableCell
-                                            colSpan={4}
-                                            className="h-24 text-center text-gray-400"
-                                        >
-                                            검색 결과가 없습니다.
-                                        </TableCell>
-                                    </TableRow>
-                                )}
-                            </TableBody>
-                        </Table>
-                    </div>
-
-                    {/* 모바일 화면에서 보이는 카드 형태 */}
-                    <div className="md:hidden">
+                    <div>
                         {filteredFacilities.length > 0 ? (
                             filteredFacilities.map((facility, index) => (
                                 <div
