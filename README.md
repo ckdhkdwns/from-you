@@ -13,7 +13,7 @@
     멀리 있어도, 마음은 가까이
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">사이트 링크</a>
+    <a href="https://fromyou.co.kr">사이트 링크</a>
     &middot;
     <a href="https://desk.channel.io/2v05e/groups/고객피드백-449705">채널톡 문의</a>
   </p>
