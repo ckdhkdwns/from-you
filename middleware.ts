@@ -43,13 +43,13 @@ export async function middleware(request: NextRequest) {
     }
 
     // 관리자 경로에 일반 사용자가 접근 시 홈으로 리다이렉트
-    // if (isAdminRoute && token && token.role !== 'admin') {
-    //     // 접근 권한 없음 메시지를 표시하기 위한 파라미터 추가
-    //     const redirectUrl = new URL('/', request.url);
-    //     redirectUrl.searchParams.set('unauthorized', 'admin');
+    if (isAdminRoute && token && token.role !== 'admin') {
+        // 접근 권한 없음 메시지를 표시하기 위한 파라미터 추가
+        const redirectUrl = new URL('/', request.url);
+        redirectUrl.searchParams.set('unauthorized', 'admin');
 
-    //     return NextResponse.redirect(redirectUrl);
-    // }
+        return NextResponse.redirect(redirectUrl);
+    }
 
     // 그 외 경로는 정상 처리
     return NextResponse.next();
