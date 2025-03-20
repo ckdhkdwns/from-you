@@ -140,11 +140,11 @@ export default function PaymentWidget({
                 <div
                     id="payment-widget"
                     className={cn(
-                        'w-full min-h-[300px] ml-6',
+                        'w-full min-h-[300px] pl-6',
                         paymentMethod === 'toss' ? 'block' : 'hidden',
                     )}
                 ></div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2"> 
                     <RadioGroupItem value="transfer" id="transfer" />
                     <Label htmlFor="transfer" className="cursor-pointer">
                         계좌이체
