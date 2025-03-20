@@ -1,7 +1,7 @@
 export const TRANSFER_ACCOUNT = {
-    bankName: "우리나라은행",
-    accountName: "김철수",
-    accountNumber: "123456-78-123456",
-    expiryDate: "2025년 1월 2일(월)",
+    bankName: "국민은행",
+    accountName: "문희원",
+    accountNumber: "475402-04-182193",
+    // expiryDate: "2025년 1월 2일(월)",
 };
 

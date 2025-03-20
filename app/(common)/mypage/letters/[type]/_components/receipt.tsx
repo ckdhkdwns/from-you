@@ -101,16 +101,6 @@ export default function Receipt({
                                 </span>
                             </p>
                         )}
-                        {paymentMethod === 'transfer' && paymentStatus === 'pending' && (
-                            <p className="text-sm text-left">
-                                <span className="text-sm font-semibold text-left text-gray-600">
-                                    {TRANSFER_ACCOUNT.expiryDate}
-                                </span>
-                                <span className="text-sm font-medium text-left text-[#4f4f4f] ml-1">
-                                    까지 미입금시 주문이 자동취소됩니다.
-                                </span>
-                            </p>
-                        )}
                     </div>
                 </div>
             </div>
