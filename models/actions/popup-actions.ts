@@ -14,6 +14,8 @@ import { Repository } from '@/services/repository';
 import { Resource } from 'sst';
 import { ActionResponse, withActionResponse } from '../types/response';
 import { getCurrentISOTime } from '@/lib/date';
+import { TableKey } from '../types/dynamo';
+import { ensureArray, ensureEntityKey } from '@/lib/api-utils';
 
 // Repository 인스턴스 생성
 const popupRepository = new Repository(Resource.FromYouTable.name);
@@ -175,7 +177,7 @@ export async function updatePopupAction(
 }
 
 /**
- * 팝업 삭제
+ * 팝업 삭제 (단일)
  */
 export async function deletePopupAction(popupId: string): Promise<ActionResponse<void>> {
     return withActionResponse(async () => {
@@ -184,3 +186,89 @@ export async function deletePopupAction(popupId: string): Promise<ActionResponse
         await popupRepository.delete(PK, SK);
     });
 }
+
+/**
+ * 팝업 삭제 (단일 또는 다중)
+ * @param keys 삭제할 팝업 키 또는 키 배열
+ */
+export async function deletePopups(
+    keys: TableKey | TableKey[],
+): Promise<ActionResponse<{ deletedIds: string[] }>> {
+    return withActionResponse(async () => {
+        const keyArray = ensureArray(keys).map(key => ensureEntityKey(key, PopupKeys));
+
+        if (keyArray.length === 0) {
+            throw new Error('선택된 팝업이 없습니다.');
+        }
+
+        const deletePromises = keyArray.map(async key => {
+            try {
+                await popupRepository.delete(key.PK, key.SK);
+                return true;
+            } catch (error) {
+                console.error(`팝업 삭제 오류 (ID: ${key.PK}):`, error);
+                return false;
+            }
+        });
+
+        const results = await Promise.all(deletePromises);
+        const failedIds = keyArray.filter((_, index) => !results[index]);
+
+        if (failedIds.length > 0) {
+            throw new Error(`${failedIds.length}개의 팝업 삭제에 실패했습니다.`);
+        }
+
+        return { deletedIds: keyArray.map(key => key.PK) };
+    });
+}
+
+/**
+ * 팝업 상태 변경 (단일 또는 다중)
+ * 참고: 현재 PopupEntity에 활성화 상태 필드가 없어 기능이 준비되지 않았습니다.
+ * 추후 활성화 상태 관리 기능 추가 시 구현 예정
+ */
+/*
+export async function togglePopupsStatus(
+    keys: TableKey | TableKey[],
+    isActive: boolean,
+): Promise<ActionResponse<{ updatedPopups: PopupPublic[] }>> {
+    return withActionResponse(async () => {
+        // 단일 키를 배열로 변환
+        const keyArray = ensureArray(keys).map(key => ensureEntityKey(key, PopupKeys));
+
+        if (keyArray.length === 0) {
+            throw new Error('선택된 팝업이 없습니다.');
+        }
+
+        const updatePromises = keyArray.map(async key => {
+            try {
+                // 업데이트할 필드 구성
+                const updates: Partial<PopupEntity> = {
+                    // 필드 이름 수정 필요
+                    // isActive, 
+                };
+
+                const updatedPopup = await popupRepository.update<PopupEntity>(
+                    key.PK,
+                    key.SK,
+                    updates,
+                );
+                return updatedPopup ? toPopupPublic(updatedPopup) : null;
+            } catch (error) {
+                console.error(`팝업 상태 변경 오류 (ID: ${key.PK}):`, error);
+                return null;
+            }
+        });
+
+        const results = await Promise.all(updatePromises);
+        const updatedPopups = results.filter(Boolean) as PopupPublic[];
+        const failedCount = keyArray.length - updatedPopups.length;
+
+        if (failedCount > 0) {
+            throw new Error(`${failedCount}개의 팝업 상태 변경에 실패했습니다.`);
+        }
+
+        return { updatedPopups };
+    });
+}
+*/

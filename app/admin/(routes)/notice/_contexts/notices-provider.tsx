@@ -2,21 +2,16 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import {
-    getNotices,
+    getNotices as apiGetNotices,
     deleteNotices as apiDeleteNotices,
-    toggleNoticeStatus,
+    toggleNoticeStatus as apiToggleNoticeStatus,
     createNotice as apiCreateNotice,
     updateNotice as apiUpdateNotice,
 } from '@/models/actions/notice-actions';
 import { NoticePublic, NoticeInput, NoticeKeys } from '@/models/types/notice';
 import { toast } from 'sonner';
-import {
-    apiHandler,
-    withLoading,
-    processBatchItems,
-    ensureArray,
-    ensureEntityKey,
-} from '@/lib/api-utils';
+import { apiHandler, withLoading, processBatchItems, ensureEntityKey } from '@/lib/api-utils';
+import { TableKey } from '@/models/types/dynamo';
 
 interface NoticesContextType {
     notices: NoticePublic[];
@@ -70,7 +65,7 @@ export function NoticesProvider({ children, initialNotices }: NoticesProviderPro
     const [selectedNotice, setSelectedNotice] = useState<NoticePublic | undefined>(undefined);
 
     const refreshNotices = async () => {
-        await apiHandler(getNotices, data => setNotices(data), {
+        await apiHandler(apiGetNotices, data => setNotices(data), {
             success: null,
             error: '공지사항을 불러오는 중 오류가 발생했습니다.',
         });
@@ -101,46 +96,60 @@ export function NoticesProvider({ children, initialNotices }: NoticesProviderPro
         );
     };
 
+    // 삭제 성공 시 상태 업데이트 함수
+    const updateNoticesAfterDelete = (data: any, keys: TableKey[], isSingle: boolean) => {
+        toast.success(
+            isSingle
+                ? '공지사항이 삭제되었습니다.'
+                : `${keys.length}개의 공지사항이 삭제되었습니다.`,
+        );
+
+        setNotices(prev =>
+            prev.filter(notice => !keys.includes(ensureEntityKey(notice, NoticeKeys))),
+        );
+
+        if (!isSingle) setSelectedNotices([]);
+        return data;
+    };
+
     const deleteNotices = async (noticeOrNotices: NoticePublic | NoticePublic[]) => {
         const batch = processBatchItems(noticeOrNotices, apiDeleteNotices);
-
         if (batch.keys.length === 0) return;
 
-        await withLoading(setIsActionLoading, async () => {
-            const result = await apiHandler(
-                () => batch.process(),
-                data => {
-                    toast.success(
-                        batch.isSingle
-                            ? '공지사항이 삭제되었습니다.'
-                            : `${batch.keys.length}개의 공지사항이 삭제되었습니다.`,
-                    );
+        const apiCall = () => batch.process();
+        const onSuccess = (data: any) => updateNoticesAfterDelete(data, batch.keys, batch.isSingle);
+        const messages = { success: null, error: '공지사항 삭제 중 오류가 발생했습니다.' };
 
-                    setNotices(prev =>
-                        prev.filter(
-                            notice => !batch.keys.includes(ensureEntityKey(notice, NoticeKeys)),
-                        ),
-                    );
+        const result = await withLoading(setIsActionLoading, () =>
+            apiHandler(apiCall, onSuccess, messages),
+        );
 
-                    if (!batch.isSingle) {
-                        setSelectedNotices([]);
-                    }
+        if (result?.deletedIds && result.deletedIds.length < batch.keys.length) {
+            await refreshNotices();
+        }
+    };
 
-                    return data;
-                },
-                {
-                    success: '공지사항이 삭제되었습니다.',
-                    error: '공지사항 삭제 중 오류가 발생했습니다.',
-                },
-            );
+    // 상태 변경 성공 시 상태 업데이트 함수
+    const updateNoticesAfterStatusChange = (
+        data: { updatedNotices: NoticePublic[] },
+        keys: TableKey[],
+        isSingle: boolean,
+        actionText: string,
+    ) => {
+        toast.success(
+            isSingle
+                ? `공지사항이 ${actionText} 상태로 변경되었습니다.`
+                : `${keys.length}개의 공지사항이 ${actionText} 상태로 변경되었습니다.`,
+        );
 
-            // 일부 삭제에 성공한 경우 목록 새로고침
-            if (result && result.deletedIds && result.deletedIds.length < batch.keys.length) {
-                await refreshNotices();
-            }
+        if (data.updatedNotices?.length) {
+            const updatedMap = new Map(data.updatedNotices.map(notice => [notice.PK, notice]));
 
-            return result;
-        });
+            setNotices(prev => prev.map(notice => updatedMap.get(notice.PK) || notice));
+        }
+
+        if (!isSingle) setSelectedNotices([]);
+        return data;
     };
 
     const toggleNoticesStatus = async (
@@ -148,62 +157,25 @@ export function NoticesProvider({ children, initialNotices }: NoticesProviderPro
         isPublished: boolean,
     ) => {
         const batch = processBatchItems(noticeOrNotices, keys =>
-            toggleNoticeStatus(keys, isPublished),
+            apiToggleNoticeStatus(keys, isPublished),
         );
 
         if (batch.keys.length === 0) return;
 
         const actionText = isPublished ? '공개' : '비공개';
 
-        await withLoading(setIsActionLoading, async () => {
-            const result = await apiHandler<{ updatedNotices: NoticePublic[] }>(
-                () => batch.process(),
-                data => {
-                    toast.success(
-                        batch.isSingle
-                            ? `공지사항이 ${actionText} 상태로 변경되었습니다.`
-                            : `${batch.keys.length}개의 공지사항이 ${actionText} 상태로 변경되었습니다.`,
-                    );
+        const apiCall = () => batch.process();
+        const onSuccess = (data: { updatedNotices: NoticePublic[] }) =>
+            updateNoticesAfterStatusChange(data, batch.keys, batch.isSingle, actionText);
+        const messages = { success: null, error: '공지사항 상태 변경 중 오류가 발생했습니다.' };
 
-                    // 업데이트된 공지사항 상태 반영
-                    if (data.updatedNotices) {
-                        // 업데이트된 공지사항으로 상태 업데이트
-                        setNotices(prev => {
-                            const updatedMap = new Map(
-                                data.updatedNotices.map(notice => [notice.PK, notice]),
-                            );
+        const result = await withLoading(setIsActionLoading, () =>
+            apiHandler(apiCall, onSuccess, messages),
+        );
 
-                            return prev.map(notice => {
-                                return updatedMap.has(notice.PK)
-                                    ? updatedMap.get(notice.PK)!
-                                    : notice;
-                            });
-                        });
-                    }
-
-                    if (!batch.isSingle) {
-                        setSelectedNotices([]);
-                    }
-
-                    return data;
-                },
-                {
-                    success: '공지사항 상태가 변경되었습니다.',
-                    error: '공지사항 상태 변경 중 오류가 발생했습니다.',
-                },
-            );
-
-            // 일부 업데이트에 성공한 경우 목록 새로고침
-            if (
-                result &&
-                result.updatedNotices &&
-                result.updatedNotices.length < batch.keys.length
-            ) {
-                await refreshNotices();
-            }
-
-            return result;
-        });
+        if (result?.updatedNotices && result.updatedNotices.length < batch.keys.length) {
+            await refreshNotices();
+        }
     };
 
     const handleRowClick = (row: NoticePublic) => {

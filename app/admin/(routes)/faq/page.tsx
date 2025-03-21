@@ -1,7 +1,8 @@
+import React from 'react';
 import { getFAQs } from '@/models/actions/faq-actions';
 import { FAQsProvider } from './_contexts/faqs-provider';
-import { FAQDataTable } from './_components/faq-data-table';
 import { FAQDialog } from './_components/faq-dialog';
+import FAQDataTable from './_components/faq-data-table';
 
 export default async function FAQPage() {
     const response = await getFAQs();
@@ -9,8 +10,8 @@ export default async function FAQPage() {
 
     return (
         <FAQsProvider initialFAQs={faqData}>
-            <FAQDataTable />
             <FAQDialog />
+            <FAQDataTable />
         </FAQsProvider>
     );
 }

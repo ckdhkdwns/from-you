@@ -1,29 +1,43 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { getFAQs, deleteFAQs, toggleFAQStatus } from '@/models/actions/faq-actions';
-import { FaqPublic } from '@/models/types/faq';
+import {
+    getFAQs,
+    deleteFAQs as apiDeleteFAQs,
+    toggleFAQStatus,
+    createFAQ as apiCreateFAQ,
+    updateFAQ as apiUpdateFAQ,
+} from '@/models/actions/faq-actions';
+import { FaqPublic, FaqInput, FaqKeys } from '@/models/types/faq';
 import { toast } from 'sonner';
-import { removeTableKeyPrefix } from '@/lib/api-utils';
+import {
+    apiHandler,
+    withLoading,
+    processBatchItems,
+    ensureArray,
+    ensureEntityKey,
+} from '@/lib/api-utils';
+import { TableKey } from '@/models/types/dynamo';
 
 interface FAQsContextType {
     faqs: FaqPublic[];
-    isLoading: boolean;
-    selectedFAQs: string[];
-    setSelectedFAQs: (_ids: string[]) => void;
-    addFAQ: (_faq: FaqPublic) => void;
-    updateFAQInList: (_id: string, _updatedFAQ: FaqPublic) => void;
-    removeFAQ: (_id: string) => void;
-    removeFAQs: (_ids: string[]) => void;
+    isActionLoading: boolean;
+    selectedFAQs: FaqPublic[];
+    setSelectedFAQs: (_faqs: FaqPublic[]) => void;
+    createFAQ: (_faq: FaqInput) => Promise<FaqPublic | null>;
+    updateFAQ: (_id: string, _updatedFAQ: FaqInput) => Promise<FaqPublic | null>;
+    deleteFAQs: (_faqOrFAQs: FaqPublic | FaqPublic[]) => Promise<void>;
+    toggleFAQsStatus: (
+        _faqOrFAQs: FaqPublic | FaqPublic[],
+        _isPublished: boolean,
+    ) => Promise<void>;
     refreshFAQs: () => Promise<void>;
-    // 다이얼로그 관련 상태 및 함수
     isDialogOpen: boolean;
     setIsDialogOpen: (_open: boolean) => void;
     selectedFAQ: FaqPublic | undefined;
     setSelectedFAQ: (_faq: FaqPublic | undefined) => void;
-    // 상태 변경 함수
-    handleDeleteFAQs: (_ids: string[]) => Promise<boolean>;
-    handleToggleFAQStatus: (_ids: string[], _isPublished: boolean) => Promise<boolean>;
+    handleRowClick: (_row: FaqPublic) => void;
+    handleDialogClose: () => void;
 }
 
 interface FAQsProviderProps {
@@ -33,144 +47,177 @@ interface FAQsProviderProps {
 
 const FAQsContext = createContext<FAQsContextType>({
     faqs: [],
-    isLoading: false,
+    isActionLoading: false,
     selectedFAQs: [],
     setSelectedFAQs: () => {},
-    addFAQ: () => {},
-    updateFAQInList: () => {},
-    removeFAQ: () => {},
-    removeFAQs: () => {},
+    createFAQ: async () => null,
+    updateFAQ: async () => null,
+    deleteFAQs: async () => {},
+    toggleFAQsStatus: async () => {},
     refreshFAQs: async () => {},
-    // 다이얼로그 관련 상태 및 함수
     isDialogOpen: false,
     setIsDialogOpen: () => {},
     selectedFAQ: undefined,
     setSelectedFAQ: () => {},
-    // 상태 변경 함수
-    handleDeleteFAQs: async () => false,
-    handleToggleFAQStatus: async () => false,
+    handleRowClick: () => {},
+    handleDialogClose: () => {},
 });
 
 export function FAQsProvider({ children, initialFAQs }: FAQsProviderProps) {
     const [faqs, setFAQs] = useState<FaqPublic[]>(initialFAQs);
-    const [isLoading, setIsLoading] = useState(false);
-    const [selectedFAQs, setSelectedFAQs] = useState<string[]>([]);
-    // 다이얼로그 관련 상태
+    const [isActionLoading, setIsActionLoading] = useState(false);
+    const [selectedFAQs, setSelectedFAQs] = useState<FaqPublic[]>([]);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [selectedFAQ, setSelectedFAQ] = useState<FaqPublic | undefined>(undefined);
 
     const refreshFAQs = async () => {
-        setIsLoading(true);
+        await apiHandler(getFAQs, data => setFAQs(data), {
+            success: null,
+            error: 'FAQ를 불러오는 중 오류가 발생했습니다.',
+        });
+    };
 
-        try {
-            const result = await getFAQs();
-            if (result.success) {
-                setFAQs(result.data);
-            } else {
-                toast.error(result.error?.message || 'FAQ를 불러오는 중 오류가 발생했습니다.');
-            }
-        } catch (error) {
-            console.error('FAQ 로드 오류:', error);
-            toast.error('FAQ를 불러오는 중 오류가 발생했습니다.');
-        } finally {
-            setIsLoading(false);
+    const createFAQ = async (faqInput: FaqInput): Promise<FaqPublic | null> => {
+        return apiHandler<FaqPublic>(
+            () => apiCreateFAQ(faqInput),
+            data => setFAQs(prev => [data, ...prev]),
+            {
+                success: 'FAQ가 생성되었습니다.',
+                error: 'FAQ 생성 중 오류가 발생했습니다.',
+            },
+        );
+    };
+
+    const updateFAQ = async (
+        id: string,
+        faqInput: FaqInput,
+    ): Promise<FaqPublic | null> => {
+        return apiHandler(
+            () => apiUpdateFAQ({ ...faqInput, id }),
+            data => setFAQs(prev => prev.map(faq => (faq.SK === id ? data : faq))),
+            {
+                success: 'FAQ가 수정되었습니다.',
+                error: 'FAQ 수정 중 오류가 발생했습니다.',
+            },
+        );
+    };
+
+    // 삭제 성공 시 상태 업데이트 함수
+    const updateFAQsAfterDelete = (data: any, keys: TableKey[], isSingle: boolean) => {
+        toast.success(
+            isSingle
+                ? 'FAQ가 삭제되었습니다.'
+                : `${keys.length}개의 FAQ가 삭제되었습니다.`
+        );
+
+        setFAQs(prev =>
+            prev.filter(faq => !keys.includes(ensureEntityKey(faq, FaqKeys)))
+        );
+
+        if (!isSingle) setSelectedFAQs([]);
+        return data;
+    };
+
+    const deleteFAQs = async (faqOrFAQs: FaqPublic | FaqPublic[]) => {
+        const batch = processBatchItems(faqOrFAQs, (keys) => {
+            // TableKey[] 유형을 string[] 유형으로 변환
+            const ids = keys.map(key => key.SK?.replace('FAQ#', '') || '');
+            return apiDeleteFAQs(ids);
+        });
+
+        if (batch.keys.length === 0) return;
+
+        const apiCall = () => batch.process();
+        const onSuccess = (data: any) => updateFAQsAfterDelete(data, batch.keys, batch.isSingle);
+        const messages = { success: null, error: 'FAQ 삭제 중 오류가 발생했습니다.' };
+
+        const result = await withLoading(setIsActionLoading, () =>
+            apiHandler(apiCall, onSuccess, messages)
+        );
+
+        if (result?.deletedIds && result.deletedIds.length < batch.keys.length) {
+            await refreshFAQs();
         }
     };
 
-    const addFAQ = (faq: FaqPublic) => {
-        setFAQs(prev => [faq, ...prev]);
+    // 상태 변경 성공 시 상태 업데이트 함수
+    const updateFAQsAfterStatusChange = (
+        data: { updatedFaqs: FaqPublic[] },
+        keys: TableKey[],
+        isSingle: boolean,
+        actionText: string
+    ) => {
+        toast.success(
+            isSingle
+                ? `FAQ가 ${actionText} 상태로 변경되었습니다.`
+                : `${keys.length}개의 FAQ가 ${actionText} 상태로 변경되었습니다.`
+        );
+
+        if (data.updatedFaqs?.length) {
+            const updatedMap = new Map(data.updatedFaqs.map(faq => [faq.SK, faq]));
+            setFAQs(prev => prev.map(faq => updatedMap.get(faq.SK) || faq));
+        }
+
+        if (!isSingle) setSelectedFAQs([]);
+        return data;
     };
 
-    const updateFAQInList = (id: string, updatedFAQ: FaqPublic) => {
-        setFAQs(prev => prev.map(faq => (removeTableKeyPrefix(faq?.SK) === id ? updatedFAQ : faq)));
-    };
+    const toggleFAQsStatus = async (
+        faqOrFAQs: FaqPublic | FaqPublic[],
+        isPublished: boolean,
+    ) => {
+        const batch = processBatchItems(faqOrFAQs, (keys) => {
+            // TableKey[] 유형을 string[] 유형으로 변환
+            const ids = keys.map(key => key.SK?.replace('FAQ#', '') || '');
+            return toggleFAQStatus(ids, isPublished);
+        });
 
-    const removeFAQ = (id: string) => {
-        setFAQs(prev => prev.filter(faq => removeTableKeyPrefix(faq?.SK) !== id));
-    };
+        if (batch.keys.length === 0) return;
 
-    const removeFAQs = (ids: string[]) => {
-        setFAQs(prev => prev.filter(faq => !ids.includes(removeTableKeyPrefix(faq?.SK))));
-    };
+        const actionText = isPublished ? '공개' : '비공개';
 
-    // FAQ 삭제 핸들러
-    const handleDeleteFAQs = async (ids: string[]): Promise<boolean> => {
-        if (ids.length === 0) return false;
+        const apiCall = () => batch.process();
+        const onSuccess = (data: { updatedFaqs: FaqPublic[] }) =>
+            updateFAQsAfterStatusChange(data, batch.keys, batch.isSingle, actionText);
+        const messages = { success: null, error: 'FAQ 상태 변경 중 오류가 발생했습니다.' };
 
-        setIsLoading(true);
-        try {
-            const response = await deleteFAQs(ids);
-            if (response.success) {
-                toast.success('FAQ가 성공적으로 삭제되었습니다.');
-                removeFAQs(ids);
-                return true;
-            } else {
-                toast.error(response.error?.message || 'FAQ 삭제 중 오류가 발생했습니다.');
-                return false;
-            }
-        } catch (error) {
-            console.error('FAQ 삭제 오류:', error);
-            toast.error('FAQ 삭제 중 오류가 발생했습니다.');
-            return false;
-        } finally {
-            setIsLoading(false);
+        const result = await withLoading(setIsActionLoading, () =>
+            apiHandler(apiCall, onSuccess, messages)
+        );
+
+        if (result?.updatedFaqs && result.updatedFaqs.length < batch.keys.length) {
+            await refreshFAQs();
         }
     };
 
-    // FAQ 상태 변경 핸들러
-    const handleToggleFAQStatus = async (ids: string[], isPublished: boolean): Promise<boolean> => {
-        if (ids.length === 0) return false;
+    const handleRowClick = (row: FaqPublic) => {
+        setSelectedFAQ(row);
+        setIsDialogOpen(true);
+    };
 
-        setIsLoading(true);
-        try {
-            const response = await toggleFAQStatus(ids, isPublished);
-            if (response.success) {
-                toast.success(`FAQ ${isPublished ? '게시' : '숨김'} 처리되었습니다.`);
-                const updatedFaqs = response.data.updatedFaqs;
-
-                // 상태가 업데이트된 FAQ들을 로컬 상태에 반영
-                updatedFaqs.forEach(faq => {
-                    const id = removeTableKeyPrefix(faq?.SK);
-                    updateFAQInList(id, faq);
-                });
-
-                return true;
-            } else {
-                toast.error(
-                    response.error?.message ||
-                        `FAQ ${isPublished ? '게시' : '숨김'} 처리 중 오류가 발생했습니다.`,
-                );
-                return false;
-            }
-        } catch (error) {
-            console.error('FAQ 상태 변경 오류:', error);
-            toast.error(`FAQ ${isPublished ? '게시' : '숨김'} 처리 중 오류가 발생했습니다.`);
-            return false;
-        } finally {
-            setIsLoading(false);
-        }
+    const handleDialogClose = () => {
+        setIsDialogOpen(false);
+        refreshFAQs();
     };
 
     return (
         <FAQsContext.Provider
             value={{
                 faqs,
-                isLoading,
+                isActionLoading,
                 selectedFAQs,
                 setSelectedFAQs,
-                addFAQ,
-                updateFAQInList,
-                removeFAQ,
-                removeFAQs,
+                createFAQ,
+                updateFAQ,
+                deleteFAQs,
+                toggleFAQsStatus,
                 refreshFAQs,
-                // 다이얼로그 관련 상태 및 함수
                 isDialogOpen,
                 setIsDialogOpen,
                 selectedFAQ,
                 setSelectedFAQ,
-                // 상태 변경 함수
-                handleDeleteFAQs,
-                handleToggleFAQStatus,
+                handleRowClick,
+                handleDialogClose,
             }}
         >
             {children}

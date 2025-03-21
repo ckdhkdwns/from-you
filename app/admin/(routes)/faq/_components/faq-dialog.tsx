@@ -17,10 +17,9 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { Switch } from '@/components/ui/switch';
 import { useState, useEffect } from 'react';
-import { toast } from 'sonner';
-
-import { createFAQ, updateFAQ } from '@/models/actions/faq-actions';
 import { useFAQs } from '../_contexts/faqs-provider';
+import { FaqInput } from '@/models/types/faq';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import {
     Select,
     SelectContent,
@@ -28,7 +27,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { FaqPublic, FaqInput } from '@/models/types/faq';
 import { FAQ_CATEGORIES, FAQCategory } from '@/constants/data/faq-categories';
 
 const formSchema = z.object({
@@ -41,42 +39,17 @@ const formSchema = z.object({
     isPublished: z.boolean().default(true),
 });
 
-interface FAQDialogProps {
-    faq?: FaqPublic;
-    open?: boolean;
-    onOpenChange?: (_open: boolean) => void;
-}
-
-export function FAQDialog({
-    faq,
-    open: externalOpen,
-    onOpenChange: externalOnOpenChange,
-}: FAQDialogProps = {}) {
+export function FAQDialog() {
     const {
-        addFAQ,
-        updateFAQInList,
+        selectedFAQ,
         isDialogOpen,
         setIsDialogOpen,
-        selectedFAQ,
-        setSelectedFAQ,
-        isLoading,
+        createFAQ,
+        updateFAQ,
+        isActionLoading,
     } = useFAQs();
-    const [localLoading, setLocalLoading] = useState(false);
 
-    const open = externalOpen !== undefined ? externalOpen : isDialogOpen;
-    const onOpenChange = externalOnOpenChange || setIsDialogOpen;
-
-    const activeFAQ = faq || selectedFAQ;
-    const loading = isLoading || localLoading;
-
-    const handleOpenChange = (newOpen: boolean) => {
-        onOpenChange(newOpen);
-        if (!newOpen) {
-            if (!faq && !externalOpen) {
-                setSelectedFAQ(undefined);
-            }
-        }
-    };
+    const isEdit = !!selectedFAQ;
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -90,12 +63,12 @@ export function FAQDialog({
     });
 
     useEffect(() => {
-        if (activeFAQ) {
-            form.setValue('question', activeFAQ.question);
-            form.setValue('answer', activeFAQ.answer);
-            form.setValue('category', activeFAQ.category as FAQCategory);
-            form.setValue('order', activeFAQ.order);
-            form.setValue('isPublished', activeFAQ.isPublished);
+        if (selectedFAQ) {
+            form.setValue('question', selectedFAQ.question);
+            form.setValue('answer', selectedFAQ.answer);
+            form.setValue('category', selectedFAQ.category as FAQCategory);
+            form.setValue('order', selectedFAQ.order);
+            form.setValue('isPublished', selectedFAQ.isPublished);
         } else {
             form.reset({
                 question: '',
@@ -105,61 +78,35 @@ export function FAQDialog({
                 isPublished: true,
             });
         }
-    }, [activeFAQ, form]);
+    }, [selectedFAQ, form]);
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        setLocalLoading(true);
-
         try {
-            let result;
-            if (activeFAQ) {
-                const updateRequest = {
-                    id: activeFAQ?.SK,
-                    ...values,
-                };
-                result = await updateFAQ(updateRequest as FaqInput);
+            const faqInput: FaqInput = {
+                question: values.question,
+                answer: values.answer,
+                category: values.category,
+                order: values.order,
+                isPublished: values.isPublished
+            };
+            
+            if (isEdit && selectedFAQ) {
+                const id = removeTableKeyPrefix(selectedFAQ.SK);
+                await updateFAQ(id, faqInput);
             } else {
-                const createRequest = {
-                    question: values.question,
-                    answer: values.answer,
-                    category: values.category,
-                    order: values.order,
-                    isPublished: values.isPublished,
-                };
-                result = await createFAQ(createRequest);
+                await createFAQ(faqInput);
             }
-
-            if (result.success) {
-                toast.success(activeFAQ ? 'FAQ가 수정되었습니다.' : 'FAQ가 생성되었습니다.');
-
-                if (result.data) {
-                    if (activeFAQ) {
-                        updateFAQInList(activeFAQ?.SK, result.data);
-                    } else {
-                        addFAQ(result.data);
-                    }
-                }
-
-                form.reset();
-                handleOpenChange(false);
-            } else {
-                toast.error(result.error);
-            }
+            setIsDialogOpen(false);
         } catch (error) {
-            console.error('FAQ operation error:', error);
-            toast.error(
-                activeFAQ ? 'FAQ 수정 중 오류가 발생했습니다.' : 'FAQ 생성 중 오류가 발생했습니다.',
-            );
-        } finally {
-            setLocalLoading(false);
+            console.error('FAQ 작업 오류:', error);
         }
     };
 
     return (
-        <Dialog open={open} onOpenChange={handleOpenChange}>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto !bg-white">
                 <DialogHeader>
-                    <DialogTitle>{activeFAQ ? 'FAQ 수정' : '새 FAQ 작성'}</DialogTitle>
+                    <DialogTitle>{isEdit ? 'FAQ 수정' : '새 FAQ 작성'}</DialogTitle>
                 </DialogHeader>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -270,12 +217,18 @@ export function FAQDialog({
                             <Button
                                 type="button"
                                 variant="outline"
-                                onClick={() => handleOpenChange(false)}
+                                onClick={() => setIsDialogOpen(false)}
                             >
                                 취소
                             </Button>
-                            <Button type="submit" disabled={loading}>
-                                {loading ? '처리 중...' : '저장하기'}
+                            <Button type="submit" disabled={isActionLoading}>
+                                {isActionLoading
+                                    ? isEdit
+                                        ? '수정 중...'
+                                        : '생성 중...'
+                                    : isEdit
+                                      ? '수정하기'
+                                      : '생성하기'}
                             </Button>
                         </div>
                     </form>

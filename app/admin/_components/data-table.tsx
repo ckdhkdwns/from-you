@@ -33,6 +33,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import TextLoader from '@/components/ui/text-loader';
 
 // 타입 정의
 type SelectionAction<TData> =
@@ -85,7 +86,7 @@ function useDataTable<TData, TValue>({
     'data' | 'columns' | 'searchField' | 'onSelectedRowsChange' | 'showCheckbox' | 'storageKey'
 > & { storageKey?: string }) {
     // 기본 페이지 크기
-    const defaultPageSize = 0;
+    const defaultPageSize = 10;
 
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -102,13 +103,17 @@ function useDataTable<TData, TValue>({
 
         if (storageKey && typeof window !== 'undefined') {
             try {
-                localStorage.setItem(`${process.env.NEXT_PUBLIC_LOCAL_STORAGE_KEY_PREFIX}table_page_size_${storageKey}`, newSize.toString());
+                localStorage.setItem(
+                    `${process.env.NEXT_PUBLIC_LOCAL_STORAGE_KEY_PREFIX}table_page_size_${storageKey}`,
+                    newSize.toString(),
+                );
             } catch (error) {
                 console.error('로컬 스토리지에 페이지 크기 저장 실패:', error);
             }
         }
     };
 
+    // 테이블 인스턴스 생성
     const table = useReactTable({
         data,
         columns,
@@ -144,32 +149,28 @@ function useDataTable<TData, TValue>({
                 return value.includes(searchTermLower);
             });
         },
-        manualPagination: false,
+        manualPagination: true,
     });
 
+    // 초기화 및 로컬 스토리지에서 페이지 크기 불러오기
     useEffect(() => {
-        const loadStoredPageSize = () => {
-            if (typeof window !== 'undefined' && storageKey) {
-                try {
-                    const storedValue = localStorage.getItem(`${process.env.NEXT_PUBLIC_LOCAL_STORAGE_KEY_PREFIX}table_page_size_${storageKey}`);
-                    if (storedValue) {
-                        const parsedSize = parseInt(storedValue, 10);
-                        setPageSize(parsedSize || 10);
-                    } else {
-                        setPageSize(10);
-                    }
-                } catch (error) {
-                    console.error('로컬 스토리지에서 페이지 크기 불러오기 실패:', error);
+        if (typeof window !== 'undefined' && storageKey) {
+            try {
+                const storedValue = localStorage.getItem(
+                    `${process.env.NEXT_PUBLIC_LOCAL_STORAGE_KEY_PREFIX}table_page_size_${storageKey}`,
+                );
+                if (storedValue) {
+                    const parsedSize = parseInt(storedValue, 10);
+                    setPageSize(parsedSize || defaultPageSize);
                 }
-            } else {
-                setPageSize(10);
+            } catch (error) {
+                console.error('로컬 스토리지에서 페이지 크기 불러오기 실패:', error);
+                setPageSize(defaultPageSize);
             }
-        };
+        }
 
-        // 초기화 설정 및 로컬 스토리지 로드
         setIsInitialized(true);
-        loadStoredPageSize();
-    }, [storageKey]);
+    }, [storageKey, defaultPageSize]);
 
     // 검색어/데이터가 변경될 때만 페이지 인덱스 초기화
     // 초기화 후에만 실행되도록 함
@@ -200,6 +201,7 @@ function useDataTable<TData, TValue>({
         setPageIndex,
         searchValue,
         setSearchValue,
+        isInitialized,
     };
 }
 
@@ -498,15 +500,22 @@ export function DataTable<TData, TValue>({
     selectionActions,
     storageKey,
 }: DataTableProps<TData, TValue>) {
-    const { table, pageSize, pageIndex, setPageIndex, updatePageSize } = useDataTable({
-        data,
-        columns,
-        searchField,
-        onSelectedRowsChange,
-        showCheckbox,
-        storageKey: storageKey,
-    });
+    const { table, pageSize, pageIndex, setPageIndex, updatePageSize, isInitialized } =
+        useDataTable({
+            data,
+            columns,
+            searchField,
+            onSelectedRowsChange,
+            showCheckbox,
+            storageKey: storageKey,
+        });
 
+    if (!isInitialized)
+        return (
+            <div className="mt-24">
+                <TextLoader text="데이터를 불러오고 있습니다..." />
+            </div>
+        );
     return (
         <div>
             <DataTableToolbar

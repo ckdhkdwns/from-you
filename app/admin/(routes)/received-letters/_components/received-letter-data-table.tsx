@@ -6,13 +6,13 @@ import ReceivedLetterDialog from './received-letter-dialog';
 import { useReceivedLetter } from '../_contexts/received-letter-provider';
 
 import { Button } from '@/components/ui/button';
-import { PlusIcon } from 'lucide-react';
+import { PlusIcon, Loader2 } from 'lucide-react';
 import { useConfirm } from '@/contexts/confirm-provider';
 import { ReceivedLetterPublic } from '@/models/types/received-letter';
 import { columns } from './columns';
 
 export default function ReceivedLetterDataTable() {
-    const { receivedLetters, handleBulkDeleteReceivedLetters } = useReceivedLetter();
+    const { receivedLetters, bulkDeleteReceivedLetters, isActionLoading } = useReceivedLetter();
     const [selectedLetter, setSelectedLetter] = useState<ReceivedLetterPublic | null>(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const { confirm } = useConfirm();
@@ -33,9 +33,26 @@ export default function ReceivedLetterDataTable() {
             const letterIds = selectedRows.map((row: ReceivedLetterPublic) =>
                 row?.SK.replace('RECEIVED_LETTER#', ''),
             );
-            handleBulkDeleteReceivedLetters(letterIds);
+            bulkDeleteReceivedLetters(letterIds);
         }
     };
+
+    const tableActions = [
+        {
+            label: '편지 추가',
+            onClick: () => setIsDialogOpen(true),
+            type: 'button' as const,
+            icon: <PlusIcon className="w-4 h-4" />
+        }
+    ];
+
+    const tableSelectionActions = [
+        {
+            label: '일괄 삭제',
+            onClick: handleBulkDelete,
+            type: 'button' as const
+        }
+    ];
 
     return (
         <>
@@ -45,24 +62,21 @@ export default function ReceivedLetterDataTable() {
                 onOpenChange={setIsDialogOpen}
             />
 
-            <DataTable
-                columns={columns}
-                data={receivedLetters}
-                onRowClick={handleRowClick}
-                actions={[
-                    <Button key="add" onClick={() => setIsDialogOpen(true)}>
-                        <PlusIcon className="w-4 h-4" />
-                        편지 추가
-                    </Button>,
-                ]}
-                selectionActions={[
-                    {
-                        label: '일괄 삭제',
-                        onClick: handleBulkDelete,
-                        type: 'button',
-                    },
-                ]}
-            />
+            <div className="relative">
+                {isActionLoading && (
+                    <div className="absolute inset-0 bg-white/50 flex items-center justify-center z-10">
+                        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                    </div>
+                )}
+                
+                <DataTable
+                    columns={columns}
+                    data={receivedLetters}
+                    onRowClick={handleRowClick}
+                    actions={tableActions}
+                    selectionActions={tableSelectionActions}
+                />
+            </div>
         </>
     );
 }

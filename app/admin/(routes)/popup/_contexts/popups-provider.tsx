@@ -1,94 +1,165 @@
 'use client';
 
-import { removeTableKeyPrefix } from '@/lib/api-utils';
-import { getAllPopupsAction } from '@/models/actions/popup-actions';
-import { PopupPublic } from '@/models/types/popup';
-import { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+import {
+    getAllPopupsAction,
+    deletePopupAction as apiDeletePopup,
+    createPopupAction as apiCreatePopup,
+    updatePopupAction as apiUpdatePopup,
+    deletePopups as apiDeletePopups,
+} from '@/models/actions/popup-actions';
+import { PopupPublic, PopupInput, PopupKeys } from '@/models/types/popup';
 import { toast } from 'sonner';
-
-interface PopupsProviderProps {
-    children: React.ReactNode;
-    initialPopups: PopupPublic[];
-}
+import {
+    apiHandler,
+    withLoading,
+    processBatchItems,
+    ensureArray,
+    ensureEntityKey,
+    removeTableKeyPrefix,
+} from '@/lib/api-utils';
+import { TableKey } from '@/models/types/dynamo';
 
 interface PopupsContextType {
     popups: PopupPublic[];
-    isLoading: boolean;
-    selectedPopups: string[];
-    setSelectedPopups: (_popups: string[]) => void;
-    addPopup: (_popup: PopupPublic) => void;
-    updatePopupInList: (_id: string, _updatedPopup: PopupPublic) => void;
-    removePopup: (_id: string) => void;
-    removePopups: (_ids: string[]) => void;
+    isActionLoading: boolean;
+    selectedPopups: PopupPublic[];
+    setSelectedPopups: (_popups: PopupPublic[]) => void;
+    createPopup: (_popup: FormData) => Promise<PopupPublic | null>;
+    updatePopup: (_id: string, _updatedPopup: FormData) => Promise<PopupPublic | null>;
+    deletePopups: (_popupOrPopups: PopupPublic | PopupPublic[]) => Promise<void>;
     refreshPopups: () => Promise<void>;
+    isDialogOpen: boolean;
+    setIsDialogOpen: (_open: boolean) => void;
+    selectedPopup: PopupPublic | undefined;
+    setSelectedPopup: (_popup: PopupPublic | undefined) => void;
+    handleRowClick: (_row: PopupPublic) => void;
+    handleDialogClose: () => void;
+}
+
+interface PopupsProviderProps {
+    children: ReactNode;
+    initialPopups: PopupPublic[];
 }
 
 const PopupsContext = createContext<PopupsContextType>({
     popups: [],
-    isLoading: false,
+    isActionLoading: false,
     selectedPopups: [],
     setSelectedPopups: () => {},
-    addPopup: () => {},
-    updatePopupInList: () => {},
-    removePopup: () => {},
-    removePopups: () => {},
+    createPopup: async () => null,
+    updatePopup: async () => null,
+    deletePopups: async () => {},
     refreshPopups: async () => {},
+    isDialogOpen: false,
+    setIsDialogOpen: () => {},
+    selectedPopup: undefined,
+    setSelectedPopup: () => {},
+    handleRowClick: () => {},
+    handleDialogClose: () => {},
 });
 
 export function PopupsProvider({ children, initialPopups }: PopupsProviderProps) {
     const [popups, setPopups] = useState<PopupPublic[]>(initialPopups);
-    const [isLoading, setIsLoading] = useState(false);
-    const [selectedPopups, setSelectedPopups] = useState<string[]>([]);
+    const [isActionLoading, setIsActionLoading] = useState(false);
+    const [selectedPopups, setSelectedPopups] = useState<PopupPublic[]>([]);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [selectedPopup, setSelectedPopup] = useState<PopupPublic | undefined>(undefined);
 
     const refreshPopups = async () => {
-        // 필요할 때 수동으로 새로고침하는 함수
-        setIsLoading(true);
-
-        try {
-            const result = await getAllPopupsAction();
-            if (result.success) {
-                setPopups(result.data);
-            } else {
-                toast.error(result.error?.message || '팝업을 불러오는 중 오류가 발생했습니다.');
-            }
-        } catch (error) {
-            console.error('팝업 로드 오류:', error);
-            toast.error('팝업을 불러오는 중 오류가 발생했습니다.');
-        } finally {
-            setIsLoading(false);
-        }
+        await apiHandler(getAllPopupsAction, data => setPopups(data), {
+            success: null,
+            error: '팝업을 불러오는 중 오류가 발생했습니다.',
+        });
     };
 
-    const addPopup = (popup: PopupPublic) => {
-        setPopups(prev => [popup, ...prev]);
-    };
-
-    const updatePopupInList = (id: string, updatedPopup: PopupPublic) => {
-        setPopups(prev =>
-            prev.map(popup => (removeTableKeyPrefix(popup.PK) === id ? updatedPopup : popup)),
+    const createPopup = async (popupData: FormData): Promise<PopupPublic | null> => {
+        return apiHandler<PopupPublic>(
+            () => apiCreatePopup(popupData),
+            data => setPopups(prev => [data, ...prev]),
+            {
+                success: '팝업이 생성되었습니다.',
+                error: '팝업 생성 중 오류가 발생했습니다.',
+            },
         );
     };
 
-    const removePopup = (id: string) => {
-        setPopups(prev => prev.filter(popup => removeTableKeyPrefix(popup.PK) !== id));
+    const updatePopup = async (
+        id: string,
+        popupData: FormData,
+    ): Promise<PopupPublic | null> => {
+        return apiHandler(
+            () => apiUpdatePopup(id, popupData),
+            data => setPopups(prev => prev.map(popup => (removeTableKeyPrefix(popup.PK) === id ? data : popup))),
+            {
+                success: '팝업이 수정되었습니다.',
+                error: '팝업 수정 중 오류가 발생했습니다.',
+            },
+        );
     };
 
-    const removePopups = (ids: string[]) => {
-        setPopups(prev => prev.filter(popup => !ids.includes(removeTableKeyPrefix(popup.PK))));
+    // 삭제 성공 시 상태 업데이트 함수
+    const updatePopupsAfterDelete = (data: any, keys: TableKey[], isSingle: boolean) => {
+        toast.success(
+            isSingle
+                ? '팝업이 삭제되었습니다.'
+                : `${keys.length}개의 팝업이 삭제되었습니다.`
+        );
+
+        setPopups(prev =>
+            prev.filter(popup => !keys.includes(ensureEntityKey(popup, PopupKeys)))
+        );
+
+        if (!isSingle) setSelectedPopups([]);
+        return data;
+    };
+
+    const deletePopups = async (popupOrPopups: PopupPublic | PopupPublic[]) => {
+        const batch = processBatchItems(popupOrPopups, apiDeletePopups);
+
+        if (batch.keys.length === 0) return;
+
+        const apiCall = () => batch.process();
+        const onSuccess = (data: any) => updatePopupsAfterDelete(data, batch.keys, batch.isSingle);
+        const messages = { success: null, error: '팝업 삭제 중 오류가 발생했습니다.' };
+
+        const result = await withLoading(setIsActionLoading, () =>
+            apiHandler(apiCall, onSuccess, messages)
+        );
+
+        // 항상 새로고침
+        await refreshPopups();
+
+        return result;
+    };
+
+    const handleRowClick = (row: PopupPublic) => {
+        setSelectedPopup(row);
+        setIsDialogOpen(true);
+    };
+
+    const handleDialogClose = () => {
+        setIsDialogOpen(false);
+        refreshPopups();
     };
 
     return (
         <PopupsContext.Provider
             value={{
                 popups,
-                isLoading,
+                isActionLoading,
                 selectedPopups,
                 setSelectedPopups,
-                addPopup,
-                updatePopupInList,
-                removePopup,
-                removePopups,
+                createPopup,
+                updatePopup,
+                deletePopups,
                 refreshPopups,
+                isDialogOpen,
+                setIsDialogOpen,
+                selectedPopup,
+                setSelectedPopup,
+                handleRowClick,
+                handleDialogClose,
             }}
         >
             {children}
@@ -97,5 +168,9 @@ export function PopupsProvider({ children, initialPopups }: PopupsProviderProps)
 }
 
 export const usePopups = () => {
-    return useContext(PopupsContext);
+    const context = useContext(PopupsContext);
+    if (!context) {
+        throw new Error('usePopups must be used within a PopupsProvider');
+    }
+    return context;
 };

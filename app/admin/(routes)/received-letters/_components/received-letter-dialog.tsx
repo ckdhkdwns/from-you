@@ -43,7 +43,7 @@ export default function ReceivedLetterDialog({
     const [showUserList, setShowUserList] = useState(false);
     const [selectedUser, setSelectedUser] = useState<UserPublic | null>(null);
     const searchRef = useRef<HTMLDivElement>(null);
-    const { handleCreateReceivedLetter, handleUpdateReceivedLetter, handleDeleteReceivedLetter } =
+    const { createReceivedLetter, updateReceivedLetter, deleteReceivedLetter } =
         useReceivedLetter();
 
     useEffect(() => {
@@ -168,53 +168,47 @@ export default function ReceivedLetterDialog({
     };
 
     const handleSubmit = async () => {
-        if (!validateForm()) return;
+        try {
+            if (!validateForm()) return;
 
-        if (selectedLetter) {
-            // 편집 모드: 기존 편지 업데이트
-            const updatedPhotos = await parsePhotos(images);
+            const receivedLetterInput = {
+                id: selectedLetter ? removeTableKeyPrefix(selectedLetter.SK) : '',
+                name,
+                senderName,
+                user: selectedUser,
+                photos: images,
+            };
 
-            const letterId = selectedLetter?.SK.replace('RECEIVED_LETTER#', '');
+            if (selectedLetter) {
+                // 편지 수정
+                await updateReceivedLetter(receivedLetterInput);
+            } else {
+                // 새 편지 생성
+                await createReceivedLetter(receivedLetterInput, images);
+            }
 
-            await handleUpdateReceivedLetter({
-                id: letterId,
-                user: {
-                    PK: selectedUser?.PK,
-                    name: selectedUser?.name,
-                },
-                photos: updatedPhotos,
-                senderName: senderName,
-            });
-        } else {
-            // 새 편지 추가 모드
-            const photos = images.map(image => ({
-                id: image.id || uuidv4(),
-                url: image.url,
-
-                isUploaded: false,
-            }));
-
-            await handleCreateReceivedLetter({
-                id: uuidv4(),
-                user: {
-                    PK: selectedUser?.PK,
-                    name: selectedUser?.name,
-                },
-                photos,
-                senderName: senderName,
-            });
+            // 폼 초기화 및 다이얼로그 닫기
+            resetForm();
+            if (onOpenChange) onOpenChange(false);
+        } catch (error) {
+            console.error('편지 처리 오류:', error);
+            toast.error('편지 처리 중 오류가 발생했습니다.');
         }
-
-        onOpenChange?.(false);
-        resetForm();
     };
 
     const handleDelete = async () => {
-        if (selectedLetter) {
-            const letterId = selectedLetter?.SK.replace('RECEIVED_LETTER#', '');
-            await handleDeleteReceivedLetter(letterId);
-            onOpenChange?.(false);
+        try {
+            if (!selectedLetter) return;
+
+            const letterId = removeTableKeyPrefix(selectedLetter.SK);
+            await deleteReceivedLetter(letterId);
+
+            // 폼 초기화 및 다이얼로그 닫기
             resetForm();
+            if (onOpenChange) onOpenChange(false);
+        } catch (error) {
+            console.error('편지 삭제 오류:', error);
+            toast.error('편지 삭제 중 오류가 발생했습니다.');
         }
     };
 

@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { UserPublic } from '@/models/types/user';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -26,28 +25,24 @@ import {
     AccordionTrigger,
 } from '@/components/ui/accordion';
 
-interface UserDialogProps {
-    user: UserPublic;
-    open: boolean;
-    onOpenChange: (_open: boolean) => void;
-}
-
-export function UserDialog({ user, open, onOpenChange }: UserDialogProps) {
-    const [pointValue, setPointValue] = useState(user.point.toString());
+export function UserDialog() {
+    const { selectedUser, isDialogOpen, setIsDialogOpen, handlePointUpdate } = useUsersContext();
+    const [pointValue, setPointValue] = useState('0');
     const [isLoading, _setIsLoading] = useState(false);
     const [letters, setLetters] = useState<LetterPublic[]>([]);
     const [isLettersLoading, setIsLettersLoading] = useState(false);
     const [pointLogs, setPointLogs] = useState<PointLogPublic[]>([]);
     const [isPointLogsLoading, setIsPointLogsLoading] = useState(false);
-    const { handlePointUpdate } = useUsersContext();
 
     const handlePointChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPointValue(e.target.value);
     };
 
     useEffect(() => {
-        setPointValue(user.point.toString());
-    }, [user]);
+        if (selectedUser) {
+            setPointValue(selectedUser.point.toString());
+        }
+    }, [selectedUser]);
 
     const loadUserLetters = async (userId: string) => {
         setIsLettersLoading(true);
@@ -82,14 +77,16 @@ export function UserDialog({ user, open, onOpenChange }: UserDialogProps) {
     };
 
     useEffect(() => {
-        if (user) {
-            loadUserLetters(removeTableKeyPrefix(user.PK));
-            loadUserPointLogs(removeTableKeyPrefix(user.PK));
+        if (selectedUser && isDialogOpen) {
+            loadUserLetters(removeTableKeyPrefix(selectedUser.PK));
+            loadUserPointLogs(removeTableKeyPrefix(selectedUser.PK));
         }
-    }, [user]);
+    }, [selectedUser, isDialogOpen]);
+
+    if (!selectedUser) return null;
 
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogContent className="sm:max-w-[1000px] max-h-[90vh] overflow-y-auto !bg-white">
                 <DialogHeader>
                     <DialogTitle className="text-xl font-bold">유저 정보</DialogTitle>
@@ -104,13 +101,13 @@ export function UserDialog({ user, open, onOpenChange }: UserDialogProps) {
                                     <div className="flex flex-col">
                                         <Label className="text-gray-450 mb-1">ID</Label>
                                         <div className="text-base">
-                                            {removeTableKeyPrefix(user.PK)}
+                                            {removeTableKeyPrefix(selectedUser.PK)}
                                         </div>
                                     </div>
 
                                     <div className="flex flex-col">
                                         <Label className="text-gray-450 mb-1">이름</Label>
-                                        <div className="text-base">{user.name}</div>
+                                        <div className="text-base">{selectedUser.name}</div>
                                     </div>
                                 </div>
 
@@ -118,19 +115,19 @@ export function UserDialog({ user, open, onOpenChange }: UserDialogProps) {
                                     <div className="flex flex-col">
                                         <Label className="text-gray-450 mb-1">가입 방법</Label>
                                         <div className="text-base">
-                                            <ProviderBadge provider={user.provider} />
+                                            <ProviderBadge provider={selectedUser.provider} />
                                         </div>
                                     </div>
 
                                     <div className="flex flex-col">
                                         <Label className="text-gray-450 mb-1">가입일</Label>
-                                        <div className="text-base">{parseDate(user.createdAt)}</div>
+                                        <div className="text-base">{parseDate(selectedUser.createdAt)}</div>
                                     </div>
                                 </div>
                                 <div className="flex flex-col">
                                     <Label className="text-gray-450 mb-1">전화번호</Label>
                                     <div className="text-base">
-                                        {user?.phone || '등록되지 않음'}
+                                        {selectedUser?.phone || '등록되지 않음'}
                                     </div>
                                 </div>
                                 <div className="flex items-end">
@@ -148,8 +145,8 @@ export function UserDialog({ user, open, onOpenChange }: UserDialogProps) {
                                     </div>
                                     <Button
                                         variant="outline"
-                                        onClick={() => handlePointUpdate(user, Number(pointValue))}
-                                        disabled={isLoading || Number(pointValue) === user.point}
+                                        onClick={() => handlePointUpdate(selectedUser, Number(pointValue))}
+                                        disabled={isLoading || Number(pointValue) === selectedUser.point}
                                         className="h-10"
                                     >
                                         {isLoading ? '업데이트 중...' : '적용'}

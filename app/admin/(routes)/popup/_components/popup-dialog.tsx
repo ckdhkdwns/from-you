@@ -4,28 +4,48 @@ import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { PopupPublic } from '@/models/types/popup';
-import { useState } from 'react';
-import { toast } from 'sonner';
+import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import Image from 'next/image';
-import { updatePopupAction } from '@/models/actions/popup-actions';
 import { usePopups } from '../_contexts/popups-provider';
 import { ResponsiveDialog } from '@/components/ui/responsive-dialog';
 
-interface PopupDialogProps {
-    popup: PopupPublic;
-    open: boolean;
-    onOpenChange: (_open: boolean) => void;
-}
+export function PopupDialog() {
+    const {
+        selectedPopup,
+        isDialogOpen,
+        setIsDialogOpen,
+        createPopup,
+        updatePopup,
+        isActionLoading,
+    } = usePopups();
 
-export function PopupDialog({ popup, open, onOpenChange }: PopupDialogProps) {
-    const { refreshPopups } = usePopups();
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [startDate, setStartDate] = useState(format(new Date(popup.startDate), 'yyyy-MM-dd'));
-    const [endDate, setEndDate] = useState(format(new Date(popup.endDate), 'yyyy-MM-dd'));
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
     const [imageFile, setImageFile] = useState<File | null>(null);
-    const [previewImage, setPreviewImage] = useState<string>(popup.image);
+    const [previewImage, setPreviewImage] = useState<string>('');
+
+    const isEdit = !!selectedPopup;
+
+    useEffect(() => {
+        if (selectedPopup) {
+            setStartDate(format(new Date(selectedPopup.startDate), 'yyyy-MM-dd'));
+            setEndDate(format(new Date(selectedPopup.endDate), 'yyyy-MM-dd'));
+            setPreviewImage(selectedPopup.image);
+            setImageFile(null);
+        } else {
+            const today = new Date();
+            setStartDate(format(today, 'yyyy-MM-dd'));
+
+            // 기본 종료일은 1주일 후
+            const nextWeek = new Date(today);
+            nextWeek.setDate(today.getDate() + 7);
+            setEndDate(format(nextWeek, 'yyyy-MM-dd'));
+
+            setImageFile(null);
+            setPreviewImage('');
+        }
+    }, [selectedPopup, isDialogOpen]);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -39,13 +59,18 @@ export function PopupDialog({ popup, open, onOpenChange }: PopupDialogProps) {
         }
     };
 
-    const extractPopupId = (popup: PopupPublic): string => {
-        return popup?.SK.replace('POPUP#', '');
-    };
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsSubmitting(true);
+
+        if (!startDate || !endDate) {
+            return;
+        }
+
+        // 편집 모드에서는 이미지가 필수가 아님 (기존 이미지 유지 가능)
+        // 생성 모드에서는 이미지가 필수
+        if (!isEdit && !imageFile) {
+            return;
+        }
 
         try {
             const formData = new FormData();
@@ -57,31 +82,29 @@ export function PopupDialog({ popup, open, onOpenChange }: PopupDialogProps) {
                 formData.append('image', imageFile);
             }
 
-            const popupId = extractPopupId(popup);
-            const { success, error } = await updatePopupAction(popupId, formData);
-
-            if (success) {
-                toast.success('팝업이 성공적으로 수정되었습니다.');
-                onOpenChange(false);
-                refreshPopups();
+            if (isEdit && selectedPopup) {
+                await updatePopup(selectedPopup.SK, formData);
             } else {
-                toast.error(error?.message || '팝업 수정에 실패했습니다.');
+                await createPopup(formData);
             }
+
+            setIsDialogOpen(false);
         } catch (error) {
-            console.error('팝업 수정 오류:', error);
-            toast.error('팝업 수정 중 오류가 발생했습니다.');
-        } finally {
-            setIsSubmitting(false);
+            console.error('팝업 작업 오류:', error);
         }
     };
 
     return (
         <ResponsiveDialog
-            title="팝업 수정"
-            description="팝업 이미지와 활성 기간을 수정할 수 있습니다."
+            title={isEdit ? '팝업 수정' : '새 팝업 추가'}
+            description={
+                isEdit
+                    ? '팝업 이미지와 활성 기간을 수정할 수 있습니다.'
+                    : '팝업 이미지와 활성 기간을 설정하여 새 팝업을 추가합니다.'
+            }
             showFooter={true}
-            open={open}
-            onOpenChange={onOpenChange}
+            open={isDialogOpen}
+            onOpenChange={setIsDialogOpen}
             className="!bg-white"
             contentClassName="!bg-white"
         >
@@ -90,18 +113,21 @@ export function PopupDialog({ popup, open, onOpenChange }: PopupDialogProps) {
                     <div className="grid grid-cols-1 gap-2">
                         <Label htmlFor="image">이미지</Label>
                         <div className="relative w-full h-40 mb-2 mx-auto overflow-hidden rounded-md border">
-                            <Image
-                                src={previewImage}
-                                alt="팝업 이미지 미리보기"
-                                fill
-                                className="object-contain"
-                            />
+                            {previewImage && (
+                                <Image
+                                    src={previewImage}
+                                    alt="팝업 이미지 미리보기"
+                                    fill
+                                    className="object-contain"
+                                />
+                            )}
                         </div>
                         <Input
                             id="image"
                             type="file"
                             accept="image/*"
                             onChange={handleImageChange}
+                            required={!isEdit}
                         />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
@@ -128,8 +154,17 @@ export function PopupDialog({ popup, open, onOpenChange }: PopupDialogProps) {
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? '저장 중...' : '저장하기'}
+                    <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
+                        취소
+                    </Button>
+                    <Button type="submit" disabled={isActionLoading}>
+                        {isActionLoading
+                            ? isEdit
+                                ? '수정 중...'
+                                : '생성 중...'
+                            : isEdit
+                              ? '수정하기'
+                              : '생성하기'}
                     </Button>
                 </DialogFooter>
             </form>

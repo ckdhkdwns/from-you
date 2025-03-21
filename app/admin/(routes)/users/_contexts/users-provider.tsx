@@ -2,9 +2,8 @@
 
 import { updateSelectedUsersBlocked, updateUserPoint } from '@/models/actions/user-actions';
 import { UserPublic } from '@/models/types/user';
-import { isSuccessResponse } from '@/models/types/response';
 import React, { createContext, useContext, useState } from 'react';
-import { toast } from 'sonner';
+import { apiHandler } from '@/lib/api-utils';
 
 interface UsersProviderProps {
     children: React.ReactNode;
@@ -16,68 +15,63 @@ const UsersContext = createContext<{
     setUsers: (_users: UserPublic[]) => void;
     handlePointUpdate: (_user: UserPublic, _point: number) => void;
     handleBlockUser: (_selectedRows: UserPublic[], _blocked: boolean) => void;
+    selectedUser: UserPublic | null;
+    isDialogOpen: boolean;
+    setSelectedUser: (_user: UserPublic | null) => void;
+    setIsDialogOpen: (_open: boolean) => void;
+    openUserDialog: (_user: UserPublic) => void;
 }>({
     users: [],
     setUsers: () => {},
     handlePointUpdate: () => {},
     handleBlockUser: () => {},
+    selectedUser: null,
+    isDialogOpen: false,
+    setSelectedUser: () => {},
+    setIsDialogOpen: () => {},
+    openUserDialog: () => {},
 });
 
 export default function UsersProvider({ children, initialUsers }: UsersProviderProps) {
     const [users, setUsers] = useState<UserPublic[]>(initialUsers);
+    const [selectedUser, setSelectedUser] = useState<UserPublic | null>(null);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const handlePointUpdate = async (user: UserPublic, point: number) => {
-        try {
-            const response = await updateUserPoint(user.PK, point, user.point);
-
-            if (isSuccessResponse(response)) {
-                const updatedUser = response.data;
-
-                toast.success('포인트가 성공적으로 업데이트되었습니다.');
-                setUsers(users.map(u => (u.PK === user.PK ? updatedUser : u)));
-            } else {
-                toast.error(response.error?.message || '포인트 업데이트 중 오류가 발생했습니다.');
-            }
-        } catch (error) {
-            toast.error('포인트 업데이트 중 오류가 발생했습니다.');
-            console.error(error);
-        }
+    const openUserDialog = (user: UserPublic) => {
+        setSelectedUser(user);
+        setIsDialogOpen(true);
     };
 
-    const handleBlockUser = async (selectedRows: UserPublic[], blocked: boolean) => {
-        try {
-            const response = await updateSelectedUsersBlocked(
+    const handlePointUpdate = (user: UserPublic, point: number) => 
+        apiHandler(
+            () => updateUserPoint(user.PK, point, user.point),
+            updatedUser => setUsers(users.map(u => u.PK === user.PK ? updatedUser : u)),
+            {
+                success: '포인트가 성공적으로 업데이트되었습니다.',
+                error: '포인트 업데이트 중 오류가 발생했습니다.'
+            }
+        );
+
+    const handleBlockUser = (selectedRows: UserPublic[], blocked: boolean) => 
+        apiHandler(
+            () => updateSelectedUsersBlocked(
                 selectedRows.map(user => user.PK),
-                blocked,
-            );
-
-            if (isSuccessResponse(response)) {
-                toast.success(
-                    `${selectedRows.length}명의 사용자가 ${
-                        blocked ? '비활성화' : '활성화'
-                    }되었습니다.`,
-                );
-
-                const updatedUsers = response.data;
-                if (updatedUsers && Array.isArray(updatedUsers)) {
-                    setUsers(prevUsers => {
-                        return prevUsers.map(user => {
-                            const updatedUser = updatedUsers.find(u => u.PK === user.PK);
-                            return updatedUser || user;
-                        });
-                    });
-                }
-            } else {
-                toast.error(
-                    response.error?.message ||
-                        `사용자 ${blocked ? '비활성화' : '활성화'} 중 오류가 발생했습니다.`,
-                );
+                blocked
+            ),
+            updatedUsers => {
+                if (!Array.isArray(updatedUsers)) return;
+                
+                const updatedMap = new Map(updatedUsers.map(user => [user.PK, user]));
+                
+                setUsers(prevUsers => prevUsers.map(
+                    user => updatedMap.get(user.PK) || user
+                ));
+            },
+            {
+                success: `${selectedRows.length}명의 사용자가 ${blocked ? '비활성화' : '활성화'}되었습니다.`,
+                error: `사용자 ${blocked ? '비활성화' : '활성화'} 중 오류가 발생했습니다.`
             }
-        } catch (error) {
-            toast.error('사용자 비활성화 중 오류가 발생했습니다.');
-            console.error(error);
-        }
-    };
+        );
 
     return (
         <UsersContext.Provider
@@ -86,6 +80,11 @@ export default function UsersProvider({ children, initialUsers }: UsersProviderP
                 setUsers,
                 handlePointUpdate,
                 handleBlockUser,
+                selectedUser,
+                isDialogOpen,
+                setSelectedUser,
+                setIsDialogOpen,
+                openUserDialog,
             }}
         >
             {children}
@@ -93,6 +92,4 @@ export default function UsersProvider({ children, initialUsers }: UsersProviderP
     );
 }
 
-export const useUsersContext = () => {
-    return useContext(UsersContext);
-};
+export const useUsersContext = () => useContext(UsersContext);

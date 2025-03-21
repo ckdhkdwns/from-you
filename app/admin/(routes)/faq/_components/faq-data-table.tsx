@@ -1,149 +1,97 @@
 'use client';
 
 import { DataTable } from '@/app/admin/_components/data-table';
-import { useFAQs } from '../_contexts/faqs-provider';
 import { columns } from './faq-columns';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
-import { FaqPublic } from '@/models/types/faq';
+import { useFAQs } from '../_contexts/faqs-provider';
 import { useConfirm } from '@/contexts/confirm-provider';
-import { removeTableKeyPrefix } from '@/lib/api-utils';
-import TextLoader from '@/components/ui/text-loader';
+import { FaqPublic } from '@/models/types/faq';
+import { Plus } from 'lucide-react';
 
-// FAQ를 컴포넌트에서 사용하기 편한 형태로 변환하는 유틸리티 함수
-const convertToFAQ = (faq: FaqPublic) => {
-    return {
-        id: removeTableKeyPrefix(faq?.SK),
-        question: faq.question,
-        answer: faq.answer,
-        category: faq.category,
-        order: faq.order,
-        isPublished: faq.isPublished,
-        createdAt: faq.createdAt,
-        SK: faq?.SK,
-        PK: faq.PK,
-    };
-};
-
-export function FAQDataTable() {
+export default function FAQDataTable() {
     const {
         faqs,
-        isLoading,
-
         setSelectedFAQs,
-
-        setIsDialogOpen,
+        deleteFAQs,
+        toggleFAQsStatus,
+        handleRowClick,
         setSelectedFAQ,
-        handleDeleteFAQs,
-        handleToggleFAQStatus,
+        setIsDialogOpen,
     } = useFAQs();
+
     const { confirm } = useConfirm();
 
-    // 변환된 FAQ 데이터
-    const faqsConverted = faqs.map(convertToFAQ);
+    const handleBulkDelete = async (selectedRows: FaqPublic[]) => {
+        if (selectedRows.length === 0) {
+            toast.error('선택된 FAQ가 없습니다.');
+            return;
+        }
 
-    // 새 FAQ 생성 다이얼로그 열기
-    const handleNewFAQ = () => {
-        setSelectedFAQ(undefined);
-        setIsDialogOpen(true);
-    };
+        const result = await confirm({
+            title: 'FAQ 일괄 삭제',
+            description: `선택한 ${selectedRows.length}개의 FAQ를 삭제하시겠습니까?`,
+            className: 'bg-white',
+        });
 
-    // FAQ 행 클릭 시 상세보기/수정 다이얼로그 열기
-    const handleRowClick = (row: FaqPublic) => {
-        const originalFaq = faqs.find(faq => removeTableKeyPrefix(faq?.SK) === row?.SK);
-        if (originalFaq) {
-            setSelectedFAQ(originalFaq);
-            setIsDialogOpen(true);
+        if (result) {
+            await deleteFAQs(selectedRows);
         }
     };
 
-    // 선택된 행 변경 핸들러
-    const handleSelectedRowsChange = (rows: FaqPublic[]) => {
-        setSelectedFAQs(rows.map(row => row?.SK));
+    const handleBulkToggleStatus = async (selectedRows: FaqPublic[], isPublished: boolean) => {
+        if (selectedRows.length === 0) {
+            toast.error('선택된 FAQ가 없습니다.');
+            return;
+        }
+
+        const action = isPublished ? '공개' : '비공개';
+        const result = await confirm({
+            title: `FAQ ${action}`,
+            description: `선택한 ${selectedRows.length}개의 FAQ를 ${action}하시겠습니까?`,
+            className: 'bg-white',
+        });
+
+        if (result) {
+            await toggleFAQsStatus(selectedRows, isPublished);
+        }
     };
 
-    // 선택 액션 정의
-    const selectionActions = [
-        {
-            type: 'button' as const,
-            label: '선택 삭제',
-            onClick: async (selectedRows: FaqPublic[]) => {
-                if (selectedRows.length === 0) return;
-
-                const confirmed = await confirm({
-                    title: 'FAQ 삭제',
-                    description: `선택한 ${selectedRows.length}개의 FAQ를 삭제하시겠습니까?`,
-                    confirmText: '삭제',
-                    cancelText: '취소',
-                });
-
-                if (confirmed) {
-                    const ids = selectedRows.map(row => row?.SK);
-                    await handleDeleteFAQs(ids);
-                }
-            },
-        },
-        {
-            type: 'button' as const,
-            label: '선택 게시',
-            onClick: async (selectedRows: FaqPublic[]) => {
-                if (selectedRows.length === 0) return;
-
-                const confirmed = await confirm({
-                    title: 'FAQ 게시',
-                    description: `선택한 ${selectedRows.length}개의 FAQ를 게시 처리하시겠습니까?`,
-                    confirmText: '게시',
-                    cancelText: '취소',
-                });
-
-                if (confirmed) {
-                    const ids = selectedRows.map(row => row?.SK);
-                    await handleToggleFAQStatus(ids, true);
-                }
-            },
-        },
-        {
-            type: 'button' as const,
-            label: '선택 숨김',
-            onClick: async (selectedRows: FaqPublic[]) => {
-                if (selectedRows.length === 0) return;
-
-                const confirmed = await confirm({
-                    title: 'FAQ 숨김',
-                    description: `선택한 ${selectedRows.length}개의 FAQ를 숨김 처리하시겠습니까?`,
-                    confirmText: '숨김',
-                    cancelText: '취소',
-                });
-
-                if (confirmed) {
-                    const ids = selectedRows.map(row => row?.SK);
-                    await handleToggleFAQStatus(ids, false);
-                }
-            },
-        },
-    ];
-
-    if (isLoading) {
-        return <TextLoader text="FAQ를 불러오는 중..." className="mt-24" />;
-    }
-
     return (
-        <>
-            <DataTable
-                columns={columns}
-                data={faqsConverted}
-                onSelectedRowsChange={handleSelectedRowsChange}
-                onRowClick={handleRowClick}
-                actions={[
-                    <Button key="create" onClick={handleNewFAQ}>
-                        <Plus className="mr-2 h-4 w-4" />
-                        FAQ 추가
-                    </Button>,
-                ]}
-                selectionActions={selectionActions}
-                // searchField={["question"]}
-                // searchPlaceholder="질문으로 검색..."
-            />
-        </>
+        <DataTable
+            storageKey="faqs"
+            columns={columns}
+            data={faqs}
+            onSelectedRowsChange={setSelectedFAQs}
+            onRowClick={handleRowClick}
+            actions={[
+                {
+                    label: 'FAQ 추가',
+                    onClick: () => {
+                        setSelectedFAQ(undefined);
+                        setIsDialogOpen(true);
+                    },
+                    type: 'button',
+                    icon: <Plus className="h-4 w-4" />,
+                },
+            ]}
+            selectionActions={[
+                {
+                    label: '삭제',
+                    onClick: handleBulkDelete,
+                    type: 'button',
+                },
+                {
+                    label: '공개',
+                    onClick: rows => handleBulkToggleStatus(rows, true),
+                    type: 'button',
+                },
+                {
+                    label: '비공개',
+                    onClick: rows => handleBulkToggleStatus(rows, false),
+                    type: 'button',
+                },
+            ]}
+        />
     );
 }
