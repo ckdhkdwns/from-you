@@ -61,7 +61,7 @@ export default function Toolbar() {
                 </div>
 
                 {/* 모바일에서 오른쪽에 보이는 아이콘들 - 정렬은 이제 select로 보임 */}
-                <div className="flex items-center gap-2 md:hidden">
+                <div className="flex items-center gap-4 md:hidden">
                     {/* 정렬 선택을 첫 번째로 배치 */}
                     <FontAlignSelect
                         fontAlign={font.align}
