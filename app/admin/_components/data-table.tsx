@@ -102,7 +102,7 @@ function useDataTable<TData, TValue>({
 
         if (storageKey && typeof window !== 'undefined') {
             try {
-                localStorage.setItem(`table_page_size_${storageKey}`, newSize.toString());
+                localStorage.setItem(`${process.env.NEXT_PUBLIC_LOCAL_STORAGE_KEY_PREFIX}table_page_size_${storageKey}`, newSize.toString());
             } catch (error) {
                 console.error('로컬 스토리지에 페이지 크기 저장 실패:', error);
             }
@@ -151,14 +151,18 @@ function useDataTable<TData, TValue>({
         const loadStoredPageSize = () => {
             if (typeof window !== 'undefined' && storageKey) {
                 try {
-                    const storedValue = localStorage.getItem(`table_page_size_${storageKey}`);
+                    const storedValue = localStorage.getItem(`${process.env.NEXT_PUBLIC_LOCAL_STORAGE_KEY_PREFIX}table_page_size_${storageKey}`);
                     if (storedValue) {
                         const parsedSize = parseInt(storedValue, 10);
-                        setPageSize(parsedSize);
+                        setPageSize(parsedSize || 10);
+                    } else {
+                        setPageSize(10);
                     }
                 } catch (error) {
                     console.error('로컬 스토리지에서 페이지 크기 불러오기 실패:', error);
                 }
+            } else {
+                setPageSize(10);
             }
         };
 

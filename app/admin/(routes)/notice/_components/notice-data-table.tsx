@@ -59,6 +59,7 @@ export default function NoticeDataTable() {
 
     return (
         <DataTable
+            storageKey="notices"
             columns={columns}
             data={notices}
             onSelectedRowsChange={setSelectedNotices}

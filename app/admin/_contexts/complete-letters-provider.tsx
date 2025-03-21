@@ -10,8 +10,7 @@ import { toast } from 'sonner';
 import { LetterPublic } from '@/models/types/letter';
 import { removeTableKeyPrefix } from '@/lib/api-utils';
 
-const STORAGE_KEY = 'fromyou:admin:new-letters';
-
+const STORAGE_KEY = process.env.NEXT_PUBLIC_LOCAL_STORAGE_KEY_PREFIX + 'new-letters';
 interface StoredLetterInfo {
     ids: string[];
     count: number;
