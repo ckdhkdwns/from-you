@@ -31,4 +31,24 @@ export default [
             'react/react-in-jsx-scope': 'off',
         },
     },
+    {
+        plugins: ['jsx-a11y', '@typescript-eslint', 'prettier', 'jest'],
+
+        env: {
+            // 전역객체를 eslint가 인식하는 구간
+            browser: true, // document나 window 인식되게 함
+            node: true,
+            es6: true,
+            'jest/globals': true,
+        },
+
+        ignorePatterns: [
+            'node_modules/',
+            '.eslintrc.js',
+            'next.config.js',
+            'postcss.config.js',
+            'run_server.js',
+            'jest.config.ts',
+        ], // eslint 미적용될 폴더나 파일 명시
+    },
 ];
