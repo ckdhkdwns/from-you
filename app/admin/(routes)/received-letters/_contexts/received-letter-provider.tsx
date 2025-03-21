@@ -9,7 +9,7 @@ import { ReceivedLetterPublic, ReceivedLetterInput } from '@/models/types/receiv
 import { createContext, useContext, useState, useCallback } from 'react';
 import { toast } from 'sonner';
 import { getUserIdBySession } from '@/lib/auth';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 interface ReceivedLetterProviderProps {
     children: React.ReactNode;

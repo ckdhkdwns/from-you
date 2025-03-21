@@ -27,7 +27,7 @@ import { logPointAction } from './point-action';
 import { Repository } from '@/services/repository';
 import { v4 as uuidv4 } from 'uuid';
 import nodemailer from 'nodemailer';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { getCurrentISOTime } from '@/lib/date';
 
 // 테이블 이름

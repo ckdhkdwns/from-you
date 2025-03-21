@@ -25,6 +25,7 @@ export const PAYMENT_METHOD = {
     KAKAOPAY: 'KAKAOPAY',
     QUICK_TRANSFER: 'TRANSFER',
     MOBILE_PHONE: 'MOBILE_PHONE',
+    VIRTUAL_ACCOUNT: 'VIRTUAL_ACCOUNT',
 } as const;
 
 // 결제 방법 타입
@@ -43,6 +44,7 @@ export const paymentMethodMapping: Record<PaymentMethod, string> = {
     [PAYMENT_METHOD.KAKAOPAY]: '카카오페이',
     [PAYMENT_METHOD.MOBILE_PHONE]: '휴대폰',
     [PAYMENT_METHOD.QUICK_TRANSFER]: '퀵계좌이체',
+    [PAYMENT_METHOD.VIRTUAL_ACCOUNT]: '가상계좌',
 };
 
 // 결제 방법 설정 매핑
@@ -99,6 +101,11 @@ export const paymentMethodConfig: Record<PaymentMethod, PaymentMethodConfig> = {
     },
     [PAYMENT_METHOD.QUICK_TRANSFER]: {
         label: '퀵계좌이체',
+        icon: 'bank-account',
+        className: 'bg-green-100 text-green-800 hover:bg-green-100',
+    },
+    [PAYMENT_METHOD.VIRTUAL_ACCOUNT]: {
+        label: '가상계좌',
         icon: 'bank-account',
         className: 'bg-green-100 text-green-800 hover:bg-green-100',
     },

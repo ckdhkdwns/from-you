@@ -44,7 +44,6 @@ export const getUserIdBySession = async () => {
     return session.user.id;
 };
 
-
 export const signInEmail = async (email: string, password: string) => {
     const result = await signIn('credentials', {
         email,
@@ -99,7 +98,6 @@ export const authOptions: NextAuthOptions = {
                         role: (user as any).role || 'user',
                     };
                 } catch (error) {
-                    console.error('로그인 인증 오류:', error);
                     return null;
                 }
             },

@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { NoticePublic } from '@/models/types/notice';
+import { Pin, AlertCircle } from 'lucide-react';
 
 export const columns: ColumnDef<NoticePublic>[] = [
     {

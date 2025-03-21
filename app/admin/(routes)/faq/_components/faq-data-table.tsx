@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { FaqPublic } from '@/models/types/faq';
 import { useConfirm } from '@/contexts/confirm-provider';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import TextLoader from '@/components/ui/text-loader';
 
 // FAQ를 컴포넌트에서 사용하기 편한 형태로 변환하는 유틸리티 함수

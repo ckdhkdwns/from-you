@@ -101,11 +101,6 @@ function UserDataProvider({ children }: { children: ReactNode }) {
     };
 
     useEffect(() => {
-        console.log('유저 정보', userData);
-        console.log('주소 정보', addresses);
-    }, [userData, addresses]);
-
-    useEffect(() => {
         if (status === 'authenticated' && session?.user?.id) {
             if (session.user.name && session.user.provider) {
                 const sessionUserData: UserData = {

@@ -17,7 +17,7 @@ import {
 import { ActionResponse, withActionResponse } from '../types/response';
 import { ReceivedLetterEntity } from '../types/received-letter';
 import { UserKeys } from '../types/user';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { getCurrentISOTime } from '@/lib/date';
 
 // Repository 인스턴스 생성

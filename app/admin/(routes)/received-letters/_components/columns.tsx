@@ -1,5 +1,5 @@
 import { parseDateToRelative } from '@/lib/date';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { ReceivedLetterPublic } from '@/models/types/received-letter';
 import { ColumnDef } from '@tanstack/react-table';
 

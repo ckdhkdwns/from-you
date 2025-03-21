@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { TemplatePublic } from '@/models/types/template';
 import Link from 'next/link';
 import React from 'react';

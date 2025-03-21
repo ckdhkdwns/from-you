@@ -6,7 +6,7 @@ import {
 } from '@/components/ui/accordion';
 import React from 'react';
 import { NoticePublic } from '@/models/types/notice';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 export default function NoticeList({
     notices,

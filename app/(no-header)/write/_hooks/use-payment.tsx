@@ -13,7 +13,7 @@ import {
     initiateTossPaymentAction,
     processPointOnlyPaymentAction,
 } from '@/models/actions/payment-actions';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { paymentMethodMapping, POINT_RATE } from '@/constants';
 import { AddressPublic } from '@/models/types/address';
 

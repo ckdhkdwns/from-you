@@ -6,7 +6,7 @@ import { TemplatePublic } from '@/models/types/template';
 import { TemplateConfigPublic } from '@/models/types/template-config';
 import { AddressPublic } from '@/models/types/address';
 import { Font, LetterPublic, Photo } from '@/models/types/letter';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { SendTimeConfigPublic } from '@/models/types/send-time-config';
 import { useUserData } from '@/contexts/session';
 

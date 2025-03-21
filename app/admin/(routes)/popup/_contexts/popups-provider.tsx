@@ -1,6 +1,6 @@
 'use client';
 
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { getAllPopupsAction } from '@/models/actions/popup-actions';
 import { PopupPublic } from '@/models/types/popup';
 import { createContext, useContext, useState } from 'react';

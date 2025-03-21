@@ -7,7 +7,7 @@ import { useMyLetters } from '../../../_contexts/my-letters-provider';
 import TextLoader from '@/components/ui/text-loader';
 import { useUserData } from '@/contexts/session';
 import ReceivedLetterItem from './received-letter-item';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { useConfirm } from '@/contexts/confirm-provider';
 import { ReceivedLetterPublic } from '@/models/types/received-letter';
 import { LetterPublic } from '@/models/types/letter';

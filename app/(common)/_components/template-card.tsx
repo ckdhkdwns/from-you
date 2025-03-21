@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { TemplatePublic } from '@/models/types/template';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 export default function TemplateCard({ template }: { template: TemplatePublic }) {
     const router = useRouter();

@@ -12,7 +12,7 @@ import {
 import { ActionResponse, withActionResponse } from '../types/response';
 import { Repository } from '@/services/repository';
 import { v4 as uuidv4 } from 'uuid';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { getCurrentISOTime } from '@/lib/date';
 
 // Repository 인스턴스 생성

@@ -12,6 +12,8 @@ import {
     createNoticeEntityFromInput,
 } from '../types/notice';
 import { getCurrentISOTime } from '@/lib/date';
+import { TableKey } from '../types/dynamo';
+import { ensureArray, ensureEntityKey } from '@/lib/api-utils';
 
 // Repository 인스턴스 생성
 const noticeRepository = new Repository(Resource.FromYouTable.name);
@@ -23,6 +25,19 @@ export async function getNotices(): Promise<ActionResponse<NoticePublic[]>> {
     return withActionResponse(async () => {
         const items = await noticeRepository.queryGSI1<NoticeEntity>('NOTICE');
         return items.map(toNoticePublic);
+    });
+}
+
+/**
+ * 공지사항 목록 조회 (상태별)
+ */
+export async function getNoticesByStatus(
+    status: boolean = true,
+): Promise<ActionResponse<NoticePublic[]>> {
+    return withActionResponse(async () => {
+        const items = await noticeRepository.queryGSI1<NoticeEntity>('NOTICE');
+        const filteredItems = items.filter(item => item.isPublished === status);
+        return filteredItems.map(toNoticePublic);
     });
 }
 
@@ -106,39 +121,36 @@ export async function updateNotice(request: NoticeInput): Promise<ActionResponse
 
 /**
  * 공지사항 삭제 (단일 또는 다중)
- * @param ids 삭제할 공지사항 ID 또는 ID 배열
+ * @param keys 삭제할 공지사항 키 또는 키 배열
  */
 export async function deleteNotices(
-    ids: string | string[],
+    keys: TableKey | TableKey[],
 ): Promise<ActionResponse<{ deletedIds: string[] }>> {
     return withActionResponse(async () => {
-        // 단일 ID를 배열로 변환
-        const idArray = Array.isArray(ids) ? ids : [ids];
+        const keyArray = ensureArray(keys).map(key => ensureEntityKey(key, NoticeKeys));
 
-        if (idArray.length === 0) {
+        if (keyArray.length === 0) {
             throw new Error('선택된 공지사항이 없습니다.');
         }
 
-        const deletePromises = idArray.map(async id => {
-            const PK = NoticeKeys.pk(id);
-            const SK = NoticeKeys.sk(id);
+        const deletePromises = keyArray.map(async key => {
             try {
-                await noticeRepository.delete(PK, SK);
+                await noticeRepository.delete(key.PK, key.SK);
                 return true;
             } catch (error) {
-                console.error(`공지사항 삭제 오류 (ID: ${id}):`, error);
+                console.error(`공지사항 삭제 오류 (ID: ${key.PK}):`, error);
                 return false;
             }
         });
 
         const results = await Promise.all(deletePromises);
-        const failedIds = idArray.filter((_, index) => !results[index]);
+        const failedIds = keyArray.filter((_, index) => !results[index]);
 
         if (failedIds.length > 0) {
             throw new Error(`${failedIds.length}개의 공지사항 삭제에 실패했습니다.`);
         }
 
-        return { deletedIds: idArray };
+        return { deletedIds: keyArray.map(key => key.PK) };
     });
 }
 
@@ -148,37 +160,39 @@ export async function deleteNotices(
  * @param isPublished 변경할 공개 상태
  */
 export async function toggleNoticeStatus(
-    ids: string | string[],
+    keys: TableKey | TableKey[],
     isPublished: boolean,
 ): Promise<ActionResponse<{ updatedNotices: NoticePublic[] }>> {
     return withActionResponse(async () => {
         // 단일 ID를 배열로 변환
-        const idArray = Array.isArray(ids) ? ids : [ids];
+        const keyArray = ensureArray(keys).map(key => ensureEntityKey(key, NoticeKeys));
 
-        if (idArray.length === 0) {
+        if (keyArray.length === 0) {
             throw new Error('선택된 공지사항이 없습니다.');
         }
 
-        const updatePromises = idArray.map(async id => {
-            const PK = NoticeKeys.pk(id);
-            const SK = NoticeKeys.sk(id);
+        const updatePromises = keyArray.map(async key => {
             try {
                 // 업데이트할 필드 구성
                 const updates: Partial<NoticeEntity> = {
                     isPublished,
                 };
 
-                const updatedNotice = await noticeRepository.update<NoticeEntity>(PK, SK, updates);
+                const updatedNotice = await noticeRepository.update<NoticeEntity>(
+                    key.PK,
+                    key.SK,
+                    updates,
+                );
                 return updatedNotice ? toNoticePublic(updatedNotice) : null;
             } catch (error) {
-                console.error(`공지사항 상태 변경 오류 (ID: ${id}):`, error);
+                console.error(`공지사항 상태 변경 오류 (ID: ${key.PK}):`, error);
                 return null;
             }
         });
 
         const results = await Promise.all(updatePromises);
         const updatedNotices = results.filter(Boolean) as NoticePublic[];
-        const failedCount = idArray.length - updatedNotices.length;
+        const failedCount = keyArray.length - updatedNotices.length;
 
         if (failedCount > 0) {
             throw new Error(`${failedCount}개의 공지사항 상태 변경에 실패했습니다.`);

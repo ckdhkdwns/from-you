@@ -8,7 +8,7 @@ import { compactParseDate } from '@/lib/date';
 
 import { getStatusText } from '../_libs/get-status-text';
 import { LetterPublic } from '@/models/types/letter';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 interface SentLetterItemProps {
     letter: LetterPublic;

@@ -4,7 +4,7 @@ import React from 'react';
 import SentLetterItem from '../../letters/[type]/_components/sent-letter-item';
 import WriteReviewDialog from './write-review-dialog';
 import { useReview } from '../_contexts/review-context';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 export default function PreparedLetterList() {
     const { openReviewDialog, preparedLetters } = useReview();

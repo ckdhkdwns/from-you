@@ -13,7 +13,7 @@ import { Font, LetterInput, Photo } from '@/models/types/letter';
 import { TemplatePublic } from '@/models/types/template';
 import { TemplateConfigPublic } from '@/models/types/template-config';
 import { AddressPublic } from '@/models/types/address';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 // letterState 타입 정의
 interface LetterStateProps {

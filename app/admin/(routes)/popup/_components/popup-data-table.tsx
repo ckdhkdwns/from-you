@@ -13,7 +13,7 @@ import { Plus } from 'lucide-react';
 import { PopupPublic } from '@/models/types/popup';
 import { CreatePopupDialog } from './create-popup-dialog';
 import TextLoader from '@/components/ui/text-loader';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 export default function PopupDataTable() {
     const {

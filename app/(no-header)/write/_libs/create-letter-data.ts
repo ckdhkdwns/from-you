@@ -1,6 +1,6 @@
 import { LetterInput, Photo, Font } from '@/models/types/letter';
 import { parsePhotos } from './parse-photos';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { AddressPublic } from '@/models/types/address';
 
 export async function createLetterData({

@@ -21,6 +21,7 @@ interface LetterDataTableProps<TData = LetterPublic> {
     showActionsToolbar?: boolean;
     showNotificationReset?: boolean;
     loadingText?: string;
+    storageKey?: string;
 }
 
 export default function LetterDataTable<TData = LetterPublic>({
@@ -33,11 +34,11 @@ export default function LetterDataTable<TData = LetterPublic>({
     showActionsToolbar = true,
     showNotificationReset = true,
     loadingText = '편지 목록을 불러오고 있습니다...',
+    storageKey,
 }: LetterDataTableProps<TData>) {
     const completeLettersContext = useCompleteLetters();
     const { handleRowClick: defaultHandleRowClick } = useLetterActions();
 
-    // props로 받은 값이 없는 경우 컨텍스트에서 가져옴
     const letters = data || completeLettersContext.letters;
     const loading = isLoading !== undefined ? isLoading : completeLettersContext.isLoading;
     const rowClickHandler = onRowClick || defaultHandleRowClick;
@@ -74,6 +75,7 @@ export default function LetterDataTable<TData = LetterPublic>({
                           ]
                         : undefined
                 }
+                storageKey={storageKey}
             />
             {showDetailDialog && <LetterDetailDialog />}
         </div>

@@ -4,14 +4,14 @@ import PopularTemplateCarousel from './_components/popular-template-carousel';
 import Image from 'next/image';
 import EventSection from './_components/event-section';
 import NoticeSection from './_components/notice-section';
-import { getNotices } from '@/models/actions/notice-actions';
+import { getNotices, getNoticesByStatus } from '@/models/actions/notice-actions';
 import SecondEventSection from './_components/second-event-section';
 import { Suspense } from 'react';
 import UnauthorizedToast from './_components/unauthorized-toast';
 
 export default async function Home() {
     const { data: templates } = await getAllTemplates();
-    const { data: notices } = await getNotices();
+    const { data: notices } = await getNoticesByStatus(true);
 
     const popularTemplates = templates.filter(template => template.isPopular);
 

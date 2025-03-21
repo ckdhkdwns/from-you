@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { deleteTemplate, getAllTemplates } from '@/models/actions/template-actions';
 import { TemplatePublic } from '@/models/types/template';
 import { toast } from 'sonner';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 const TemplatesContext = createContext<{
     templates: TemplatePublic[];

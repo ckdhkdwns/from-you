@@ -7,7 +7,7 @@ import {
     toggleMultipleBestReviewsAction,
 } from '@/models/actions/review-actions';
 import { ReviewPublic } from '@/models/types/review';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 interface ReviewContextType {
     reviews: ReviewPublic[];

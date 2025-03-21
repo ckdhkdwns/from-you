@@ -4,7 +4,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import { PointLogPublic } from '@/models/types/point-log';
 import { parseDateToRelative } from '@/lib/date';
 import { POINT_CHANGE_REASON } from '@/constants/data/point-change-reason';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 export const columns: ColumnDef<PointLogPublic>[] = [
     {

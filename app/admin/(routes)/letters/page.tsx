@@ -7,7 +7,7 @@ export default async function LettersPage() {
 
     return (
         <CompleteLettersProvider initialLetters={letters || []}>
-            <LetterDataTable />
+            <LetterDataTable storageKey="letters" />
         </CompleteLettersProvider>
     );
 }

@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { getFAQs, deleteFAQs, toggleFAQStatus } from '@/models/actions/faq-actions';
 import { FaqPublic } from '@/models/types/faq';
 import { toast } from 'sonner';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 interface FAQsContextType {
     faqs: FaqPublic[];

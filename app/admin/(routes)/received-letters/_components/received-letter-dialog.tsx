@@ -20,7 +20,7 @@ import { useReceivedLetter } from '../_contexts/received-letter-provider';
 import { v4 as uuidv4 } from 'uuid';
 import { ReceivedLetterPublic } from '@/models/types/received-letter';
 import { toast } from 'sonner';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { parsePhotos } from '@/app/(no-header)/write/_libs/parse-photos';
 import { Photo } from '@/models/types/letter';
 

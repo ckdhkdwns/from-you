@@ -16,7 +16,7 @@ import {
     getMyPreparedLettersAction,
 } from '@/models/actions/review-actions';
 import { toast } from 'sonner';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 interface ReviewContextType {
     selectedLetter: LetterPublic | null;

@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { parseDate } from '@/lib/date';
 import { useUsersContext } from '../_contexts/users-provider';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { getLettersByUserIdAction } from '@/models/actions/letter-actions';
 import { getUserPointLogsAction } from '@/models/actions/point-action';
 import { LetterPublic } from '@/models/types/letter';

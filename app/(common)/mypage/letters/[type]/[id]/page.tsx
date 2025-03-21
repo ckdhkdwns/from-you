@@ -13,7 +13,7 @@ import PreviewLetterContent from '../_components/preview-letter-content';
 import PreviewPhoto from '../_components/preview-photo';
 import { paymentMethodConfig } from '@/constants';
 import { getTemplateConfigAction } from '@/models/actions/config-actions';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 export default async function page({ params }: { params: Promise<{ type: string; id: string }> }) {
     const { type, id } = await params;

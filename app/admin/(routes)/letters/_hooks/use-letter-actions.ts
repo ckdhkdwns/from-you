@@ -6,7 +6,7 @@ import { useConfirm } from '@/contexts/confirm-provider';
 import { LetterPublic, ShippingStatus } from '@/models/types/letter';
 import * as XLSX from 'xlsx';
 import { PaymentStatus, postTypeMapping } from '@/constants';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import {
     updateLetterTrackingNumberAction,
     updatePaymentStatusAction,

@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation';
 import { verifyAndCompleteTossPayment } from '@/models/actions/payment-actions';
 import { paymentMethodConfig } from '@/constants';
 import { LetterPublic } from '@/models/types/letter';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 export default async function PaymentSuccessPage({
     searchParams,

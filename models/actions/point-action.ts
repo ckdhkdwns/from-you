@@ -13,7 +13,7 @@ import {
     createPointLogEntityFromInput,
     PointLogKeys,
 } from '../types/point-log';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { UserKeys } from '../types/user';
 
 const repository = new Repository(Resource.FromYouTable.name);

@@ -11,7 +11,7 @@ import {
     AccordionTrigger,
 } from '@/components/ui/accordion';
 import { FaqPublic } from '@/models/types/faq';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 export default function page() {
     const [faqs, setFaqs] = useState<FaqPublic[]>([]);

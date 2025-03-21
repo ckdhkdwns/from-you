@@ -6,7 +6,7 @@ import { deleteUserAddress } from '@/models/actions/user-actions';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { PlusIcon } from '@radix-ui/react-icons';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import AddressDialog from './address-dialog';
 
 interface AddressListProps {

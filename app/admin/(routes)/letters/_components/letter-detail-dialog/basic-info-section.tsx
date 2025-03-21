@@ -17,7 +17,7 @@ import { useState } from 'react';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { postTypeMapping } from '@/constants';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 interface BasicInfoSectionProps {
     letter: LetterPublic;

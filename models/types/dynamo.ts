@@ -8,6 +8,11 @@ export interface DynamoEntity {
     EntityType: string;
 }
 
+export interface TableKey {
+    PK: string;
+    SK: string;
+}
+
 /**
  * 모든 공개 타입에서 제외될 DynamoDB 관련 필드
  */

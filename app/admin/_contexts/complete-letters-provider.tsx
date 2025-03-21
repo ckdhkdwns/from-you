@@ -8,7 +8,7 @@ import React, { useState, useEffect, createContext, useContext, useCallback, use
 import { useInterval } from '@/hooks/use-interval';
 import { toast } from 'sonner';
 import { LetterPublic } from '@/models/types/letter';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 const STORAGE_KEY = 'fromyou:admin:new-letters';
 

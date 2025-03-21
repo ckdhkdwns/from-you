@@ -1,6 +1,6 @@
 'use server';
 
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { Repository } from '@/services/repository';
 import { Resource } from 'sst';
 import { ActionResponse, withActionResponse } from '../types/response';

@@ -11,7 +11,7 @@ import {
     updateUserAddress,
 } from '@/models/actions/user-actions';
 import KakaoAddressDialog from '@/components/kakao-address-dialog';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 interface AddressDialogProps {
     isOpen: boolean;

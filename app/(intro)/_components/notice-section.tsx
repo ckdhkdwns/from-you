@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import Image from 'next/image';
 import { NoticePublic } from '@/models/types/notice';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 
 export default function NoticeSection({ notices }: { notices: NoticePublic[] }) {
     const router = useRouter();

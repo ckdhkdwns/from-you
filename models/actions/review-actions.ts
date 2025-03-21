@@ -16,7 +16,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { logPointAction } from './point-action';
 import { POINT_CHANGE_REASON } from '@/constants/data/point-change-reason';
-import { removeTableKeyPrefix } from '@/lib/remove-prefix';
+import { removeTableKeyPrefix } from '@/lib/api-utils';
 import { UserEntity, UserKeys } from '../types/user';
 import { TemplateKeys } from '../types/template';
 import { getCurrentISOTime } from '@/lib/date';
