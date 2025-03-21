@@ -4,6 +4,7 @@ import './font.css';
 import AuthSession from '@/contexts/session';
 import { Toaster } from '@/components/ui/sonner';
 import { ConfirmProvider } from '@/contexts/confirm-provider';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
     title: '프롬유',
@@ -74,7 +75,17 @@ export default function RootLayout({
                     as="style"
                     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
                 />
+
+                <Script src="//wcs.naver.net/wcslog.js" strategy="beforeInteractive" />
+                <Script strategy="lazyOnload">
+                    {`if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "10b316bdd17b2e0";
+if(window.wcs) {
+wcs_do();
+}`}
+                </Script>
             </head>
+
             <body
                 style={{ fontFamily: 'Pretendard Variable' }}
                 className={`antialiased text-primary-black font-medium overflow-y-auto`}
